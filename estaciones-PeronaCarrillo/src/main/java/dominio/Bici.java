@@ -3,7 +3,7 @@ package dominio;
 import java.time.LocalDate;
 import java.util.UUID;
 
-public class Bici {
+public class Bici implements Identificable {
 	private String id;
 	private String modelo;
 	private LocalDate fechaAlta;
@@ -36,6 +36,10 @@ public class Bici {
 
 	public String getId() {
 		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getModelo() {
