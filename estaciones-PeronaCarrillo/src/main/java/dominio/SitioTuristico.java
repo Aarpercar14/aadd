@@ -2,6 +2,8 @@ package dominio;
 
 import java.util.UUID;
 
+import repositorio.Identificable;
+
 public class SitioTuristico implements Identificable{
 	private String nombre;
 	private String descripcion;

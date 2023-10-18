@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import repositorio.EntidadNoEncontrada;
+import repositorio.RepositorioException;
+
 public class Administrador extends Usuario {
 	
 	private RepositorioMemoriaEstacion estacionamientos;

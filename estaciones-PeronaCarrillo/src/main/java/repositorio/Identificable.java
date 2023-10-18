@@ -1,6 +1,9 @@
-package dominio;
+package repositorio;
 
 public interface Identificable {
+	
 	String getId();
+	
 	void setId(String id); //Preguntar Aaron
+	
 }

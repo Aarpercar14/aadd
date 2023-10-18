@@ -1,7 +1,11 @@
 package dominio;
 
 import java.util.*;
-import java.math.*;
+
+import repositorio.EntidadNoEncontrada;
+import repositorio.RepositorioException;
+import repositorio.RepositorioMemoria;
+
 
 public class RepositorioMemoriaSitioTuristico extends RepositorioMemoria<SitioTuristico>{
 	public RepositorioMemoriaSitioTuristico(){
