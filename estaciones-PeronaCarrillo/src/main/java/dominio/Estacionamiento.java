@@ -8,19 +8,18 @@ import repositorio.Identificable;
 public class Estacionamiento implements Identificable{
 	private String nombre;
 	private int numPuestos;
-	private int postal;
-	private double cordX;
-	private double cordY;
+	private String postal;
+	private String cordX;
+	private String cordY;
 	private LocalDateTime fechaAlta;
-	private final String id;
+	private String id;
 	
-	public Estacionamiento(String nom, int num, int post, double x, double y) {
+	public Estacionamiento(String nom, int num, String post, String x, String y) {
 		this.nombre=nom;
 		this.numPuestos=num;
 		this.cordX=x;
 		this.cordY=y;
 		this.fechaAlta=LocalDateTime.now();
-		this.id=UUID.randomUUID().toString();
 	}
 	
 	
@@ -32,6 +31,7 @@ public class Estacionamiento implements Identificable{
 
 	@Override
 	public void setId(String id) {
+		this.id = id;
 	}
 
 
@@ -60,37 +60,37 @@ public class Estacionamiento implements Identificable{
 
 
 
-	public int getPostal() {
+	public String getPostal() {
 		return postal;
 	}
 
 
 
-	public void setPostal(int postal) {
+	public void setPostal(String postal) {
 		this.postal = postal;
 	}
 
 
 
-	public double getCordX() {
+	public String getCordX() {
 		return cordX;
 	}
 
 
 
-	public void setCordX(double cordX) {
+	public void setCordX(String cordX) {
 		this.cordX = cordX;
 	}
 
 
 
-	public double getCordY() {
+	public String getCordY() {
 		return cordY;
 	}
 
 
 
-	public void setCordY(double cordY) {
+	public void setCordY(String cordY) {
 		this.cordY = cordY;
 	}
 

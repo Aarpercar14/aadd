@@ -6,11 +6,15 @@ import java.util.LinkedList;
 
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
+import servicio.FactoriaServicios;
+import servicio.IServicioEstaciones;
+import servicio.IServicioSitiosTuristicos;
 
 public class Administrador extends Usuario {
 	
-	private RepositorioMemoriaEstacion estacionamientos;
 	HashMap<String,LinkedList<SitioTuristico>> sitiosEstacionamiento; 
+	private IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
+	private IServicioSitiosTuristicos servSitios = FactoriaServicios.getServicio(IServicioSitiosTuristicos.class);
 	
 	public Administrador(String nombre, String apellidos, String email, String password, String telefono, LocalDate fechaNacimiento) {
 		super(nombre, apellidos, email, password, telefono, fechaNacimiento);
@@ -18,9 +22,12 @@ public class Administrador extends Usuario {
 
 	}
 	
-	public String DarDeAltaEstacion(String nom, int num, int post, double x, double y) {
-		Estacionamiento est=new Estacionamiento(nom,num,post,x,y);
-		return(estacionamientos.add(est));
+	public String DarDeAltaEstacion(String nom, int num, String post, String x, String y) {
+			
+			String id = servEstaciones.crear(nom, num, post, x, y);
+			
+			return id;		
+		
 	}	
 	public void EstablecerSitioTuristico(String id,LinkedList<SitioTuristico> sitios) {
 		sitiosEstacionamiento.put(id,sitios);
@@ -29,6 +36,6 @@ public class Administrador extends Usuario {
 		return sitiosEstacionamiento.get(id);
 	}
 	public Estacionamiento getEstacionamiento(String id) throws RepositorioException, EntidadNoEncontrada {
-		return estacionamientos.getById(id);
+		return servEstaciones.getEstacion(id);
 	}
 }
