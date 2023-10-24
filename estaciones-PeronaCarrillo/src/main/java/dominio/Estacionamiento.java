@@ -1,7 +1,8 @@
 package dominio;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.LinkedList;
+import java.util.List;
 
 import repositorio.Identificable;
 
@@ -14,12 +15,15 @@ public class Estacionamiento implements Identificable{
 	private LocalDateTime fechaAlta;
 	private String id;
 	
+	private List<SitioTuristico> sitiosTuristicos;
+	
 	public Estacionamiento(String nom, int num, String post, String x, String y) {
 		this.nombre=nom;
 		this.numPuestos=num;
 		this.cordX=x;
 		this.cordY=y;
 		this.fechaAlta=LocalDateTime.now();
+		this.sitiosTuristicos = new LinkedList<>();
 	}
 	
 	
@@ -104,6 +108,14 @@ public class Estacionamiento implements Identificable{
 
 	public void setFechaAlta(LocalDateTime fechaAlta) {
 		this.fechaAlta = fechaAlta;
+	}
+	
+	public List<SitioTuristico> getSitiosTuristicos(){
+		return new LinkedList<>(this.sitiosTuristicos);
+	}
+	
+	public void setSitiosTuristicox(List<SitioTuristico> sitiosTuristicos) {
+		this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
 
 }

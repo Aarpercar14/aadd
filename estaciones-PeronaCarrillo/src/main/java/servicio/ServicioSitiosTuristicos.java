@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -28,7 +27,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
 
 
 	@Override
-	public List<SitioTuristico> getSitiosInteres(int cordX, int cordY){
+	public List<SitioTuristico> getSitiosInteres(String cordX, String cordY){
 		String sitios="http://api.geonames.org/findNearbyWikipedia?lat="+cordX+"&lng="+cordY+"&username=plasnake";//cambiar usuario
 		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
 		Document documento = null;
