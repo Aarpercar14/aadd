@@ -1,6 +1,9 @@
 package repositorio;
 
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.UUID;
 
 public class RepositorioJSON<T extends Identificable> implements RepositorioString {
 	
@@ -61,4 +64,71 @@ public class RepositorioJSON<T extends Identificable> implements RepositorioStri
 		}
 	}
 
+	/*** Fin métodos de apoyo ***/
+	
+	@Override
+	public String add(T entidad) throws RepositorioException {
+		
+		String id = UUID.randomUUID().toString();
+		
+		entidad.getId();
+		save(entidad);
+		
+		return id;
+		
+	}
+	
+	@Override
+	public void update(T entidad) throws RepositorioException, EntidadNoEncontrada {
+		
+		if(!checkDocumento(entidad.getId()))
+			throw new EntidadNoEncontrada("La entidad no existe, id: " + entidad.getId());
+		
+		save(entidad);
+				
+	}
+	
+	@Override
+	public T getById(String id) throws RepositorioException, EntidadNoEncontrada {
+		
+		return load(id);
+		
+	}
+	
+	@Override
+	public List<String> getIds() {
+		LinkedList<String> resultado = new LinkedList<>();
+		
+		File directorio = new File(DIRECTORIO);
+		
+		File[] entidades = directorio.listFiles(f -> f.isFile() && f.getName().endsWith(".json"));
+		
+		final String prefijo = getClase().getSimpleName() + "-";
+		for(File file : entidades) {
+			
+			String id = file.getName().substring(prefijo.length(), file.getName().length() - 4);
+			
+			resultado.add(id);
+		}
+		
+		return resultado;
+		
+	}
+	
+	public List<T> getAll() throws RepositorioException {
+		
+		LinkedList<T> resultado = new LinkedList<>();
+		
+		for(String id : getIds()) {
+			try {
+				resultado.add(load(id));
+			} catch (EntidadNoEncontrada e) {
+				// No debería suceder
+				e.printStackTrace();
+			}
+		}
+		
+		return resultado;
+	}
+	
 }
