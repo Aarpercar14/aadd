@@ -59,8 +59,8 @@ public class SitioTuristico implements Identificable{
 		return URL;
 	}
 
-	public void setURL(String uRL) {
-		URL = uRL;
+	public void setURL(String URL) {
+		this.URL = URL;
 	}
 	
 
