@@ -135,6 +135,20 @@ public abstract class RepositorioJSON<T extends Identificable> implements Reposi
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void delete(T entity) throws EntidadNoEncontrada {
+		
+		if(!checkDocumento(entity.getId()))
+			throw new EntidadNoEncontrada("La entidad no existe, id: " + entity.getId());
+		
+		final String documento = getDocumento(entity.getId());
+		
+		File fichero = new File(documento);
+		
+		fichero.delete();
+			
+	}
 
 	@Override
 	public T getById(String id) throws RepositorioException, EntidadNoEncontrada {
