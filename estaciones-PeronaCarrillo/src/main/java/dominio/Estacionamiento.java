@@ -15,7 +15,7 @@ public class Estacionamiento implements Identificable{
 	private LocalDateTime fechaAlta;
 	private String id;
 	
-	private List<SitioTuristico> sitiosTuristicos;
+	private List<ResumenSitioTuristico> sitiosTuristicos;
 	
 	public Estacionamiento(String nom, int num, String post, String x, String y) {
 		this.nombre=nom;
@@ -110,11 +110,11 @@ public class Estacionamiento implements Identificable{
 		this.fechaAlta = fechaAlta;
 	}
 	
-	public List<SitioTuristico> getSitiosTuristicos(){
+	public List<ResumenSitioTuristico> getSitiosTuristicos(){
 		return new LinkedList<>(this.sitiosTuristicos);
 	}
 	
-	public void setSitiosTuristicox(List<SitioTuristico> sitiosTuristicos) {
+	public void setSitiosTuristicox(List<ResumenSitioTuristico> sitiosTuristicos) {
 		this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
 

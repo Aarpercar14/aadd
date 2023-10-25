@@ -7,16 +7,14 @@ import repositorio.Identificable;
 public class SitioTuristico implements Identificable{
 	private String nombre;
 	private String descripcion;
-	private double coordX;
-	private double coordY;
+	private DistanciaCoordenadas distancia;
 	private String URL;
 	private String id;
 	
-	public SitioTuristico(String nombre, String des,double x, double y, String U) {
+	public SitioTuristico(String nombre, String des, DistanciaCoordenadas distancia, String U) {
 		this.nombre=nombre;
 		this.descripcion=des;
-		this.coordX=x;
-		this.coordY=y;
+		this.distancia = distancia;
 		this.URL=U;
 		id=UUID.randomUUID().toString();
 	}
@@ -28,7 +26,7 @@ public class SitioTuristico implements Identificable{
 
 	@Override
 	public void setId(String id) {
-		// TODO Auto-generated method stub
+		this.id = id;
 		
 	}
 
@@ -48,11 +46,8 @@ public class SitioTuristico implements Identificable{
 		this.descripcion = descripcion;
 	}
 
-	public double getX() {
-		return coordX;
-	}
-	public double getY() {
-		return coordY;
+	public DistanciaCoordenadas getDistancia() {
+		return distancia;
 	}
 
 	public String getURL() {
