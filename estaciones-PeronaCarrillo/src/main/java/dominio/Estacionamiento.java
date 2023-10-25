@@ -114,7 +114,7 @@ public class Estacionamiento implements Identificable{
 		return new LinkedList<>(this.sitiosTuristicos);
 	}
 	
-	public void setSitiosTuristicox(List<ResumenSitioTuristico> sitiosTuristicos) {
+	public void setSitiosTuristicos(List<ResumenSitioTuristico> sitiosTuristicos) {
 		this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
 

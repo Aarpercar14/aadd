@@ -49,6 +49,14 @@ public class SitioTuristico implements Identificable{
 	public DistanciaCoordenadas getDistancia() {
 		return distancia;
 	}
+	
+	public double getDistanciaX() {
+		return distancia.getX();
+	}
+	
+	public double getDistanciaY() {
+		return distancia.getY();
+	}
 
 	public String getURL() {
 		return URL;

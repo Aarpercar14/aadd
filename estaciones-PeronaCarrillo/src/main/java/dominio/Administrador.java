@@ -29,10 +29,10 @@ public class Administrador extends Usuario {
 			return id;		
 		
 	}	
-	public void EstablecerSitioTuristico(String id, LinkedList<SitioTuristico> sitios) throws RepositorioException, EntidadNoEncontrada {
+	public void EstablecerSitioTuristico(String id, LinkedList<ResumenSitioTuristico> sitios) throws RepositorioException, EntidadNoEncontrada {
 		
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
-		estacion.setSitiosTuristicox(sitios);		
+		estacion.setSitiosTuristicos(sitios);		
 		
 	}
 	
