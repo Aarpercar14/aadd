@@ -27,10 +27,13 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		
 		Estacionamiento estacion = new Estacionamiento(nombre,numPuestos, postal, cordX, cordY);
 		
-		String id = repositorio.add(estacion);
-		
-		
-		return id;
+		try {
+			String id = repositorio.add(estacion);
+			return id;
+		} catch(RepositorioException e) {
+			e.printStackTrace();
+		}
+		return "";
 		
 	}
 	
