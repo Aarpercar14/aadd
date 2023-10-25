@@ -11,11 +11,11 @@ public class SitioTuristico implements Identificable{
 	private String URL;
 	private String id;
 	
-	public SitioTuristico(String nombre, String des, DistanciaCoordenadas distancia, String U) {
+	public SitioTuristico(String nombre, String descrpcion, DistanciaCoordenadas distancia, String URL) {
 		this.nombre=nombre;
-		this.descripcion=des;
+		this.descripcion=descripcion;
 		this.distancia = distancia;
-		this.URL=U;
+		this.URL=URL;
 		id=UUID.randomUUID().toString();
 	}
 

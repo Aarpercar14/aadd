@@ -63,4 +63,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
 		}
 		return null;
 	}
+	 public void getJsonDbpedia() {
+		 
+	 }
 }
