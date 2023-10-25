@@ -18,6 +18,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import dominio.DistanciaCoordenadas;
 import dominio.SitioTuristico;
 
 
@@ -27,8 +28,8 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
 
 
 	@Override
-	public List<SitioTuristico> getSitiosInteres(String cordX, String cordY){
-		String sitios="http://api.geonames.org/findNearbyWikipedia?lat="+cordX+"&lng="+cordY+"&username=plasnake";//cambiar usuario
+	public List<SitioTuristico> getSitiosInteres(String cordX1, String cordY1){
+		String sitios="http://api.geonames.org/findNearbyWikipedia?lat="+cordX1+"&lng="+cordY1+"&username=plasnake";//cambiar usuario
 		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
 		Document documento = null;
 		try {
@@ -43,7 +44,10 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
 		for(int i=0;i<nodos.getLength();i++)
 		{
 			Element elemento= (Element) nodos.item(i);
-			SitioTuristico s=new SitioTuristico(elemento.getElementsByTagName("title").item(0).getLocalName(),elemento.getElementsByTagName("summary").item(0).getLocalName(),Integer.parseInt(elemento.getElementsByTagName("lat").item(0).getLocalName()),Integer.parseInt(elemento.getElementsByTagName("lng").item(0).getLocalName()),elemento.getElementsByTagName("wikipediaUrl").item(0).getLocalName());
+			double cordX2 = Double.parseDouble(elemento.getElementsByTagName("lat").item(0).getLocalName());
+			double cordY2 = Double.parseDouble(elemento.getElementsByTagName("lng").item(0).getLocalName());
+			DistanciaCoordenadas distancia = DistanciaCoordenadas.obtenerDistancia(Double.parseDouble(cordX1), Double.parseDouble(cordY1), cordX2, cordY2);
+			SitioTuristico s=new SitioTuristico(elemento.getElementsByTagName("title").item(0).getLocalName(),elemento.getElementsByTagName("summary").item(0).getLocalName(), distancia,elemento.getElementsByTagName("wikipediaUrl").item(0).getLocalName());
 			lista.add(s);
 		}
 		return  lista;
