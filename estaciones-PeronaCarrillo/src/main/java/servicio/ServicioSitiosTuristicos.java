@@ -20,11 +20,9 @@ import org.xml.sax.SAXException;
 
 import dominio.SitioTuristico;
 
-
 public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
 	
 	private Repositorio<SitioTuristico, String> repositorio = FactoriaRepositorios.getRepositorio(SitioTuristico.class);
-
 
 	@Override
 	public List<SitioTuristico> getSitiosInteres(String cordX, String cordY){
@@ -35,7 +33,6 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
 			DocumentBuilder analizador = factoria.newDocumentBuilder();
 			 documento = analizador.parse(sitios);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		NodeList nodos=documento.getElementsByTagName("entry");
@@ -62,5 +59,4 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
 		}
 		return null;
 	}
-
 }
