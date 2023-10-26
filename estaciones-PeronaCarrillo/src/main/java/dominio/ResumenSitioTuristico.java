@@ -14,7 +14,12 @@ public class ResumenSitioTuristico {
 		this.descripcion=descripcion;
 		this.distancia = distancia;
 		this.URL=URL;
-		id=UUID.randomUUID().toString();
+		int i=URL.length();
+		char[] c=URL.toCharArray();
+		String id="";
+		while(i>0 && c[i]!='/') {
+			id=c[i]+id;
+		}
 	}
 
 	
