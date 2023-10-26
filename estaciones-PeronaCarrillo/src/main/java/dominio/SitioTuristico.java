@@ -10,13 +10,20 @@ public class SitioTuristico implements Identificable{
 	private DistanciaCoordenadas distancia;
 	private String URL;
 	private String id;
+	private String categoria;
+	private String infoComplementaria;
+	private String direccionImg;
 	
-	public SitioTuristico(String nombre, String descrpcion, DistanciaCoordenadas distancia, String URL) {
-		this.nombre=nombre;
-		this.descripcion=descripcion;
+	public SitioTuristico(String nombre, String descripcion, DistanciaCoordenadas distancia, String uRL, String id,
+			String categoria, String infoComplementaria, String direccionImg) {
+		this.nombre = nombre;
+		this.descripcion = descripcion;
 		this.distancia = distancia;
-		this.URL=URL;
-		id=UUID.randomUUID().toString();
+		this.URL = uRL;
+		this.id = UUID.randomUUID().toString();
+		this.categoria = categoria;
+		this.infoComplementaria = infoComplementaria;
+		this.direccionImg = direccionImg;
 	}
 
 	@Override
@@ -64,6 +71,18 @@ public class SitioTuristico implements Identificable{
 
 	public void setURL(String URL) {
 		this.URL = URL;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public String getInfoComplementaria() {
+		return infoComplementaria;
+	}
+
+	public String getDireccionImg() {
+		return direccionImg;
 	}
 	
 
