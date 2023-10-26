@@ -36,10 +36,10 @@ public class Administrador extends Usuario {
 		
 	}
 	
-	public List<SitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada {
+	public List<ResumenSitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada {
 		
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
-		List<SitioTuristico> sitios = new LinkedList<>(servSitios.getSitiosInteres(estacion.getCordX(), estacion.getCordY()));
+		List<ResumenSitioTuristico> sitios = new LinkedList<>(servSitios.getSitiosInteres(estacion.getCordX(), estacion.getCordY()));
 		return sitios;
 		
 	}

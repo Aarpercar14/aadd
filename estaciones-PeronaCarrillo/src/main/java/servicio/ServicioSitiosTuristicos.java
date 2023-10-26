@@ -5,10 +5,18 @@ import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -19,35 +27,45 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import dominio.DistanciaCoordenadas;
+import dominio.RepositorioSitiosTuristicosJSON;
+import dominio.ResumenSitioTuristico;
 import dominio.SitioTuristico;
 
-public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
-	
-	private Repositorio<SitioTuristico, String> repositorio = FactoriaRepositorios.getRepositorio(SitioTuristico.class);
+public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
+
+	private Repositorio<ResumenSitioTuristico, String> repositorio = FactoriaRepositorios
+			.getRepositorio(ResumenSitioTuristico.class);
+	private RepositorioSitiosTuristicosJSON repositorioJSON = FactoriaRepositorios.getRepositorio(RepositorioSitiosTuristicosJSON.class);
 
 	@Override
-	public List<SitioTuristico> getSitiosInteres(String cordX1, String cordY1){
-		String sitios="http://api.geonames.org/findNearbyWikipedia?lat="+cordX1+"&lng="+cordY1+"&username=plasnake";//cambiar usuario
+	public List<ResumenSitioTuristico> getSitiosInteres(String cordX1, String cordY1) {
+		String sitios = "http://api.geonames.org/findNearbyWikipedia?lat=" + cordX1 + "&lng=" + cordY1
+				+ "&username=aadd";
 		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
 		Document documento = null;
 		try {
 			DocumentBuilder analizador = factoria.newDocumentBuilder();
-			 documento = analizador.parse(sitios);
+			documento = analizador.parse(sitios);
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			e.printStackTrace();
 		}
-		NodeList nodos=documento.getElementsByTagName("entry");
-		LinkedList<SitioTuristico> lista=new LinkedList<SitioTuristico>();
-		for(int i=0;i<nodos.getLength();i++)
-		{
-			Element elemento= (Element) nodos.item(i);
+		NodeList nodos = documento.getElementsByTagName("entry");
+		LinkedList<ResumenSitioTuristico> listaResumen = new LinkedList<ResumenSitioTuristico>();
+		for (int i = 0; i < nodos.getLength(); i++) {
+			Element elemento = (Element) nodos.item(i);
 			double cordX2 = Double.parseDouble(elemento.getElementsByTagName("lat").item(0).getLocalName());
 			double cordY2 = Double.parseDouble(elemento.getElementsByTagName("lng").item(0).getLocalName());
-			DistanciaCoordenadas distancia = DistanciaCoordenadas.obtenerDistancia(Double.parseDouble(cordX1), Double.parseDouble(cordY1), cordX2, cordY2);
-			SitioTuristico s=new SitioTuristico(elemento.getElementsByTagName("title").item(0).getLocalName(),elemento.getElementsByTagName("summary").item(0).getLocalName(), distancia,elemento.getElementsByTagName("wikipediaUrl").item(0).getLocalName());
-			lista.add(s);
+			DistanciaCoordenadas distancia = DistanciaCoordenadas.obtenerDistancia(Double.parseDouble(cordX1),
+					Double.parseDouble(cordY1), cordX2, cordY2);
+			ResumenSitioTuristico s = new ResumenSitioTuristico(
+					elemento.getElementsByTagName("title").item(0).getLocalName(),
+					elemento.getElementsByTagName("summary").item(0).getLocalName(), distancia,
+					elemento.getElementsByTagName("wikipediaUrl").item(0).getLocalName());
+
+			listaResumen.add(s);
 		}
-		return  lista;
+
+		return listaResumen;
 	}
 
 	@Override
@@ -63,7 +81,29 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos{
 		}
 		return null;
 	}
-	 public void getJsonDbpedia() {
-		 
-	 }
+
+	public void getSitioTuristicoInfo(URL url) throws IOException {
+		InputStreamReader objeto = new InputStreamReader(url.openStream());
+		JsonReader jsonReader = Json.createReader(objeto);
+		JsonObject obj = jsonReader.readObject();
+
+		JsonObject nombreObj = obj.getJsonObject("http://www.w3.org/2000/01/rdf-schema#label");
+		JsonObject resumenObj = obj.getJsonObject("http://dbpedia.org/ontology/abstract");
+		JsonObject categoriasObj = obj.getJsonObject("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+		JsonObject enlaceExternoObj = obj.getJsonObject("http://dbpedia.org/ontology/wikiPageExternalLink");
+		JsonObject imagenObj = obj.getJsonObject("http://es.dbpedia.org/property/imagen");
+		
+		String nombre=nombreObj.getString("value");
+		String resumen=resumenObj.getString("value");
+		String categorias=categoriasObj.getString("value");
+		String enlaceExterno=enlaceExternoObj.getString("value");
+		String imagen=imagenObj.getString("value");
+		SitioTuristico sitio=new SitioTuristico(nombre,resumen,categorias,enlaceExterno,imagen,url.toString());
+		try {
+			repositorioJSON.add(sitio);
+		} catch (RepositorioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

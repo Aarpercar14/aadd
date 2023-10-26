@@ -15,37 +15,26 @@ import javax.json.bind.config.PropertyNamingStrategy;
 import javax.json.bind.config.PropertyOrderStrategy;
 import javax.json.bind.spi.JsonbProvider;
 
-
-
 public abstract class RepositorioJSON<T extends Identificable> implements RepositorioString<T> {
 
 	public final static String DIRECTORIO = "repositorio-json/";
 
 	static {
-
 		File directorio = new File(DIRECTORIO);
-
 		if (!directorio.exists())
 			directorio.mkdir();
-
 	}
 
 	public abstract Class<T> getClase();
 
 	protected String getDocumento(String id) {
-
 		return DIRECTORIO + getClase().getSimpleName() + "-" + id + ".json";
-
 	}
 
 	protected boolean checkDocumento(String id) {
-
 		final String documento = getDocumento(id);
-
 		File fichero = new File(documento);
-
 		return fichero.exists();
-
 	}
 
 	@SuppressWarnings("resource")
@@ -54,32 +43,23 @@ public abstract class RepositorioJSON<T extends Identificable> implements Reposi
 		final String documento = getDocumento(entity.getId());
 
 		final FileWriter fichero = new FileWriter(documento);
-		
 
 		try {
 			// TODO implementacion con JSON-B y JSON-P
-			JsonbConfig config = new JsonbConfig()
-					.withNullValues(true)
-					.withFormatting(true)
-					.withPropertyNamingStrategy(
-							PropertyNamingStrategy.LOWER_CASE_WITH_UNDERSCORES)
-					.withPropertyOrderStrategy(
-							PropertyOrderStrategy.LEXICOGRAPHICAL);
-			Jsonb contexto = JsonbProvider.provider()
-					.create()
-					.withConfig(config)
-					.build();
-			
+			JsonbConfig config = new JsonbConfig().withNullValues(true).withFormatting(true)
+					.withPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CASE_WITH_UNDERSCORES)
+					.withPropertyOrderStrategy(PropertyOrderStrategy.LEXICOGRAPHICAL);
+			Jsonb contexto = JsonbProvider.provider().create().withConfig(config).build();
+
 			String cadenaJSON = contexto.toJson(entity);
 			fichero.write(cadenaJSON);
-			
+
 		} catch (Exception e) {
 			throw new RepositorioException("Error al guardar la entidad con id: " + entity.getId());
 		}
 
 	}
 
-	
 	protected T load(String id) throws RepositorioException, EntidadNoEncontrada {
 
 		if (!checkDocumento(id))
@@ -88,17 +68,10 @@ public abstract class RepositorioJSON<T extends Identificable> implements Reposi
 		final String documento = getDocumento(id);
 		try {
 			// TODO implementacion con JSON-B y JSON-P
-			JsonbConfig config = new JsonbConfig()
-					.withNullValues(true)
-					.withFormatting(true)
-					.withPropertyNamingStrategy(
-							PropertyNamingStrategy.LOWER_CASE_WITH_UNDERSCORES)
-					.withPropertyOrderStrategy(
-							PropertyOrderStrategy.LEXICOGRAPHICAL);
-			Jsonb contexto = JsonbProvider.provider()
-					.create()
-					.withConfig(config)
-					.build();
+			JsonbConfig config = new JsonbConfig().withNullValues(true).withFormatting(true)
+					.withPropertyNamingStrategy(PropertyNamingStrategy.LOWER_CASE_WITH_UNDERSCORES)
+					.withPropertyOrderStrategy(PropertyOrderStrategy.LEXICOGRAPHICAL);
+			Jsonb contexto = JsonbProvider.provider().create().withConfig(config).build();
 			Reader entrada = new FileReader(documento);
 			T entity = contexto.fromJson(entrada, getClase());
 			return entity;
@@ -135,19 +108,19 @@ public abstract class RepositorioJSON<T extends Identificable> implements Reposi
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void delete(T entity) throws EntidadNoEncontrada {
-		
-		if(!checkDocumento(entity.getId()))
+
+		if (!checkDocumento(entity.getId()))
 			throw new EntidadNoEncontrada("La entidad no existe, id: " + entity.getId());
-		
+
 		final String documento = getDocumento(entity.getId());
-		
+
 		File fichero = new File(documento);
-		
+
 		fichero.delete();
-			
+
 	}
 
 	@Override
