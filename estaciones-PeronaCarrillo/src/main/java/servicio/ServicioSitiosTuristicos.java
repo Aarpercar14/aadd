@@ -33,8 +33,6 @@ import dominio.SitioTuristico;
 
 public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 
-	private Repositorio<ResumenSitioTuristico, String> repositorio = FactoriaRepositorios
-			.getRepositorio(ResumenSitioTuristico.class);
 	private RepositorioSitiosTuristicosJSON repositorioJSON = FactoriaRepositorios.getRepositorio(RepositorioSitiosTuristicosJSON.class);
 
 	@Override
@@ -71,7 +69,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 	@Override
 	public String getInfoSitio(String id) {
 		try {
-			return repositorio.getById(id).toString();
+			return repositorioJSON.getById(id).toString();
 		} catch (RepositorioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
