@@ -23,10 +23,11 @@ public class FactoriaServicios {
 			else {
 				PropertiesReader properties = new PropertiesReader(PROPERTIES);
 				String clase = properties.getProperty(servicio.getName());
-
 				T servicioInstancia = (T) Class.forName(clase).getConstructor().newInstance();
 
 				servicios.put(servicio, servicioInstancia);
+				System.out.println("1");
+
 				return servicioInstancia;
 			}
 			
