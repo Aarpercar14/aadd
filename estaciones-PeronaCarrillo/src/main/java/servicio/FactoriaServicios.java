@@ -7,7 +7,7 @@ import utils.PropertiesReader;
 
 public class FactoriaServicios {
 
-	private static final String PROPERTIES = "servicio.properties";
+	private static final String PROPERTIES = "servicios.properties";
 	
 	private static Map<Class<?>, Object> servicios = new HashMap<>();
 	
