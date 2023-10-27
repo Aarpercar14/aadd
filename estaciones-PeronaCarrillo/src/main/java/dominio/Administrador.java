@@ -7,13 +7,15 @@ import java.util.List;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 import servicio.FactoriaServicios;
+import servicio.IServicioEstaciones;
+import servicio.IServicioSitiosTuristicos;
 import servicio.ServicioEstaciones;
 import servicio.ServicioSitiosTuristicos;
 
 public class Administrador extends Usuario {
 
-	private ServicioEstaciones servEstaciones = FactoriaServicios.getServicio(ServicioEstaciones.class);
-	private ServicioSitiosTuristicos servSitios = FactoriaServicios.getServicio(ServicioSitiosTuristicos.class);
+	public IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
+	public IServicioSitiosTuristicos servSitios = FactoriaServicios.getServicio(IServicioSitiosTuristicos.class);
 
 	public Administrador(String nombre, String apellidos, String email, String password, String telefono,
 			LocalDate fechaNacimiento) {
