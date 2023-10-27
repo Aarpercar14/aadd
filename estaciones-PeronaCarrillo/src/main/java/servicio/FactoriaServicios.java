@@ -15,7 +15,6 @@ public class FactoriaServicios {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T getServicio(Class<T> servicio) {
-		System.out.println(servicio.getName());
 		try {
 			if (servicios.containsKey(servicio)) {
 				return (T) servicios.get(servicio);
@@ -23,7 +22,6 @@ public class FactoriaServicios {
 				PropertiesReader properties = new PropertiesReader(PROPERTIES);
 				String clase = properties.getProperty(servicio.getName());
 				T servicioInstancia = (T) Class.forName(clase).getConstructor().newInstance();
-				System.out.println("1");
 				servicios.put(servicio, servicioInstancia);
 				return servicioInstancia;
 

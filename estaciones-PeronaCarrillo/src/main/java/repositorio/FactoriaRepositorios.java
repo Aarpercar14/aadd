@@ -9,11 +9,9 @@ public class FactoriaRepositorios {
 	public static <T, K, R extends Repositorio<T, K>> R getRepositorio(Class<?> entidad) {
 		
 		try {
-			
 			PropertiesReader properties = new PropertiesReader(PROPERTIES);
 			String clase = properties.getProperty(entidad.getName());
 			return (R) Class.forName(clase).getConstructor().newInstance();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			

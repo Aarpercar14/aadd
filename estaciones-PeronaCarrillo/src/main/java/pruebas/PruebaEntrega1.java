@@ -1,7 +1,6 @@
 package pruebas;
 
 import java.time.LocalDate;
-
 import dominio.Administrador;
 import dominio.Estacionamiento;
 import servicio.ServicioEstaciones;
