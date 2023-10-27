@@ -1,6 +1,5 @@
 package dominio;
 
-import java.util.UUID;
 
 public class ResumenSitioTuristico {
 	private String nombre;
