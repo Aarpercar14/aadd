@@ -11,7 +11,10 @@ public class PropertiesReader {
 		InputStream is = getClass().getClassLoader()
 				.getResourceAsStream(propertyFileName);
 		this.properties = new Properties();
+		System.out.println(is);
 		this.properties.load(is);
+		System.out.println("1");
+
 	}
 	
 	public String getProperty(String propertyName) {

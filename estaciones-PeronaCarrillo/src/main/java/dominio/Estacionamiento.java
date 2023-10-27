@@ -17,9 +17,9 @@ public class Estacionamiento implements Identificable{
 	
 	private List<ResumenSitioTuristico> sitiosTuristicos;
 	
-	public Estacionamiento(String nombre, int numero, String postal, String x, String y) {
+	public Estacionamiento(String nombre, int numPuesto, String postal, String x, String y) {
 		this.nombre=nombre;
-		this.numPuestos=numero;
+		this.numPuestos=numPuesto;
 		this.cordX=x;
 		this.cordY=y;
 		this.fechaAlta=LocalDateTime.now();
