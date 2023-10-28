@@ -41,12 +41,12 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 
 	public String crear(String uRL) {
 		URL url;
-		System.out.println(uRL);
 		try {
 		String regex = "https://en\\.wikipedia\\.org/wiki/(.*)";
 		String nuevaUrlBase = "https://es.dbpedia.org/data/";
 		String nuevaUrl = uRL.replaceFirst(regex, nuevaUrlBase + "$1");
 		url = new URL(nuevaUrl+".json");
+		
 		
 		InputStreamReader objeto = new InputStreamReader(url.openStream());
 		JsonReader jsonReader = Json.createReader(objeto);
@@ -58,25 +58,51 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 		if(obj.isEmpty()) { 
 			return  "Sitio sin pagina en dbpedia\n";
 		}
-		JsonObject nombreObj = obj2.getJsonArray("http://www.w3.org/2000/01/rdf-schema#label").getJsonObject(0).asJsonObject();
-		JsonObject resumenObj = obj2.getJsonArray("http://dbpedia.org/ontology/abstract").getJsonObject(0).asJsonObject();
-		JsonArray categoriasObj = obj2.getJsonArray("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 		
-		JsonObject enlaceExternoObj = obj2.getJsonArray("http://dbpedia.org/ontology/wikiPageExternalLink").getJsonObject(0).asJsonObject();		
-		JsonObject imagenObj = obj2.getJsonArray("http://es.dbpedia.org/property/imagen").getJsonObject(0).asJsonObject();
-
-		String nombre = nombreObj.getString("value");
-		String resumen = resumenObj.getString("value");
-		String categorias = "";
-		for(int i =0;i<categoriasObj.size();i++) {
-			categorias=categorias + categoriasObj.getJsonObject(i).asJsonObject().getString("value")+"; ";
+		
+		JsonObject nombreObj = obj2.getJsonArray("http://www.w3.org/2000/01/rdf-schema#label").getJsonObject(0).asJsonObject();
+		JsonObject resumenObj=Json.createObjectBuilder().add("", "").build();
+		if(obj2.getJsonArray("http://dbpedia.org/ontology/abstract")==null) {
+			resumenObj=Json.createObjectBuilder().add("", "").build();
+		}else {
+			resumenObj = obj2.getJsonArray("http://dbpedia.org/ontology/abstract").getJsonObject(0).asJsonObject();
 		}
-		String enlaceExterno = enlaceExternoObj.getString("value");
+		JsonArray categoriasObj=Json.createArrayBuilder().add("").build();
+		if(obj2.getJsonArray("http://www.w3.org/1999/02/22-rdf-syntax-ns#type")==null) {
+			 categoriasObj=Json.createArrayBuilder().add("").build();
+		}else {
+			 categoriasObj = obj2.getJsonArray("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+		}
+		JsonObject enlaceExternoObj=Json.createObjectBuilder().add("", "").build();
+		if(obj2.getJsonArray("http://dbpedia.org/ontology/wikiPageExternalLink") == null) {
+			 enlaceExternoObj=Json.createObjectBuilder().add("", "").build();
+		}else {
+			enlaceExternoObj = obj2.getJsonArray("http://dbpedia.org/ontology/wikiPageExternalLink").getJsonObject(0).asJsonObject();
+		}
+		JsonObject imagenObj=Json.createObjectBuilder().add("", "").build();
+		if(obj2.getJsonArray("http://es.dbpedia.org/property/imagenhttp://es.dbpedia.org/property/imagen")==null) {
+			 imagenObj=Json.createObjectBuilder().add("", "").build();
+		}else {
+			imagenObj = obj2.getJsonArray("http://es.dbpedia.org/property/imagen").getJsonObject(0).asJsonObject();
+		}
+		
+		
+		String nombre = nombreObj.getString("value");
+		String resumen = resumenObj.getString("value","No hay resumen disponible");
+		String categorias = "";
+		if(categoriasObj.size()>1) {
+			for(int i =0;i<categoriasObj.size();i++) {
+				categorias = categorias + categoriasObj.getJsonObject(i).asJsonObject().getString("value") + "; ";
+			}
+		}
+		String enlaceExterno = enlaceExternoObj.getString("value","no encontrado");
 		String imagen = imagenObj.getString("datatype","no hay imagen");
+		
 
 		SitioTuristico sitio = new SitioTuristico(nombre,resumen,enlaceExterno,categorias,imagen,nuevaUrl);			
 		try {
 			String id = repositorioJSON.add(sitio);
+			repositorioJSON.add(sitio);
 			return id;
 		} catch(RepositorioException e) {
 			e.printStackTrace();

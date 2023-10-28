@@ -1,10 +1,6 @@
 package repositorio;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -52,8 +48,7 @@ public abstract class RepositorioJSON<T extends Identificable> implements Reposi
 			Jsonb contexto = JsonbProvider.provider().create().withConfig(config).build();
 
 			String cadenaJSON = contexto.toJson(entity);
-			fichero.write(cadenaJSON);
-
+			contexto.toJson(entity, new PrintStream("repositorio-json/sitioTuristico-"+entity.getId()+".json"));
 		} catch (Exception e) {
 			throw new RepositorioException("Error al guardar la entidad con id: " + entity.getId());
 		}
