@@ -34,7 +34,7 @@ import dominio.SitioTuristico;
 public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 
 	private RepositorioSitiosTuristicosJSON repositorioJSON = FactoriaRepositorios
-			.getRepositorio(RepositorioSitiosTuristicosJSON.class);
+			.getRepositorio(SitioTuristico.class);
 
 	public String crear(String nombre, String descripcion, String URL, String categorias, String infoComplementaria,
 			String direccionImg) {
