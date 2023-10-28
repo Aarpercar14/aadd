@@ -8,7 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import dominio.ResumenSitioTuristico;
-import dominio.SitioTuristico;
+
 
 public interface IServicioSitiosTuristicos {
 
