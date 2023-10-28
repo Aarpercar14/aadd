@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.json.Json;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.xml.parsers.DocumentBuilder;
@@ -40,6 +41,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 
 	public String crear(String uRL) {
 		URL url;
+		System.out.println(uRL);
 		try {
 		String regex = "https://en\\.wikipedia\\.org/wiki/(.*)";
 		String nuevaUrlBase = "https://es.dbpedia.org/data/";
@@ -49,23 +51,30 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 		InputStreamReader objeto = new InputStreamReader(url.openStream());
 		JsonReader jsonReader = Json.createReader(objeto);
 		JsonObject obj = jsonReader.readObject();
-
-		JsonObject nombreObj = obj.getJsonObject("http://www.w3.org/2000/01/rdf-schema#label");
-		System.out.println(nombreObj);
-		JsonObject resumenObj = obj.getJsonObject("http://dbpedia.org/ontology/abstract");
-		JsonObject categoriasObj = obj.getJsonObject("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
-		JsonObject enlaceExternoObj = obj.getJsonObject("http://dbpedia.org/ontology/wikiPageExternalLink");
-		JsonObject imagenObj = obj.getJsonObject("http://es.dbpedia.org/property/imagen");
-
+		String regex2="https://es.dbpedia.org/data/(.*)";
+		String nuevoRegex2="http://es.dbpedia.org/resource/";
+		String nuevaUrl2=nuevaUrl.replaceFirst(regex2, nuevoRegex2+"$1");
+		JsonObject obj2= obj.getJsonObject(nuevaUrl2);
+		if(obj.isEmpty()) { 
+			return  "Sitio sin pagina en dbpedia\n";
+		}
+		JsonObject nombreObj = obj2.getJsonArray("http://www.w3.org/2000/01/rdf-schema#label").getJsonObject(0).asJsonObject();
+		JsonObject resumenObj = obj2.getJsonArray("http://dbpedia.org/ontology/abstract").getJsonObject(0).asJsonObject();
+		JsonArray categoriasObj = obj2.getJsonArray("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+		
+		JsonObject enlaceExternoObj = obj2.getJsonArray("http://dbpedia.org/ontology/wikiPageExternalLink").getJsonObject(0).asJsonObject();		
+		JsonObject imagenObj = obj2.getJsonArray("http://es.dbpedia.org/property/imagen").getJsonObject(0).asJsonObject();
 
 		String nombre = nombreObj.getString("value");
 		String resumen = resumenObj.getString("value");
-		String categorias = categoriasObj.getString("value");
+		String categorias = "";
+		for(int i =0;i<categoriasObj.size();i++) {
+			categorias=categorias + categoriasObj.getJsonObject(i).asJsonObject().getString("value")+"; ";
+		}
 		String enlaceExterno = enlaceExternoObj.getString("value");
-		String imagen = imagenObj.getString("value");
-	
-		SitioTuristico sitio = new SitioTuristico(nombre,resumen,enlaceExterno,categorias,imagen,nuevaUrl);
-		
+		String imagen = imagenObj.getString("datatype","no hay imagen");
+
+		SitioTuristico sitio = new SitioTuristico(nombre,resumen,enlaceExterno,categorias,imagen,nuevaUrl);			
 		try {
 			String id = repositorioJSON.add(sitio);
 			return id;
