@@ -13,14 +13,8 @@ public class ResumenSitioTuristico {
 		this.descripcion=descripcion;
 		this.distancia = distancia;
 		this.URL=URL;
-		int i=URL.length()-1;
-		char[] c=URL.toCharArray();
-		String id="";
-		while(i>0 && c[i]!='/') {
-			id=c[i]+id;
-			i--;
-
-		}
+		String[] segmentos = URL.split("/");
+		this.id = segmentos[segmentos.length - 1];
 	}
 
 	
@@ -60,6 +54,11 @@ public class ResumenSitioTuristico {
 
 	public void setURL(String URL) {
 		this.URL = URL;
+	}
+	
+	@Override
+	public String toString() {
+		return "ResumenSitioTuristico [id = "+ id +", nombre= " + nombre +" descripcion= " + descripcion + ", distancia = " + distancia.toString() + ", URL= " + URL +" ]";	
 	}
 	
 }

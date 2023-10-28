@@ -7,8 +7,9 @@ import repositorio.RepositorioException;
 
 
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.LinkedList;
@@ -24,6 +25,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import dominio.DistanciaCoordenadas;
@@ -63,34 +65,44 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 	}
 
 	@Override
-	public List<ResumenSitioTuristico> getSitiosInteres(String cordX1, String cordY1) {
-		String sitios ="http://api.geonames.org/findNearbyWikipedia?lat=38&lng=-1&username=aadd";
-		DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
-		
+	public List<ResumenSitioTuristico> getSitiosInteres(String cordX1, String cordY1) throws SAXException, ParserConfigurationException {
+		String sitios = "http://api.geonames.org/findNearbyWikipedia?lat=" + cordX1 + "&lng=" + cordY1
+				+ "&username=aadd";
 		try {
-			DocumentBuilder analizador = factoria.newDocumentBuilder();
-			Document documento = analizador.parse(new URL(sitios).openStream());
-			NodeList nodos = (NodeList) documento.getElementsByTagName("geonames");
-			System.out.println(documento);
-			LinkedList<ResumenSitioTuristico> listaResumen = new LinkedList<ResumenSitioTuristico>();
-			for (int i = 0; i < nodos.getLength(); i++) {
-				Element elemento = (Element) nodos.item(i);
-				double cordX2 = Double.parseDouble(elemento.getElementsByTagName("lat").item(0).getTextContent());
-				double cordY2 = Double.parseDouble(elemento.getElementsByTagName("lng").item(0).getTextContent());
-				DistanciaCoordenadas distancia = DistanciaCoordenadas.obtenerDistancia(Double.parseDouble(cordX1),
-						Double.parseDouble(cordY1), cordX2, cordY2);
-				ResumenSitioTuristico s = new ResumenSitioTuristico(
-						elemento.getElementsByTagName("title").item(0).getTextContent(),
-						elemento.getElementsByTagName("summary").item(0).getTextContent(), distancia,
-						elemento.getElementsByTagName("wikipediaUrl").item(0).getTextContent());
+			URL url = new URL(sitios);
+			try {
+				InputStream is = url.openStream();
+				DocumentBuilderFactory factoria = DocumentBuilderFactory.newInstance();
+				DocumentBuilder analizador = factoria.newDocumentBuilder();
+				InputSource inputSource = new InputSource(is);
+				Document documento = analizador.parse(inputSource);
+				
+				NodeList nodos = documento.getElementsByTagName("entry");
+				LinkedList<ResumenSitioTuristico> listaResumen = new LinkedList<ResumenSitioTuristico>();
+				for (int i = 0; i < nodos.getLength(); i++) {
+					Element elemento = (Element) nodos.item(i);
+					double cordX2 = Double.parseDouble(elemento.getElementsByTagName("lat").item(0).getTextContent());
+					double cordY2 = Double.parseDouble(elemento.getElementsByTagName("lng").item(0).getTextContent());
+					DistanciaCoordenadas distancia = DistanciaCoordenadas.obtenerDistancia(Double.parseDouble(cordX1),
+							Double.parseDouble(cordY1), cordX2, cordY2);
+					ResumenSitioTuristico s = new ResumenSitioTuristico(
+							elemento.getElementsByTagName("title").item(0).getTextContent(),
+							elemento.getElementsByTagName("summary").item(0).getTextContent(), distancia,
+							elemento.getElementsByTagName("wikipediaUrl").item(0).getTextContent());
 
-				listaResumen.add(s);
+					listaResumen.add(s);
+				}
+
+				return listaResumen;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-
-			return listaResumen;
-		} catch (ParserConfigurationException | SAXException | IOException e) {
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return null;
 		
 	}
