@@ -11,7 +11,6 @@ public class FactoriaRepositorios {
 		try {
 			PropertiesReader properties = new PropertiesReader(PROPERTIES);
 			String clase = properties.getProperty(entidad.getName());
-			System.out.println(properties.getProperty("dominio.SitioTuristico"));
 			return (R) Class.forName(clase).getConstructor().newInstance();
 		} catch (Exception e) {
 			e.printStackTrace();
