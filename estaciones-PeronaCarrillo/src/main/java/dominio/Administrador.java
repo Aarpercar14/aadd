@@ -34,7 +34,7 @@ public class Administrador extends Usuario {
 
 	}
 
-	public void EstablecerSitioTuristico(String id, LinkedList<ResumenSitioTuristico> sitios)
+	public void EstablecerSitioTuristico(String id, List<ResumenSitioTuristico> sitios)
 			throws RepositorioException, EntidadNoEncontrada {
 
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
