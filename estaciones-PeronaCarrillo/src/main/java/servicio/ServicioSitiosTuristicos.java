@@ -42,7 +42,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 		URL url;
 		try {
 		String regex = "https://en\\.wikipedia\\.org/wiki/(.*)";
-		String nuevaUrlBase = "https://dbpedia.org/page/";
+		String nuevaUrlBase = "https://es.dbpedia.org/data/";
 		String nuevaUrl = uRL.replaceFirst(regex, nuevaUrlBase + "$1");
 		url = new URL(nuevaUrl+".json");
 		
@@ -51,6 +51,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 		JsonObject obj = jsonReader.readObject();
 
 		JsonObject nombreObj = obj.getJsonObject("http://www.w3.org/2000/01/rdf-schema#label");
+		System.out.println(nombreObj);
 		JsonObject resumenObj = obj.getJsonObject("http://dbpedia.org/ontology/abstract");
 		JsonObject categoriasObj = obj.getJsonObject("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 		JsonObject enlaceExternoObj = obj.getJsonObject("http://dbpedia.org/ontology/wikiPageExternalLink");

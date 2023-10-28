@@ -24,7 +24,7 @@ public class PruebaEntrega1 {
 
 	public static void main(String[] args) throws RepositorioException, EntidadNoEncontrada, SAXException, ParserConfigurationException {
 		Administrador admin=new Administrador("admin", "jefe", "admin@gmail.com", "password", "612345678", LocalDate.now());
-		String idEstacion = admin.DarDeAltaEstacion("Murcia Centro", 10, "30020", "38", "-1");
+		String idEstacion = admin.DarDeAltaEstacion("Saint Louis", 10, "30020", "38", "-1");
 		System.out.println("El administrador ha creado la estacion con id: " + idEstacion);
 		try {
 			admin.EstablecerSitioTuristico(idEstacion,(LinkedList<ResumenSitioTuristico>) admin.getSitiosTuristicos(idEstacion));
@@ -49,6 +49,11 @@ public class PruebaEntrega1 {
 		if(admin.getEstacionamiento(idEstacion).getSitiosTuristicos().equals(sitios))
 			System.out.println();
 			System.out.println("Las listas de sitios de getSitiosTuristicos() es igual a la lista ");
+			
+			for(ResumenSitioTuristico sitio : admin.getEstacionamiento(idEstacion).getSitiosTuristicos()) {
+				System.out.println(admin.guardarSitioTuristicoJson(sitio));
+			}
+			
 			System.out.println("que almacena el método establecerSitiosTuristicos() en el estacionamiento");
 		
 		

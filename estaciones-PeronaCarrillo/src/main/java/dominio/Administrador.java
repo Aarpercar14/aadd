@@ -13,6 +13,7 @@ import repositorio.RepositorioException;
 import servicio.FactoriaServicios;
 import servicio.IServicioEstaciones;
 import servicio.IServicioSitiosTuristicos;
+import servicio.ServicioEstaciones;
 
 public class Administrador extends Usuario {
 
@@ -55,6 +56,10 @@ public class Administrador extends Usuario {
 
 		return servEstaciones.getEstacion(id);
 
+	}
+	
+	public String guardarSitioTuristicoJson(ResumenSitioTuristico resumen) {
+		return servSitios.crear(resumen.getURL());
 	}
 	
 }

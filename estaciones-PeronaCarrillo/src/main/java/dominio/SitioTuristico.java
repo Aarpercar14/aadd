@@ -18,13 +18,8 @@ public class SitioTuristico implements Identificable{
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.URL = uRL;
-		int i=uRL.length();
-		char[] c=uRL.toCharArray();
-		String id="";
-		while(i>0 && c[i]!='/') {
-			id=c[i]+id;
-		}
-		this.id = UUID.randomUUID().toString();
+		String[] segmentos = URL.split("/");
+		this.id = segmentos[segmentos.length - 1];
 		this.categoria = categoria;
 		this.infoComplementaria = infoComplementaria;
 		this.direccionImg = direccionImg;
