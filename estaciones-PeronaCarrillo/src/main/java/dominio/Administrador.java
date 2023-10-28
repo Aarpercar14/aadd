@@ -4,6 +4,10 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 import servicio.FactoriaServicios;
@@ -38,7 +42,7 @@ public class Administrador extends Usuario {
 
 	}
 
-	public List<ResumenSitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada {
+	public List<ResumenSitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada, SAXException, ParserConfigurationException {
 
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
 		List<ResumenSitioTuristico> sitios = new LinkedList<>(
