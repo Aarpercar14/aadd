@@ -3,7 +3,7 @@ package servicio;
 import java.util.List;
 
 import dominio.ResumenSitioTuristico;
-import dominio.SitioTuristico;
+
 
 public interface IServicioSitiosTuristicos {
 
