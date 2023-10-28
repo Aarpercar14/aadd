@@ -1,6 +1,7 @@
 package servicio;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -12,6 +13,7 @@ import dominio.ResumenSitioTuristico;
 
 public interface IServicioSitiosTuristicos {
 
+	public String crear(String uRL);
 	
 	List<ResumenSitioTuristico> getSitiosInteres(String cordX, String cordY) throws SAXException, ParserConfigurationException;
 	

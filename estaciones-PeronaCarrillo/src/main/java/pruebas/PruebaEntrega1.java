@@ -37,8 +37,10 @@ public class PruebaEntrega1 {
 		
 		for(ResumenSitioTuristico sitio : sitios) {
 			System.out.println(sitio.toString());
+			System.out.println(admin.servSitios.crear(sitio.getURL()));
 		}
 		
+				
 	}
 
 }

@@ -38,27 +38,41 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 	private RepositorioSitiosTuristicosJSON repositorioJSON = FactoriaRepositorios
 			.getRepositorio(SitioTuristico.class);
 
-	public String crear(String nombre, String descripcion, String URL, String categorias, String infoComplementaria,
-			String direccionImg) {
-		if(nombre == null || nombre.isEmpty())
-			throw new IllegalArgumentException("nombre: no debe ser nulo ni vacio");
-		if(descripcion == null || descripcion .isEmpty())
-			throw new IllegalArgumentException("descripcion: no debe ser nulo ni vacio");
-		if(URL == null || URL .isEmpty())
-			throw new IllegalArgumentException("URL: no debe ser nulo ni vacio");
-		if(categorias == null || categorias .isEmpty())
-			throw new IllegalArgumentException("descripcion: no debe ser nulo ni vacio");
-		if(infoComplementaria == null || infoComplementaria .isEmpty())
-			throw new IllegalArgumentException("infoComplementaria: no debe ser nulo ni vacio");
-		if(direccionImg == null || direccionImg.isEmpty())
-			throw new IllegalArgumentException("direccionImg: no debe ser nula ni vacia");
+	public String crear(String uRL) {
+		URL url;
+		try {
+		String regex = "https://en\\.wikipedia\\.org/wiki/(.*)";
+		String nuevaUrlBase = "https://dbpedia.org/page/";
+		String nuevaUrl = uRL.replaceFirst(regex, nuevaUrlBase + "$1");
+		url = new URL(nuevaUrl+".json");
 		
-		SitioTuristico sitio = new SitioTuristico(nombre,descripcion,URL,categorias,infoComplementaria,direccionImg);
+		InputStreamReader objeto = new InputStreamReader(url.openStream());
+		JsonReader jsonReader = Json.createReader(objeto);
+		JsonObject obj = jsonReader.readObject();
+
+		JsonObject nombreObj = obj.getJsonObject("http://www.w3.org/2000/01/rdf-schema#label");
+		JsonObject resumenObj = obj.getJsonObject("http://dbpedia.org/ontology/abstract");
+		JsonObject categoriasObj = obj.getJsonObject("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
+		JsonObject enlaceExternoObj = obj.getJsonObject("http://dbpedia.org/ontology/wikiPageExternalLink");
+		JsonObject imagenObj = obj.getJsonObject("http://es.dbpedia.org/property/imagen");
+
+
+		String nombre = nombreObj.getString("value");
+		String resumen = resumenObj.getString("value");
+		String categorias = categoriasObj.getString("value");
+		String enlaceExterno = enlaceExternoObj.getString("value");
+		String imagen = imagenObj.getString("value");
+	
+		SitioTuristico sitio = new SitioTuristico(nombre,resumen,enlaceExterno,categorias,imagen,nuevaUrl);
 		
 		try {
 			String id = repositorioJSON.add(sitio);
 			return id;
 		} catch(RepositorioException e) {
+			e.printStackTrace();
+		}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "";
@@ -76,7 +90,6 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 				DocumentBuilder analizador = factoria.newDocumentBuilder();
 				InputSource inputSource = new InputSource(is);
 				Document documento = analizador.parse(inputSource);
-				
 				NodeList nodos = documento.getElementsByTagName("entry");
 				LinkedList<ResumenSitioTuristico> listaResumen = new LinkedList<ResumenSitioTuristico>();
 				for (int i = 0; i < nodos.getLength(); i++) {
@@ -89,10 +102,8 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 							elemento.getElementsByTagName("title").item(0).getTextContent(),
 							elemento.getElementsByTagName("summary").item(0).getTextContent(), distancia,
 							elemento.getElementsByTagName("wikipediaUrl").item(0).getTextContent());
-
 					listaResumen.add(s);
 				}
-
 				return listaResumen;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -102,9 +113,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
-		
 	}
 
 	@Override
@@ -119,30 +128,5 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	public void getSitioTuristicoInfo(URL url) throws IOException {
-		InputStreamReader objeto = new InputStreamReader(url.openStream());
-		JsonReader jsonReader = Json.createReader(objeto);
-		JsonObject obj = jsonReader.readObject();
-
-		JsonObject nombreObj = obj.getJsonObject("http://www.w3.org/2000/01/rdf-schema#label");
-		JsonObject resumenObj = obj.getJsonObject("http://dbpedia.org/ontology/abstract");
-		JsonObject categoriasObj = obj.getJsonObject("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
-		JsonObject enlaceExternoObj = obj.getJsonObject("http://dbpedia.org/ontology/wikiPageExternalLink");
-		JsonObject imagenObj = obj.getJsonObject("http://es.dbpedia.org/property/imagen");
-
-		String nombre = nombreObj.getString("value");
-		String resumen = resumenObj.getString("value");
-		String categorias = categoriasObj.getString("value");
-		String enlaceExterno = enlaceExternoObj.getString("value");
-		String imagen = imagenObj.getString("value");
-		SitioTuristico sitio = new SitioTuristico(nombre, resumen, categorias, enlaceExterno, imagen, url.toString());
-		try {
-			repositorioJSON.add(sitio);
-		} catch (RepositorioException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 }
