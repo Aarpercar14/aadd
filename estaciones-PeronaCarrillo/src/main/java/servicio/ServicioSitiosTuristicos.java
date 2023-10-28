@@ -70,20 +70,19 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 		try {
 			DocumentBuilder analizador = factoria.newDocumentBuilder();
 			Document documento = analizador.parse(new URL(sitios).openStream());
-			documento.getDocumentElement().normalize();
-			NodeList nodos = (NodeList) documento.getDocumentElement().getChildNodes();
+			NodeList nodos = (NodeList) documento.getElementsByTagName("geonames");
 			System.out.println(documento);
 			LinkedList<ResumenSitioTuristico> listaResumen = new LinkedList<ResumenSitioTuristico>();
 			for (int i = 0; i < nodos.getLength(); i++) {
 				Element elemento = (Element) nodos.item(i);
-				double cordX2 = Double.parseDouble(elemento.getElementsByTagName("lat").item(0).getLocalName());
-				double cordY2 = Double.parseDouble(elemento.getElementsByTagName("lng").item(0).getLocalName());
+				double cordX2 = Double.parseDouble(elemento.getElementsByTagName("lat").item(0).getTextContent());
+				double cordY2 = Double.parseDouble(elemento.getElementsByTagName("lng").item(0).getTextContent());
 				DistanciaCoordenadas distancia = DistanciaCoordenadas.obtenerDistancia(Double.parseDouble(cordX1),
 						Double.parseDouble(cordY1), cordX2, cordY2);
 				ResumenSitioTuristico s = new ResumenSitioTuristico(
-						elemento.getElementsByTagName("title").item(0).getLocalName(),
-						elemento.getElementsByTagName("summary").item(0).getLocalName(), distancia,
-						elemento.getElementsByTagName("wikipediaUrl").item(0).getLocalName());
+						elemento.getElementsByTagName("title").item(0).getTextContent(),
+						elemento.getElementsByTagName("summary").item(0).getTextContent(), distancia,
+						elemento.getElementsByTagName("wikipediaUrl").item(0).getTextContent());
 
 				listaResumen.add(s);
 			}

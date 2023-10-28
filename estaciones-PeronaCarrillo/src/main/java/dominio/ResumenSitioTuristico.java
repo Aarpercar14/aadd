@@ -13,11 +13,13 @@ public class ResumenSitioTuristico {
 		this.descripcion=descripcion;
 		this.distancia = distancia;
 		this.URL=URL;
-		int i=URL.length();
+		int i=URL.length()-1;
 		char[] c=URL.toCharArray();
 		String id="";
 		while(i>0 && c[i]!='/') {
 			id=c[i]+id;
+			i--;
+
 		}
 	}
 
