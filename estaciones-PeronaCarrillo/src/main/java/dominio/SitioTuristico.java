@@ -1,6 +1,5 @@
 package dominio;
 
-import java.util.UUID;
 
 import repositorio.Identificable;
 

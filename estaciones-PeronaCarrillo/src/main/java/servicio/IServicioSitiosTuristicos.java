@@ -1,7 +1,5 @@
 package servicio;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;

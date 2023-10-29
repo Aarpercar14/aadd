@@ -13,12 +13,6 @@ import dominio.ResumenSitioTuristico;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 
-import dominio.Administrador;
-import dominio.Estacionamiento;
-import dominio.ResumenSitioTuristico;
-import repositorio.EntidadNoEncontrada;
-import repositorio.RepositorioException;
-import servicio.ServicioEstaciones;
 
 public class PruebaEntrega1 {
 
