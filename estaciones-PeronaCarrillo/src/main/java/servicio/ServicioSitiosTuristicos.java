@@ -36,7 +36,7 @@ import dominio.SitioTuristicoException;
 
 public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 
-	private Repositorio<SitioTuristico,String> repositorioJSON = FactoriaRepositorios
+	private RepositorioSitiosTuristicosJSON repositorioJSON = FactoriaRepositorios
 			.getRepositorio(SitioTuristico.class);
 
 	public String crear(String uRL) {
@@ -89,7 +89,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 		
 		String nombre = nombreObj.getString("value");
 		String resumen = resumenObj.getString("value","No hay resumen disponible");
-		Collection<String> categorias = null;
+		Collection<String> categorias = new Collection<String>();
 		if(categoriasObj.size()>1) {
 			for(int i =0;i<categoriasObj.size();i++) {
 				categorias.add(categoriasObj.getJsonObject(i).asJsonObject().getString("value") + "; ");

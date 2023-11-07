@@ -16,9 +16,9 @@ import servicio.IServicioSitiosTuristicos;
 
 
 public class Administrador extends Usuario {
-
-	public IServicioEstaciones servEstaciones ;//= FactoriaServicios.getServicio(IServicioEstaciones.class);
+	
 	public IServicioSitiosTuristicos servSitios = FactoriaServicios.getServicio(IServicioSitiosTuristicos.class);
+	public IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 
 	public Administrador(String nombre, String apellidos, String email, String password, String telefono,
 			LocalDate fechaNacimiento) {
