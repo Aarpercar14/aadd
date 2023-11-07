@@ -1,0 +1,22 @@
+
+{
+    "categoria": [
+        "http://schema.org/Place; ",
+        "http://dbpedia.org/ontology/GovernmentalAdministrativeRegion; ",
+        "http://www.wikidata.org/entity/Q3455524; ",
+        "http://dbpedia.org/ontology/Region; ",
+        "http://dbpedia.org/ontology/AdministrativeRegion; ",
+        "http://dbpedia.org/ontology/PopulatedPlace; ",
+        "http://dbpedia.org/ontology/Place; ",
+        "http://www.w3.org/2002/07/owl#Thing; ",
+        "http://dbpedia.org/ontology/Municipality; ",
+        "http://dbpedia.org/ontology/Location; ",
+        "http://schema.org/AdministrativeArea; "
+    ],
+    "descripcion": "Mejorada es un municipio español perteneciente a la provincia de Toledo, en la comunidad autónoma de Castilla-La Mancha.",
+    "direccion_img": "https://es.dbpedia.org/data/Mejorada",
+    "id": "muni_datos.php%3Fid_area=11&id_cat=169&f=169&codine=45097&id_ent=151",
+    "info_complementaria": "no hay imagen",
+    "nombre": "Mejorada",
+    "url": "http://www.diputoledo.es/global/areas/turismo/muni_datos.php%3Fid_area=11&id_cat=169&f=169&codine=45097&id_ent=151"
+}

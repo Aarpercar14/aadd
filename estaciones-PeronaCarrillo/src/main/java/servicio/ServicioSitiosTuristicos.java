@@ -89,7 +89,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 		
 		String nombre = nombreObj.getString("value");
 		String resumen = resumenObj.getString("value","No hay resumen disponible");
-		Collection<String> categorias = null;
+		LinkedList<String> categorias = new LinkedList<String>();
 		if(categoriasObj.size()>1) {
 			for(int i =0;i<categoriasObj.size();i++) {
 				categorias.add(categoriasObj.getJsonObject(i).asJsonObject().getString("value") + "; ");
@@ -115,8 +115,8 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 	}
 
 	@Override
-	public List<ResumenSitioTuristico> getSitiosInteres(String cordX1, String cordY1) throws SAXException, ParserConfigurationException, SitioTuristicoException {
-		String sitios = "http://api.geonames.org/findNearbyWikipedia?lat=" + cordX1 + "&lng=" + cordY1
+	public List<ResumenSitioTuristico> getSitiosInteres(double cordX1, double cordY1) throws SAXException, ParserConfigurationException, SitioTuristicoException {
+		String sitios = "http://api.geonames.org/findNearbyWikipedia?lat=" + Double.toString(cordX1) + "&lng=" + Double.toString(cordY1)
 				+ "&username=aadd";
 		try {
 			URL url = new URL(sitios);
@@ -132,8 +132,8 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 					Element elemento = (Element) nodos.item(i);
 					double cordX2 = Double.parseDouble(elemento.getElementsByTagName("lat").item(0).getTextContent());
 					double cordY2 = Double.parseDouble(elemento.getElementsByTagName("lng").item(0).getTextContent());
-					DistanciaCoordenadas distancia = DistanciaCoordenadas.obtenerDistancia(Double.parseDouble(cordX1),
-							Double.parseDouble(cordY1), cordX2, cordY2);
+					DistanciaCoordenadas distancia = DistanciaCoordenadas.obtenerDistancia(cordX1,
+							cordY1, cordX2, cordY2);
 					ResumenSitioTuristico s = new ResumenSitioTuristico(
 							elemento.getElementsByTagName("title").item(0).getTextContent(),
 							elemento.getElementsByTagName("summary").item(0).getTextContent(), distancia,
@@ -160,8 +160,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 			throw new SitioTuristicoException("Error al devolver el obejto desde el repositorio");
 		} catch (EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioTuristicoException("Error: no se encuentra el fichero con id: "+id);
 		}
-		return null;
 	}
 }

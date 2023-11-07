@@ -10,14 +10,13 @@ public class Estacionamiento implements Identificable{
 	private String nombre;
 	private int numPuestos;
 	private String postal;
-	private String cordX;
-	private String cordY;
+	private double cordX,cordY;
 	private LocalDateTime fechaAlta;
 	private String id;
 	
 	private List<ResumenSitioTuristico> sitiosTuristicos;
 	
-	public Estacionamiento(String nombre, int numPuesto, String postal, String x, String y) {
+	public Estacionamiento(String nombre, int numPuesto, String postal, double x, double y) {
 		this.nombre=nombre;
 		this.numPuestos=numPuesto;
 		this.cordX=x;
@@ -76,25 +75,25 @@ public class Estacionamiento implements Identificable{
 
 
 
-	public String getCordX() {
+	public double getCordX() {
 		return cordX;
 	}
 
 
 
-	public void setCordX(String cordX) {
+	public void setCordX(double cordX) {
 		this.cordX = cordX;
 	}
 
 
 
-	public String getCordY() {
+	public double getCordY() {
 		return cordY;
 	}
 
 
 
-	public void setCordY(String cordY) {
+	public void setCordY(double cordY) {
 		this.cordY = cordY;
 	}
 

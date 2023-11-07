@@ -12,17 +12,13 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	private Repositorio<Estacionamiento, String> repositorio = FactoriaRepositorios.getRepositorio(Estacionamiento.class);
 	
 	@Override
-	public String crear(String nombre, int numPuestos, String postal, String cordX, String cordY) {
+	public String crear(String nombre, int numPuestos, String postal, double cordX, double cordY) {
 		if(nombre == null || nombre.isEmpty())
 			throw new IllegalArgumentException("nombre: no debe ser nulo ni vacio");
 		if(numPuestos < 5)
 			throw new IllegalArgumentException("numero de puestos: una estacion tiene 5 puestos como mínimo");
 		if(postal == null || postal.isEmpty())
 			throw new IllegalArgumentException("posta: no debe ser nulo ni vacio");
-		if(cordX == null || cordX.isEmpty())
-			throw new IllegalArgumentException("cordX: no debe ser nula ni vacia");
-		if(cordY == null || cordY.isEmpty())
-			throw new IllegalArgumentException("cordY: no debe ser nula ni vacia");
 		
 		
 		Estacionamiento estacion = new Estacionamiento(nombre,numPuestos, postal, cordX, cordY);

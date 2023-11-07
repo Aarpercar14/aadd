@@ -1,6 +1,7 @@
 
 {
-    "categoria": "",
+    "categoria": [
+    ],
     "descripcion": "No hay resumen disponible",
     "direccion_img": "https://es.dbpedia.org/data/Gamonal",
     "id": "no encontrado",

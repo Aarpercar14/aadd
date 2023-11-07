@@ -15,7 +15,7 @@ public interface IServicioSitiosTuristicos {
 
 	public String crear(String uRL);
 	
-	List<ResumenSitioTuristico> getSitiosInteres(String cordX, String cordY) throws SAXException, ParserConfigurationException, SitioTuristicoException;
+	List<ResumenSitioTuristico> getSitiosInteres(double cordX, double cordY) throws SAXException, ParserConfigurationException, SitioTuristicoException;
 	
 	SitioTuristico getInfoSitio(String id) throws SitioTuristicoException;
 }

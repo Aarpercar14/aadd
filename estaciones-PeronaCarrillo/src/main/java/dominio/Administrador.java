@@ -27,7 +27,7 @@ public class Administrador extends Usuario {
 
 	}
 
-	public String DarDeAltaEstacion(String nom, int num, String post, String x, String y) {
+	public String DarDeAltaEstacion(String nom, int num, String post, double x, double y) {
 
 		String id = servEstaciones.crear(nom, num, post, x, y);
 
