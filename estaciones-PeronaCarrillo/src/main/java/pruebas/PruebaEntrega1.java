@@ -10,13 +10,14 @@ import org.xml.sax.SAXException;
 
 import dominio.Administrador;
 import dominio.ResumenSitioTuristico;
+import dominio.SitioTuristicoException;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 
 
 public class PruebaEntrega1 {
 
-	public static void main(String[] args) throws RepositorioException, EntidadNoEncontrada, SAXException, ParserConfigurationException {
+	public static void main(String[] args) throws RepositorioException, EntidadNoEncontrada, SAXException, ParserConfigurationException, SitioTuristicoException {
 		Administrador admin=new Administrador("admin", "jefe", "admin@gmail.com", "password", "612345678", LocalDate.now());
 		String idEstacion = admin.DarDeAltaEstacion("Saint Louis", 10, "30020", "40", "-5");
 		System.out.println("El administrador ha creado la estacion con id: " + idEstacion);

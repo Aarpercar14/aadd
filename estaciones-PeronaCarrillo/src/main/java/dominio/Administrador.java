@@ -43,7 +43,7 @@ public class Administrador extends Usuario {
 
 	}
 
-	public List<ResumenSitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada, SAXException, ParserConfigurationException {
+	public List<ResumenSitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada, SAXException, ParserConfigurationException, SitioTuristicoException {
 
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
 		List<ResumenSitioTuristico> sitios = new LinkedList<>(

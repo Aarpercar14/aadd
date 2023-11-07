@@ -1,6 +1,6 @@
-package dominio;
+package repositorio;
 
-import repositorio.RepositorioMemoria;
+import dominio.Estacionamiento;
 
 public class RepositorioMemoriaEstacion extends RepositorioMemoria<Estacionamiento>{
 	

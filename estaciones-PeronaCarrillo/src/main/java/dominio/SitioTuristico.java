@@ -1,6 +1,8 @@
 package dominio;
 
 
+import java.util.Collection;
+
 import repositorio.Identificable;
 
 public class SitioTuristico implements Identificable{
@@ -8,12 +10,12 @@ public class SitioTuristico implements Identificable{
 	private String descripcion;
 	private String URL;
 	private String id;
-	private String categoria;
+	private Collection<String> categoria;
 	private String infoComplementaria;
 	private String direccionImg;
 	
 	public SitioTuristico(String nombre, String descripcion,  String uRL,
-			String categoria, String infoComplementaria, String direccionImg) {
+			Collection<String> categoria, String infoComplementaria, String direccionImg) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.URL = uRL;
@@ -59,7 +61,7 @@ public class SitioTuristico implements Identificable{
 		this.URL = URL;
 	}
 
-	public String getCategoria() {
+	public Collection<String> getCategoria() {
 		return categoria;
 	}
 

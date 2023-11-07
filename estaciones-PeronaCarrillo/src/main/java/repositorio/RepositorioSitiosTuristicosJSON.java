@@ -1,6 +1,6 @@
-package dominio;
+package repositorio;
 
-import repositorio.RepositorioJSON;
+import dominio.SitioTuristico;
 
 public class RepositorioSitiosTuristicosJSON extends RepositorioJSON<SitioTuristico>{
 	

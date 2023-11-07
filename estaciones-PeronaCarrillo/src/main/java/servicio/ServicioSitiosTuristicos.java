@@ -2,16 +2,16 @@ package servicio;
 
 import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
-
+import repositorio.Repositorio;
 import repositorio.RepositorioException;
-
+import repositorio.RepositorioSitiosTuristicosJSON;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,13 +30,13 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import dominio.DistanciaCoordenadas;
-import dominio.RepositorioSitiosTuristicosJSON;
 import dominio.ResumenSitioTuristico;
 import dominio.SitioTuristico;
+import dominio.SitioTuristicoException;
 
 public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 
-	private RepositorioSitiosTuristicosJSON repositorioJSON = FactoriaRepositorios
+	private Repositorio<SitioTuristico,String> repositorioJSON = FactoriaRepositorios
 			.getRepositorio(SitioTuristico.class);
 
 	public String crear(String uRL) {
@@ -89,10 +89,10 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 		
 		String nombre = nombreObj.getString("value");
 		String resumen = resumenObj.getString("value","No hay resumen disponible");
-		String categorias = "";
+		Collection<String> categorias = null;
 		if(categoriasObj.size()>1) {
 			for(int i =0;i<categoriasObj.size();i++) {
-				categorias = categorias + categoriasObj.getJsonObject(i).asJsonObject().getString("value") + "; ";
+				categorias.add(categoriasObj.getJsonObject(i).asJsonObject().getString("value") + "; ");
 			}
 		}
 		String enlaceExterno = enlaceExternoObj.getString("value","no encontrado");
@@ -115,7 +115,7 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 	}
 
 	@Override
-	public List<ResumenSitioTuristico> getSitiosInteres(String cordX1, String cordY1) throws SAXException, ParserConfigurationException {
+	public List<ResumenSitioTuristico> getSitiosInteres(String cordX1, String cordY1) throws SAXException, ParserConfigurationException, SitioTuristicoException {
 		String sitios = "http://api.geonames.org/findNearbyWikipedia?lat=" + cordX1 + "&lng=" + cordY1
 				+ "&username=aadd";
 		try {
@@ -143,22 +143,21 @@ public class ServicioSitiosTuristicos implements IServicioSitiosTuristicos {
 				return listaResumen;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new SitioTuristicoException("Error en la lectura de la URL y formacion del documento ");
 			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioTuristicoException("Error al generar la URL");
 		}
-		return null;
 	}
 
 	@Override
-	public String getInfoSitio(String id) {
+	public SitioTuristico getInfoSitio(String id) throws SitioTuristicoException {
 		try {
-			return repositorioJSON.getById(id).toString();
+			return repositorioJSON.getById(id);
 		} catch (RepositorioException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new SitioTuristicoException("Error al devolver el obejto desde el repositorio");
 		} catch (EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

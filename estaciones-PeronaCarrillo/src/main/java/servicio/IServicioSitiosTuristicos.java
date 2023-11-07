@@ -7,14 +7,16 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import dominio.ResumenSitioTuristico;
+import dominio.SitioTuristico;
+import dominio.SitioTuristicoException;
 
 
 public interface IServicioSitiosTuristicos {
 
 	public String crear(String uRL);
 	
-	List<ResumenSitioTuristico> getSitiosInteres(String cordX, String cordY) throws SAXException, ParserConfigurationException;
+	List<ResumenSitioTuristico> getSitiosInteres(String cordX, String cordY) throws SAXException, ParserConfigurationException, SitioTuristicoException;
 	
-	String getInfoSitio(String id);
+	SitioTuristico getInfoSitio(String id) throws SitioTuristicoException;
 }
  
