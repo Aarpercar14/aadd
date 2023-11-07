@@ -1,9 +1,7 @@
 package servicio;
 
-
 import java.util.HashMap;
 import java.util.Map;
-
 import utils.PropertiesReader;
 
 public class FactoriaServicios {
@@ -23,14 +21,10 @@ public class FactoriaServicios {
 				T servicioInstancia = (T) Class.forName(clase).getConstructor().newInstance();
 				servicios.put(servicio, servicioInstancia);
 				return servicioInstancia;
-
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
-
 			throw new RuntimeException("No se ha podido obtener la implementación del servicio: " + servicio.getName());
 		}
-
 	}
 }
