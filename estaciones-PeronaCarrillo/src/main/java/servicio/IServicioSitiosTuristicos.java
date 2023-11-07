@@ -13,7 +13,7 @@ import dominio.SitioTuristicoException;
 
 public interface IServicioSitiosTuristicos {
 
-	public String crear(String uRL);
+	String crear(String uRL);
 	
 	List<ResumenSitioTuristico> getSitiosInteres(double cordX, double cordY) throws SAXException, ParserConfigurationException, SitioTuristicoException;
 	
