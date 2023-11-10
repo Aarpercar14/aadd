@@ -12,6 +12,7 @@ import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 import servicio.FactoriaServicios;
 import servicio.IServicioEstaciones;
+import servicio.IServicioIncidencias;
 import servicio.IServicioSitiosTuristicos;
 
 
@@ -19,6 +20,7 @@ public class Administrador extends Usuario {
 
 	public IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 	public IServicioSitiosTuristicos servSitios = FactoriaServicios.getServicio(IServicioSitiosTuristicos.class);
+	public IServicioIncidencias servIncidencias=FactoriaServicios.getServicio(IServicioIncidencias.class);
 
 	public Administrador(String nombre, String apellidos, String email, String password, String telefono,
 			LocalDate fechaNacimiento) {

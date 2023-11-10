@@ -7,6 +7,8 @@ public interface IServicioIncidencias {
 	
 	Incidencia crear(String idBici,String descripcionIncidencia);
 	
-	//void Gestion
+	void gestionDeLasIncidencias(String cierre, String operario, String incidencia);
+	
+	Incidencia recuperarIncidencia();
 
 }

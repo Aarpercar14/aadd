@@ -4,12 +4,12 @@ import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
-
+import dominio.Bicicleta;
 import dominio.Estacionamiento;
 
 public class ServicioEstaciones implements IServicioEstaciones {
 	
-	private Repositorio<Estacionamiento, String> repositorio = FactoriaRepositorios.getRepositorio(Estacionamiento.class);
+	private Repositorio<Estacionamiento, String> repositorioEstacion = FactoriaRepositorios.getRepositorio(Estacionamiento.class);
 	
 	@Override
 	public String crear(String nombre, int numPuestos, String postal, double cordX, double cordY) {
@@ -24,7 +24,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		Estacionamiento estacion = new Estacionamiento(nombre,numPuestos, postal, cordX, cordY);
 		
 		try {
-			String id = repositorio.add(estacion);
+			String id = repositorioEstacion.add(estacion);
 			return id;
 		} catch(RepositorioException e) {
 			e.printStackTrace();
@@ -39,7 +39,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		if(id == null || id.isEmpty())
 			throw new IllegalArgumentException("id: no debe ser nulo ni vacío");
 		
-		return repositorio.getById(id);
+		return repositorioEstacion.getById(id);
 		
 	}
 	
@@ -48,8 +48,8 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		if (id == null || id.isEmpty())
 			throw new IllegalArgumentException("id: no debe ser nulo ni vacio");
 		
-		Estacionamiento estacion = repositorio.getById(id);
-		repositorio.delete(estacion);
+		Estacionamiento estacion = repositorioEstacion.getById(id);
+		repositorioEstacion.delete(estacion);
 	}
 	
 }
