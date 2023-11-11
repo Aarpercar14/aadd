@@ -4,6 +4,6 @@ public interface Identificable {
 	
 	String getId();
 	
-	void setId(String id); //Preguntar Aaron
+	void setId(String id);
 	
 }

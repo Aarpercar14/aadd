@@ -10,7 +10,17 @@ public class Bicicleta implements Identificable{
 	private String modelo;
 	private LocalDateTime fechaAlta;
 	private Optional<LocalDateTime> fechaBaja;
-	private Optional<String> motivoBaja;
+	private Optional<String> motivoBaja;	
+	
+
+	public Bicicleta(String id, String modelo) {
+		super();
+		this.id = id;
+		this.modelo = modelo;
+		this.fechaAlta = LocalDateTime.now();
+		this.fechaBaja = null;
+		this.motivoBaja = null;
+	}
 
 	@Override
 	public String getId() {
@@ -20,8 +30,6 @@ public class Bicicleta implements Identificable{
 
 	@Override
 	public void setId(String id) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
-
 }
