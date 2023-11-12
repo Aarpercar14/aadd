@@ -1,13 +1,24 @@
 package servicio;
 
+import java.time.LocalDateTime;
+
 import dominio.Incidencia;
+import repositorio.Repositorio;
+import repositorio.RepositorioException;
 
 public class ServicioIncidencia implements IServicioIncidencias{
+	private Repositorio<Incidencia,String> repositorio;
 
 	@Override
 	public Incidencia crear(String idBici, String descripcionIncidencia) {
-		// TODO Auto-generated method stub
-		return null;
+		Incidencia i=new Incidencia(idBici, LocalDateTime.now(), descripcionIncidencia);
+		try {
+			repositorio.add(i);
+		} catch (RepositorioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return i;
 	}
 
 	@Override

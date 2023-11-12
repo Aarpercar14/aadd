@@ -135,5 +135,9 @@ public abstract class RepositorioJPA<T extends Identificable> implements Reposit
 
 		}
 	}
+	public String getNombre(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

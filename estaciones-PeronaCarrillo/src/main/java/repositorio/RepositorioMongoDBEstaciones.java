@@ -1,15 +1,54 @@
 package repositorio;
 
+import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import dominio.Estacionamiento;
+import utils.PropertiesReader;
 
 public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionamiento>{
+	
+	protected MongoClient mongoClient;
+	protected MongoDatabase database;
+	protected MongoCollection<Estacionamiento> coleccion;
+	protected MongoCollection<Document> coleccionSinCodificar;
+	
+	public RepositorioMongoDBEstaciones() {
+		PropertiesReader properties;
+		try {
+			properties = new PropertiesReader("mongo.properties");
+
+			String connectionString = properties.getProperty("mongouri");
+
+			MongoClient mongoClient = MongoClients.create(connectionString);
+
+			String mongoDatabase = properties.getProperty("mongodatabase");
+
+			database = mongoClient.getDatabase(mongoDatabase);
+
+			CodecRegistry defaultCodecRegistry = CodecRegistries.fromRegistries(
+					MongoClientSettings.getDefaultCodecRegistry(),
+					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+			coleccion = database.getCollection("estacionamiento", Estacionamiento.class).withCodecRegistry(defaultCodecRegistry);
+			coleccionSinCodificar = database.getCollection("estacionamiento");
+
+		} catch (Exception e) {
+
+		}
+	}
 
 	@Override
 	public MongoCollection<Estacionamiento> getCollection() {
-		// TODO Auto-generated method stub
-		return null;
+		return coleccion;
 	}
 
 }

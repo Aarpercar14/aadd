@@ -15,8 +15,7 @@ import dominio.Estacionamiento;
 public class ServicioEstaciones implements IServicioEstaciones {
 	
 	private Repositorio<Estacionamiento, String> repositorioEstacion = FactoriaRepositorios.getRepositorio(Estacionamiento.class);
-	private RepositorioJPABicicletas repositorioBici=FactoriaRepositorios.getRepositorio(Bicicleta.class);
-	
+	private Repositorio<Bicicleta,String> repositorioBicicletas=FactoriaRepositorios.getRepositorio(Bicicleta.class);
 	@Override
 	public String crear(String nombre, int numPuestos, String postal, double cordX, double cordY) {
 		if(nombre == null || nombre.isEmpty())
@@ -63,7 +62,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		String id=UUID.randomUUID().toString();
 		Bicicleta bici=new Bicicleta(id,modelo);
 		try {
-			repositorioBici.add(bici);
+			repositorioBicicletas.add(bici);
 		} catch (RepositorioException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +72,17 @@ public class ServicioEstaciones implements IServicioEstaciones {
 
 	@Override
 	public void estacionarUnaBicileta(String idBici, String idEstacion) {
-		
+		try {
+			Bicicleta bici=repositorioBicicletas.getById(idBici);
+			Estacionamiento e=repositorioEstacion.getById(idEstacion);
+			bici.estacionar(e);
+			e.getBicicletas().add(bici);
+			//e.ge
+			
+		} catch (RepositorioException | EntidadNoEncontrada e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

@@ -4,7 +4,12 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.bson.Document;
+
+import repositorio.FactoriaRepositorios;
 import repositorio.Identificable;
+import repositorio.Repositorio;
+import repositorio.RepositorioException;
 
 public class Estacionamiento implements Identificable{
 	private String nombre;
@@ -13,6 +18,10 @@ public class Estacionamiento implements Identificable{
 	private double cordX,cordY;
 	private LocalDateTime fechaAlta;
 	private String id;
+	
+	private LinkedList<Bicicleta> bicicletas;
+	
+	private Repositorio<Bicicleta,String> historico=FactoriaRepositorios.getRepositorio(Bicicleta.class);
 	
 	private List<ResumenSitioTuristico> sitiosTuristicos;
 	
@@ -23,6 +32,18 @@ public class Estacionamiento implements Identificable{
 		this.cordY=y;
 		this.fechaAlta=LocalDateTime.now();
 		this.sitiosTuristicos = new LinkedList<>();
+		this.bicicletas=new LinkedList<>();
+	}
+	
+	public void estacionarBici(Bicicleta bici) throws RepositorioException {
+		bicicletas.add(bici);
+		historico.add(bici);
+		numPuestos--;
+	}
+	
+	public void sacarBici(Bicicleta bici) {
+		bicicletas.remove(bici);
+		numPuestos++;
 	}
 	
 	
@@ -116,5 +137,16 @@ public class Estacionamiento implements Identificable{
 	public void setSitiosTuristicos(List<ResumenSitioTuristico> sitiosTuristicos) {
 		this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
+
+	public LinkedList<Bicicleta> getBicicletas() {
+		return bicicletas;
+	}
+
+	public Repositorio<Bicicleta, String> getHistorico() {
+		return historico;
+	}
+	
+	
+	
 
 }
