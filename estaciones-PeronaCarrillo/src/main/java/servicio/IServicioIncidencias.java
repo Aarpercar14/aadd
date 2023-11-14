@@ -1,5 +1,7 @@
 package servicio;
 
+import java.util.List;
+
 import dominio.Bicicleta;
 import dominio.Incidencia;
 
@@ -9,6 +11,6 @@ public interface IServicioIncidencias {
 	
 	void gestionDeLasIncidencias(String cierre, String operario, String incidencia);
 	
-	Incidencia recuperarIncidencia();
+	List<Incidencia> recuperarIncidencia();
 
 }

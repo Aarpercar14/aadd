@@ -9,24 +9,34 @@ import javax.persistence.Lob;
 
 import repositorio.Identificable;
 
-public class Incidencia implements Identificable{
+public class Incidencia implements Identificable {
 	@Id
 	private String id;
-	@Column(name="idBicicleta")
+	@Column(name = "idBicicleta")
 	private String idBicicleta;
-	@Column(name="fechaCreacion",columnDefinition="DATE")
+	@Column(name = "fechaCreacion", columnDefinition = "DATE")
 	private LocalDateTime fechaCreacion;
 	@Lob
-	@Column(name="descripcion")
+	@Column(name = "descripcion")
 	private String descripcion;
-	@Column(name="estado")
+	@Column(name = "estado")
 	private EstadoIncidencia estado;
-	
+	@Column(name = "fechaCierre", columnDefinition = "DATE")
+	private LocalDateTime fechaCierre;
+	@Lob
+	@Column(name = "motivoCierre")
+	private String motivoCierre;
+	@Column(name = "operario")
+	private String operario;
+
 	public Incidencia(String idBici, LocalDateTime fechaCreacion, String descripcion) {
 		super();
-		this.id=UUID.randomUUID().toString();
-		this.idBicicleta=idBici;
+		this.id = UUID.randomUUID().toString();
+		this.idBicicleta = idBici;
 		this.fechaCreacion = fechaCreacion;
+		this.fechaCierre = null;
+		this.motivoCierre = "";
+		this.operario = "";
 		this.descripcion = descripcion;
 		this.estado = EstadoIncidencia.PENDIENTE;
 	}
@@ -41,7 +51,61 @@ public class Incidencia implements Identificable{
 	public void setId(String id) {
 		// TODO Auto-generated method stub
 	}
-	
-	
+
+	public String getIdBicicleta() {
+		return idBicicleta;
+	}
+
+	public LocalDateTime getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public EstadoIncidencia getEstado() {
+		return estado;
+	}
+
+	public void setIdBicicleta(String idBicicleta) {
+		this.idBicicleta = idBicicleta;
+	}
+
+	public void setFechaCreacion(LocalDateTime fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public void setEstado(EstadoIncidencia estado) {
+		this.estado = estado;
+	}
+
+	public LocalDateTime getFechaCierre() {
+		return fechaCierre;
+	}
+
+	public void setFechaCierre(LocalDateTime fechaCierre) {
+		this.fechaCierre = fechaCierre;
+	}
+
+	public String getMotivoCierre() {
+		return motivoCierre;
+	}
+
+	public void setMotivoCierre(String motivoCierre) {
+		this.motivoCierre = motivoCierre;
+	}
+
+	public String getOperario() {
+		return operario;
+	}
+
+	public void setOperario(String operario) {
+		this.operario = operario;
+	}
 
 }
