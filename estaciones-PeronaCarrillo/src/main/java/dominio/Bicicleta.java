@@ -36,7 +36,9 @@ public class Bicicleta implements Identificable{
 	private Optional<LocalDateTime> fechaBaja;
 	@Lob
 	@Column(name="motivobaja")
-	private Optional<String> motivoBaja;	
+	private Optional<String> motivoBaja;
+	@Column(name="estado")
+	private String estado;
 	
 	private Repositorio<Estacionamiento,String> historico=FactoriaRepositorios.getRepositorio(Estacionamiento.class);
 	
@@ -58,6 +60,10 @@ public class Bicicleta implements Identificable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void cambioEstadoBici(String estado) {
+		this.setEstado(estado);
 	}
 
 	@Override
@@ -88,6 +94,34 @@ public class Bicicleta implements Identificable{
 
 	public Repositorio<Estacionamiento, String> getHistorico() {
 		return historico;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	private void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
+	}
+
+	public void setFechaAlta(LocalDateTime fechaAlta) {
+		this.fechaAlta = fechaAlta;
+	}
+
+	public void setFechaBaja(Optional<LocalDateTime> fechaBaja) {
+		this.fechaBaja = fechaBaja;
+	}
+
+	public void setMotivoBaja(Optional<String> motivoBaja) {
+		this.motivoBaja = motivoBaja;
+	}
+
+	public void setHistorico(Repositorio<Estacionamiento, String> historico) {
+		this.historico = historico;
 	}
 	
 	

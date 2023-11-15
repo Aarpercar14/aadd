@@ -13,7 +13,7 @@ public class Incidencia implements Identificable {
 	@Id
 	private String id;
 	@Column(name = "idBicicleta")
-	private String idBicicleta;
+	private Bicicleta bicicleta;
 	@Column(name = "fechaCreacion", columnDefinition = "DATE")
 	private LocalDateTime fechaCreacion;
 	@Lob
@@ -29,11 +29,11 @@ public class Incidencia implements Identificable {
 	@Column(name = "operario")
 	private String operario;
 
-	public Incidencia(String idBici, LocalDateTime fechaCreacion, String descripcion) {
+	public Incidencia(Bicicleta bici, String descripcion) {
 		super();
 		this.id = UUID.randomUUID().toString();
-		this.idBicicleta = idBici;
-		this.fechaCreacion = fechaCreacion;
+		this.bicicleta =bici;
+		this.fechaCreacion = LocalDateTime.now();
 		this.fechaCierre = null;
 		this.motivoCierre = "";
 		this.operario = "";
@@ -52,8 +52,8 @@ public class Incidencia implements Identificable {
 		// TODO Auto-generated method stub
 	}
 
-	public String getIdBicicleta() {
-		return idBicicleta;
+	public Bicicleta getBicicleta() {
+		return bicicleta;
 	}
 
 	public LocalDateTime getFechaCreacion() {
@@ -66,10 +66,6 @@ public class Incidencia implements Identificable {
 
 	public EstadoIncidencia getEstado() {
 		return estado;
-	}
-
-	public void setIdBicicleta(String idBicicleta) {
-		this.idBicicleta = idBicicleta;
 	}
 
 	public void setFechaCreacion(LocalDateTime fechaCreacion) {

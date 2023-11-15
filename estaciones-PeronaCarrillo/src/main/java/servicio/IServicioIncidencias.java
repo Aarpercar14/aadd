@@ -7,9 +7,9 @@ import dominio.Incidencia;
 
 public interface IServicioIncidencias {
 	
-	Incidencia crear(String idBici,String descripcionIncidencia);
+	Incidencia crear(Bicicleta bici,String descripcionIncidencia);
 	
-	void gestionDeLasIncidencias(String cierre, String operario, String incidencia);
+	void gestionDeLasIncidencias(String cierre, String operario, String incidencia,String nuevoEstado);
 	
 	List<Incidencia> recuperarIncidencia();
 
