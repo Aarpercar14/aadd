@@ -14,6 +14,7 @@ import repositorio.RepositorioException;
 
 public class ServicioIncidencia implements IServicioIncidencias{
 	private Repositorio<Incidencia,String> repositorio;
+	private IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 
 	@Override
 	public Incidencia crear(Bicicleta bici, String descripcionIncidencia) {
@@ -32,6 +33,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 	public void gestionDeLasIncidencias(String cierre, String operario, String incidencia,String nuevoEstado) {
 		try {
 			Incidencia i=repositorio.getById(incidencia);
+			
 			switch(nuevoEstado){
 				case "cancelada":
 					i.setEstado(EstadoIncidencia.CANCELADA);
@@ -43,7 +45,11 @@ public class ServicioIncidencia implements IServicioIncidencias{
 				case "asignada":
 					i.setEstado(EstadoIncidencia.ASIGNADA);
 					i.setOperario(operario);
+					
 					//TODO Quitar bici de la estacion
+					Bicicleta biciAsignada = i.getBicicleta();
+					servEstaciones.darDeBajaUnaBici(biciAsignada.getId(), nuevoEstado);
+					
 					break;
 				case "resuelta":
 					i.setMotivoCierre(cierre);
