@@ -5,6 +5,7 @@ import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
+import repositorio.RepositorioMongoDBHistorico;
 
 public interface IServicioEstaciones {
 	
@@ -14,11 +15,11 @@ public interface IServicioEstaciones {
 	
 	void eliminar(String id) throws RepositorioException, EntidadNoEncontrada;
 	
-	String altaDeUnaBici(String modelo, Estacionamiento estacion);
+	String altaDeUnaBici(String modelo, Estacionamiento estacion,RepositorioMongoDBHistorico historico);
 	
-	void estacionarUnaBicileta(String idBici, String idEstacion);
+	void estacionarUnaBicileta(String idBici, String idEstacion,RepositorioMongoDBHistorico historico);
 	
-	void retirarUnaBicleta(String idBici);
+	void retirarUnaBicleta(String idBici,RepositorioMongoDBHistorico repositorio);
 	
 	void darDeBajaUnaBici(String idBici, String motivo);
 	

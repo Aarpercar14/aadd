@@ -33,10 +33,10 @@ public class Bicicleta implements Identificable{
 	@Column(name="fechaAlta",columnDefinition = "DATE")
 	private LocalDateTime fechaAlta;
 	@Column(name="fechabaja",columnDefinition="DATE")
-	private Optional<LocalDateTime> fechaBaja;
+	private LocalDateTime fechaBaja;
 	@Lob
 	@Column(name="motivobaja")
-	private Optional<String> motivoBaja;
+	private String motivoBaja;
 	@Column(name="estado")
 	private String estado;
 	
@@ -84,11 +84,11 @@ public class Bicicleta implements Identificable{
 		return fechaAlta;
 	}
 
-	public Optional<LocalDateTime> getFechaBaja() {
+	public LocalDateTime getFechaBaja() {
 		return fechaBaja;
 	}
 
-	public Optional<String> getMotivoBaja() {
+	public String getMotivoBaja() {
 		return motivoBaja;
 	}
 
@@ -112,11 +112,11 @@ public class Bicicleta implements Identificable{
 		this.fechaAlta = fechaAlta;
 	}
 
-	public void setFechaBaja(Optional<LocalDateTime> fechaBaja) {
-		this.fechaBaja = fechaBaja;
+	public void setFechaBaja(LocalDateTime localDateTime) {
+		this.fechaBaja = localDateTime;
 	}
 
-	public void setMotivoBaja(Optional<String> motivoBaja) {
+	public void setMotivoBaja(String motivoBaja) {
 		this.motivoBaja = motivoBaja;
 	}
 

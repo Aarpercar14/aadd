@@ -1,5 +1,6 @@
 package repositorio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
@@ -35,8 +36,11 @@ public abstract class RepositorioMongoDB<T extends Identificable> implements Rep
 
 	@Override
 	public T getById(String id) throws RepositorioException, EntidadNoEncontrada {
-		// TODO Auto-generated method stub
-		return null;
+		 List<T> coll =getCollection().find().into(new ArrayList<>());
+		 for(T t:coll) {
+			 if(t.getId()==id) return t;
+		 }
+		 return null;
 	}
 
 	@Override

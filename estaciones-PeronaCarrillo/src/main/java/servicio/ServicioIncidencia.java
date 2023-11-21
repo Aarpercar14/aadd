@@ -43,7 +43,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 				case "asignada":
 					i.setEstado(EstadoIncidencia.ASIGNADA);
 					i.setOperario(operario);
-					//TODOQuitar bici de la estacion
+					//TODO Quitar bici de la estacion
 					break;
 				case "resuelta":
 					i.setMotivoCierre(cierre);

@@ -35,7 +35,7 @@ public class RepositorioJPABicicletas extends RepositorioJPA<Bicicleta>{
 		return query.getResultList();
 		
 		}catch(RuntimeException ru) {
-			throw new RepositorioException("Error buscando revistas por palabra clave", ru);
+			throw new RepositorioException("Error buscando bicicletas por palabra clave", ru);
 		}
 	}
 	

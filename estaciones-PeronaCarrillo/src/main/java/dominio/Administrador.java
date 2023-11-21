@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import repositorio.EntidadNoEncontrada;
+import repositorio.Repositorio;
 import repositorio.RepositorioException;
 import servicio.FactoriaServicios;
 import servicio.IServicioEstaciones;
@@ -21,6 +22,8 @@ public class Administrador extends Usuario {
 	public IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 	public IServicioSitiosTuristicos servSitios = FactoriaServicios.getServicio(IServicioSitiosTuristicos.class);
 	public IServicioIncidencias servIncidencias=FactoriaServicios.getServicio(IServicioIncidencias.class);
+	
+	public Repositorio<Historico,String> repositorioHistorico;
 
 	public Administrador(String nombre, String apellidos, String email, String password, String telefono,
 			LocalDate fechaNacimiento) {
