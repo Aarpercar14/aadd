@@ -13,7 +13,7 @@ import java.util.UUID;
 
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
-import dominio.Historico;
+import dominio.EntradaHistorico;
 
 public class ServicioEstaciones implements IServicioEstaciones {
 
@@ -83,7 +83,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 						Bicicleta bici = repositorioBicicletas.getById(idBici);
 						bici.estacionar(e);
 						e.getBicicletas().add(bici);
-						historico.add(new Historico(idBici, e.getId()));
+						historico.add(new EntradaHistorico(idBici, e.getId()));
 					}
 				}
 			} else {
@@ -91,7 +91,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 				Estacionamiento e = repositorioEstacion.getById(idEstacion);
 				bici.estacionar(e);
 				e.getBicicletas().add(bici);
-				historico.add(new Historico(idBici, idEstacion));
+				historico.add(new EntradaHistorico(idBici, idEstacion));
 			}
 		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
@@ -107,7 +107,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 					if (b.getId().equals(idBici)) {
 						e.sacarBici(b);
 						repositorioEstacion.update(e);
-						for (Historico h : repositorio.getAll()) {
+						for (EntradaHistorico h : repositorio.getAll()) {
 							if ((h.getIdBici() == b.getId()) && (h.getIdEstacion() == e.getNombre())) {
 								h.setFechaRetiro(LocalDateTime.now());
 							}

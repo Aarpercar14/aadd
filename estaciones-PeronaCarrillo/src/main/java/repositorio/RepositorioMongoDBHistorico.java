@@ -11,14 +11,14 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import dominio.Historico;
+import dominio.EntradaHistorico;
 import utils.PropertiesReader;
 
-public class RepositorioMongoDBHistorico extends RepositorioMongoDB<Historico>{
+public class RepositorioMongoDBHistorico extends RepositorioMongoDB<EntradaHistorico>{
 
 protected MongoClient mongoClient;
 protected MongoDatabase database;
-protected MongoCollection<Historico> coleccion;
+protected MongoCollection<EntradaHistorico> coleccion;
 protected MongoCollection<Document> coleccionSinCodificar;
 
 public RepositorioMongoDBHistorico() {
@@ -38,7 +38,7 @@ public RepositorioMongoDBHistorico() {
 				MongoClientSettings.getDefaultCodecRegistry(),
 				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
-		coleccion = database.getCollection("historico", Historico.class).withCodecRegistry(defaultCodecRegistry);
+		coleccion = database.getCollection("historico", EntradaHistorico.class).withCodecRegistry(defaultCodecRegistry);
 		coleccionSinCodificar = database.getCollection("editorial");
 
 	} catch (Exception e) {
@@ -47,7 +47,7 @@ public RepositorioMongoDBHistorico() {
 }
 
 @Override
-public MongoCollection<Historico> getCollection() {
+public MongoCollection<EntradaHistorico> getCollection() {
 	// TODO Auto-generated method stub
 	return null;
 }
