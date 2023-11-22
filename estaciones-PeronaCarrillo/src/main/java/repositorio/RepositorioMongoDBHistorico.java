@@ -12,13 +12,14 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
 import dominio.EntradaHistorico;
+import dominio.Historico;
 import utils.PropertiesReader;
 
-public class RepositorioMongoDBHistorico extends RepositorioMongoDB<EntradaHistorico>{
+public class RepositorioMongoDBHistorico extends RepositorioMongoDB<Historico>{
 
 protected MongoClient mongoClient;
 protected MongoDatabase database;
-protected MongoCollection<EntradaHistorico> coleccion;
+protected MongoCollection<Historico> coleccion;
 protected MongoCollection<Document> coleccionSinCodificar;
 
 public RepositorioMongoDBHistorico() {
@@ -38,7 +39,7 @@ public RepositorioMongoDBHistorico() {
 				MongoClientSettings.getDefaultCodecRegistry(),
 				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
-		coleccion = database.getCollection("historico", EntradaHistorico.class).withCodecRegistry(defaultCodecRegistry);
+		coleccion = database.getCollection("historico", Historico.class).withCodecRegistry(defaultCodecRegistry);
 		coleccionSinCodificar = database.getCollection("editorial");
 
 	} catch (Exception e) {
@@ -47,9 +48,14 @@ public RepositorioMongoDBHistorico() {
 }
 
 @Override
-public MongoCollection<EntradaHistorico> getCollection() {
-	// TODO Auto-generated method stub
-	return null;
+public MongoCollection<Historico> getCollection() {
+	
+	CodecRegistry defaultCodecRegistry = CodecRegistries.fromRegistries(
+			MongoClientSettings.getDefaultCodecRegistry(),
+			CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+	
+	return database.getCollection("historico", Historico.class).withCodecRegistry(defaultCodecRegistry);
+	
 }
 
 }
