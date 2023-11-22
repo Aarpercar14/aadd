@@ -46,8 +46,8 @@ public class ServicioIncidencia implements IServicioIncidencias{
 					i.setEstado(EstadoIncidencia.ASIGNADA);
 					i.setOperario(operario);
 					
-					//TODO Quitar bici de la estacion
 					Bicicleta biciAsignada = i.getBicicleta();
+					servEstaciones.retirarUnaBicleta(biciAsignada.getId());
 					
 					break;
 				case "resuelta":
