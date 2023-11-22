@@ -27,4 +27,6 @@ public interface IServicioEstaciones {
 	
 	List<Estacionamiento> recuperarEstacionSitiosTuristicos();
 	
+	public String encontrarEstacionLibre() throws RepositorioException;
+	
 }

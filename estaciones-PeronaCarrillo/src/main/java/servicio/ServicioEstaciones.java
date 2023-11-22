@@ -4,8 +4,7 @@ import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
-import repositorio.RepositorioJPABicicletas;
-import repositorio.RepositorioMongoDBHistorico;
+import repositorio.RepositorioMemoriaEstacion;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -143,11 +142,18 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public List<Estacionamiento> recuperarEstacionSitiosTuristicos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public String encontrarEstacionLibre() throws RepositorioException {
+		String idEstacion = RepositorioMemoriaEstacion.getEstacionLibre(repositorioEstacion);
+		return idEstacion;
+		
 	}
 
 }

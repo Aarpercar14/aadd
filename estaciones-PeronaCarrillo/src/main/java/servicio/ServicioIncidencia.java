@@ -57,9 +57,16 @@ public class ServicioIncidencia implements IServicioIncidencias{
 					//TODO hacer un if bici esta rota o si regresa a estacion
 					int random_int = (int)Math.floor(Math.random() * 10);
 					if(random_int>5) {
+						// Caso bici rota, se da de baja la bici
+						Bicicleta biciRota = i.getBicicleta();
+						servEstaciones.darDeBajaUnaBici(biciRota.getId(), "Bicicleta Rota");
 						
 					}else {
-						
+						// Caso bici regresa a estacion
+						String idEstacion = servEstaciones.encontrarEstacionLibre();
+						if(idEstacion == null)
+							throw new NullPointerException();
+						servEstaciones.estacionarUnaBicileta(i.getBicicleta().getId(), idEstacion);
 					}
 					break;
 			};
