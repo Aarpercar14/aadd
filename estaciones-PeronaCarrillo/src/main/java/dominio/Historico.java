@@ -10,8 +10,8 @@ public class Historico implements Identificable {
 	private String id;
 	private HashMap<String, EntradaHistorico> historico;
 	
-	public Historico() {
-		this.id = UUID.randomUUID().toString();
+	public Historico(String idBici) {
+		this.id = idBici;
 		this.historico = new HashMap<String, EntradaHistorico>();
 	}
 	
