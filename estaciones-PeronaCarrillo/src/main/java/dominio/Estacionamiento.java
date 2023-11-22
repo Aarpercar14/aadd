@@ -124,6 +124,6 @@ public class Estacionamiento implements Identificable{
 	}
 	
 	public boolean haySitioLibre() {
-		return (bicicletas.size()<this.numPuestos);
+		return (this.numPuestos > 0);
 	}
 }

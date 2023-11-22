@@ -1,9 +1,7 @@
 package dominio;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
-import repositorio.Identificable;
 
 public class EntradaHistorico {
 	
