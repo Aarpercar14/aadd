@@ -8,11 +8,12 @@ import repositorio.Identificable;
 public class Historico implements Identificable {
 	
 	private String id;
+	private String idBici;
 	private HashMap<String, EntradaHistorico> historico;
 	private String idUltimoEstacion;
 	
 	public Historico(String idBici) {
-		this.id = idBici;
+		this.idBici = idBici;
 		this.historico = new HashMap<String, EntradaHistorico>();
 		this.idUltimoEstacion="";
 	}
@@ -41,5 +42,9 @@ public class Historico implements Identificable {
 	}
 	public EntradaHistorico getEntradaHistorico() {
 		return historico.get(idUltimoEstacion);
+	}
+	
+	public String getIdBici() {
+		return this.idBici;
 	}
 }
