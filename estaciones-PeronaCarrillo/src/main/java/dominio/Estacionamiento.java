@@ -1,11 +1,9 @@
 package dominio;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.bson.Document;
-
 import repositorio.FactoriaRepositorios;
 import repositorio.Identificable;
 import repositorio.Repositorio;
@@ -19,7 +17,7 @@ public class Estacionamiento implements Identificable{
 	private LocalDateTime fechaAlta;
 	private String id;
 	
-	private LinkedList<Bicicleta> bicicletas;
+	private ArrayList<Bicicleta> bicicletas;
 	
 	private Repositorio<Bicicleta,String> historico=FactoriaRepositorios.getRepositorio(Bicicleta.class);
 	
@@ -32,7 +30,7 @@ public class Estacionamiento implements Identificable{
 		this.cordY=y;
 		this.fechaAlta=LocalDateTime.now();
 		this.sitiosTuristicos = new LinkedList<>();
-		this.bicicletas=new LinkedList<>();
+		this.bicicletas=new ArrayList<>();
 	}
 	
 	public void estacionarBici(Bicicleta bici) throws RepositorioException {
@@ -41,13 +39,16 @@ public class Estacionamiento implements Identificable{
 		numPuestos--;
 	}
 	
-	public void sacarBici(Bicicleta bici) {
-		bicicletas.remove(bici);
+	public void sacarBici(String idBici) {
+		for(Bicicleta b:bicicletas) {
+			if(b.getId()==idBici) {
+				bicicletas.remove(b);
+				break;
+			}
+		}
 		numPuestos++;
 	}
 	
-	
-
 	@Override
 	public String getId() {
 		return id;
@@ -58,73 +59,49 @@ public class Estacionamiento implements Identificable{
 		this.id = id;
 	}
 
-
-
 	public String getNombre() {
 		return nombre;
 	}
-
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
-
 	public int getNumPuestos() {
 		return numPuestos;
 	}
-
-
 
 	public void setNumPuestos(int numPuestos) {
 		this.numPuestos = numPuestos;
 	}
 
-
-
 	public String getPostal() {
 		return postal;
 	}
-
-
 
 	public void setPostal(String postal) {
 		this.postal = postal;
 	}
 
-
-
 	public double getCordX() {
 		return cordX;
 	}
-
-
 
 	public void setCordX(double cordX) {
 		this.cordX = cordX;
 	}
 
-
-
 	public double getCordY() {
 		return cordY;
 	}
-
-
 
 	public void setCordY(double cordY) {
 		this.cordY = cordY;
 	}
 
-
-
 	public LocalDateTime getFechaAlta() {
 		return fechaAlta;
 	}
-
-
 
 	public void setFechaAlta(LocalDateTime fechaAlta) {
 		this.fechaAlta = fechaAlta;
@@ -138,15 +115,11 @@ public class Estacionamiento implements Identificable{
 		this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
 
-	public LinkedList<Bicicleta> getBicicletas() {
+	public ArrayList<Bicicleta> getBicicletas() {
 		return bicicletas;
 	}
 
 	public Repositorio<Bicicleta, String> getHistorico() {
 		return historico;
 	}
-	
-	
-	
-
 }

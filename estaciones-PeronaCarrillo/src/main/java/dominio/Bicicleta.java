@@ -39,7 +39,7 @@ public class Bicicleta implements Identificable{
 	private String motivoBaja;
 	@Column(name="estado")
 	private String estado;
-	@Column(name="idultimaEstacion")
+	@Column(name="idUltimaEstacion")
 	private String idUltimaEstacion;
 	
 	private Repositorio<Estacionamiento,String> historico=FactoriaRepositorios.getRepositorio(Estacionamiento.class);
@@ -77,7 +77,7 @@ public class Bicicleta implements Identificable{
 
 	@Override
 	public void setId(String id) {
-		// TODO Auto-generated method stub	
+		this.id=id;
 	}
 
 	public String getModelo() {
@@ -135,8 +135,4 @@ public class Bicicleta implements Identificable{
 	public void setIdUltimaEstacion(String idUltimaEstacion) {
 		this.idUltimaEstacion = idUltimaEstacion;
 	}
-	
-	
-	
-	
 }

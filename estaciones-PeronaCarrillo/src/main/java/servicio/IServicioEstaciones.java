@@ -15,11 +15,11 @@ public interface IServicioEstaciones {
 	
 	void eliminar(String id) throws RepositorioException, EntidadNoEncontrada;
 	
-	String altaDeUnaBici(String modelo, Estacionamiento estacion,RepositorioMongoDBHistorico historico);
+	String altaDeUnaBici(String modelo, Estacionamiento estacion);
 	
-	void estacionarUnaBicileta(String idBici, String idEstacion,RepositorioMongoDBHistorico historico);
+	void estacionarUnaBicileta(String idBici, String idEstacion);
 	
-	void retirarUnaBicleta(String idBici,RepositorioMongoDBHistorico repositorio);
+	void retirarUnaBicleta(String idBici);
 	
 	void darDeBajaUnaBici(String idBici, String motivo);
 	

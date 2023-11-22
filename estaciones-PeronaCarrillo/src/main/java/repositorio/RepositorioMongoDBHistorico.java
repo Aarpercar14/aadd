@@ -26,19 +26,13 @@ public RepositorioMongoDBHistorico() {
 	PropertiesReader properties;
 	try {
 		properties = new PropertiesReader("mongo.properties");
-
 		String connectionString = properties.getProperty("mongouri");
-
 		MongoClient mongoClient = MongoClients.create(connectionString);
-
 		String mongoDatabase = properties.getProperty("mongodatabase");
-
 		database = mongoClient.getDatabase(mongoDatabase);
-
 		CodecRegistry defaultCodecRegistry = CodecRegistries.fromRegistries(
 				MongoClientSettings.getDefaultCodecRegistry(),
 				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-
 		coleccion = database.getCollection("historico", Historico.class).withCodecRegistry(defaultCodecRegistry);
 		coleccionSinCodificar = database.getCollection("editorial");
 

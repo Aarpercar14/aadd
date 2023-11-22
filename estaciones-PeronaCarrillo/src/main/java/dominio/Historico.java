@@ -9,14 +9,17 @@ public class Historico implements Identificable {
 	
 	private String id;
 	private HashMap<String, EntradaHistorico> historico;
+	private String idUltimoEstacion;
 	
 	public Historico(String idBici) {
 		this.id = idBici;
 		this.historico = new HashMap<String, EntradaHistorico>();
+		this.idUltimoEstacion="";
 	}
 	
 	public void añadirEntrada(EntradaHistorico entrada) {
 		this.historico.put(entrada.getIdEstacion(), entrada);
+		this.idUltimoEstacion=entrada.getIdEstacion();
 	}
 	
 	public void eliminarEntrada(String idEstacion) {
@@ -35,5 +38,8 @@ public class Historico implements Identificable {
 	@Override
 	public void setId(String id) {
 		this.id = id;
+	}
+	public EntradaHistorico getEntradaHistorico() {
+		return historico.get(idUltimoEstacion);
 	}
 }
