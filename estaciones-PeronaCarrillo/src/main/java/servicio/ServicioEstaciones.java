@@ -13,6 +13,7 @@ import java.util.UUID;
 
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
+import dominio.Historico;
 import dominio.EntradaHistorico;
 
 public class ServicioEstaciones implements IServicioEstaciones {
@@ -20,7 +21,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	private Repositorio<Estacionamiento, String> repositorioEstacion = FactoriaRepositorios
 			.getRepositorio(Estacionamiento.class);
 	private Repositorio<Bicicleta, String> repositorioBicicletas = FactoriaRepositorios.getRepositorio(Bicicleta.class);
-
+	private Repositorio<Historico,String> repositorioHistorico=FactoriaRepositorios.getRepositorio(Historico.class);
 	@Override
 	public String crear(String nombre, int numPuestos, String postal, double cordX, double cordY) {
 		if (nombre == null || nombre.isEmpty())
@@ -70,7 +71,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		} catch (RepositorioException e) {
 			e.printStackTrace();
 		}
-		this.estacionarUnaBicileta(id, estacion.getId(), historico);
+		this.estacionarUnaBicileta(id, estacion.getId(), reposi);
 		return id;
 	}
 
@@ -110,6 +111,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 						for (EntradaHistorico h : repositorio.getAll()) {
 							if ((h.getIdBici() == b.getId()) && (h.getIdEstacion() == e.getNombre())) {
 								h.setFechaRetiro(LocalDateTime.now());
+								
 							}
 						}
 					}
