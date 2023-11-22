@@ -32,24 +32,28 @@ public class Bicicleta implements Identificable{
 	private String modelo;
 	@Column(name="fechaAlta",columnDefinition = "DATE")
 	private LocalDateTime fechaAlta;
-	@Column(name="fechabaja",columnDefinition="DATE")
+	@Column(name="fechaBaja",columnDefinition="DATE")
 	private LocalDateTime fechaBaja;
 	@Lob
-	@Column(name="motivobaja")
+	@Column(name="motivoBaja")
 	private String motivoBaja;
 	@Column(name="estado")
 	private String estado;
+	@Column(name="idultimaEstacion")
+	private String idUltimaEstacion;
 	
 	private Repositorio<Estacionamiento,String> historico=FactoriaRepositorios.getRepositorio(Estacionamiento.class);
 	
 
-	public Bicicleta(String id, String modelo) {
+	public Bicicleta(String id, String modelo, String idEstacion) {
 		super();
 		this.id = id;
 		this.modelo = modelo;
 		this.fechaAlta = LocalDateTime.now();
+		this.idUltimaEstacion = idEstacion;
 		this.fechaBaja = null;
 		this.motivoBaja = null;
+		
 	}
 	
 	public void estacionar(Estacionamiento estacion) {
@@ -123,6 +127,16 @@ public class Bicicleta implements Identificable{
 	public void setHistorico(Repositorio<Estacionamiento, String> historico) {
 		this.historico = historico;
 	}
+
+	public String getIdUltimaEstacion() {
+		return idUltimaEstacion;
+	}
+
+	public void setIdUltimaEstacion(String idUltimaEstacion) {
+		this.idUltimaEstacion = idUltimaEstacion;
+	}
+	
+	
 	
 	
 }
