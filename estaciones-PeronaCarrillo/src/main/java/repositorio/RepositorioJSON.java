@@ -3,7 +3,7 @@ package repositorio;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
+
 
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbConfig;
@@ -36,10 +36,6 @@ public abstract class RepositorioJSON<T extends Identificable> implements Reposi
 	@SuppressWarnings("resource")
 	protected void save(T entity) throws RepositorioException, IOException {
 
-		final String documento = getDocumento(entity.getId());
-
-		final FileWriter fichero = new FileWriter(documento);
-
 		try {
 			// TODO implementacion con JSON-B y JSON-P
 			JsonbConfig config = new JsonbConfig().withNullValues(true).withFormatting(true)
@@ -47,7 +43,7 @@ public abstract class RepositorioJSON<T extends Identificable> implements Reposi
 					.withPropertyOrderStrategy(PropertyOrderStrategy.LEXICOGRAPHICAL);
 			Jsonb contexto = JsonbProvider.provider().create().withConfig(config).build();
 
-			String cadenaJSON = contexto.toJson(entity);
+			
 			contexto.toJson(entity, new PrintStream("repositorio-json/sitioTuristico-"+entity.getId()+".json"));
 		} catch (Exception e) {
 			throw new RepositorioException("Error al guardar la entidad con id: " + entity.getId());
