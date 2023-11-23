@@ -122,4 +122,8 @@ public class Estacionamiento implements Identificable{
 	public Repositorio<Bicicleta, String> getHistorico() {
 		return historico;
 	}
+	
+	public boolean haySitioLibre() {
+		return (this.numPuestos > 0);
+	}
 }

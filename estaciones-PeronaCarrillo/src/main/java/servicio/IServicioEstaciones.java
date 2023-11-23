@@ -1,6 +1,7 @@
 package servicio;
 
 import java.util.List;
+
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import repositorio.EntidadNoEncontrada;
@@ -16,6 +17,8 @@ public interface IServicioEstaciones {
 	
 	String altaDeUnaBici(String modelo, Estacionamiento estacion);
 	
+	void estacionarUnaBicileta(String idBici);
+	
 	void estacionarUnaBicileta(String idBici, String idEstacion);
 	
 	void retirarUnaBicleta(String idBici);
@@ -25,5 +28,7 @@ public interface IServicioEstaciones {
 	List<Bicicleta> recuperarBiciEstacionadaPosicion(double x, double y);
 	
 	List<Estacionamiento> recuperarEstacionSitiosTuristicos();
+	
+	public String encontrarEstacionLibre() throws RepositorioException;
 	
 }

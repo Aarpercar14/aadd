@@ -9,10 +9,7 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import repositorio.FactoriaRepositorios;
 import repositorio.Identificable;
-import repositorio.Repositorio;
-import repositorio.RepositorioException;
 
 @Entity
 @Table(name="revista")
@@ -34,33 +31,23 @@ public class Bicicleta implements Identificable{
 	private String motivoBaja;
 	@Column(name="estado")
 	private String estado;
-	@Column(name="idUltimaEstacion")
-	private String idUltimaEstacion;
+	@Column(name="idHistorico")
+	private String idHistorico;
 	
-	private Repositorio<Estacionamiento,String> historico=FactoriaRepositorios.getRepositorio(Estacionamiento.class);
+	
 	
 
-	public Bicicleta(String id, String modelo, String idEstacion) {
+	public Bicicleta(String id, String modelo, String idHistorico) {
 		super();
 		this.id = id;
 		this.modelo = modelo;
 		this.fechaAlta = LocalDateTime.now();
-		this.idUltimaEstacion = idEstacion;
+		this.idHistorico = idHistorico;
 		this.fechaBaja = null;
 		this.motivoBaja = null;
 		
 	}
-	
-	public void estacionar(Estacionamiento estacion) {
-		try {
-			historico.add(estacion);
-			
-		} catch (RepositorioException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
+		
 	public void cambioEstadoBici(String estado) {
 		this.setEstado(estado);
 	}
@@ -91,9 +78,6 @@ public class Bicicleta implements Identificable{
 		return motivoBaja;
 	}
 
-	public Repositorio<Estacionamiento, String> getHistorico() {
-		return historico;
-	}
 
 	public String getEstado() {
 		return estado;
@@ -119,15 +103,12 @@ public class Bicicleta implements Identificable{
 		this.motivoBaja = motivoBaja;
 	}
 
-	public void setHistorico(Repositorio<Estacionamiento, String> historico) {
-		this.historico = historico;
+
+	public String getIdHistorico() {
+		return idHistorico;
 	}
 
-	public String getIdUltimaEstacion() {
-		return idUltimaEstacion;
-	}
-
-	public void setIdUltimaEstacion(String idUltimaEstacion) {
-		this.idUltimaEstacion = idUltimaEstacion;
+	public void setIdHistorico(String idHistorico) {
+		this.idHistorico = idHistorico;
 	}
 }

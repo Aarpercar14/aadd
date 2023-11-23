@@ -1,5 +1,6 @@
 package dominio;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import repositorio.Identificable;
@@ -7,18 +8,19 @@ import repositorio.Identificable;
 public class Historico implements Identificable {
 	
 	private String id;
+	private String idBici;
 	private HashMap<String, EntradaHistorico> historico;
-	private String idUltimoEstacion;
+	private String idUltimaEstacion;
 	
 	public Historico(String idBici) {
-		this.id = idBici;
+		this.idBici = idBici;
 		this.historico = new HashMap<String, EntradaHistorico>();
-		this.idUltimoEstacion="";
+		this.idUltimaEstacion="";
 	}
 	
 	public void añadirEntrada(EntradaHistorico entrada) {
 		this.historico.put(entrada.getIdEstacion(), entrada);
-		this.idUltimoEstacion=entrada.getIdEstacion();
+		this.idUltimaEstacion=entrada.getIdEstacion();
 	}
 	
 	public void eliminarEntrada(String idEstacion) {
@@ -38,7 +40,18 @@ public class Historico implements Identificable {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public EntradaHistorico getEntradaHistorico() {
-		return historico.get(idUltimoEstacion);
+	
+	public void salidaUltimaEstacion() {
+		EntradaHistorico entrada = historico.get(idUltimaEstacion);
+		entrada.setFechaRetiro(LocalDateTime.now());
+		historico.replace(idUltimaEstacion, entrada);
+	}
+	
+	public String getIdBici() {
+		return this.idBici;
+	}
+	
+	public String getUltimaEstacion() {
+		return this.idUltimaEstacion;
 	}
 }

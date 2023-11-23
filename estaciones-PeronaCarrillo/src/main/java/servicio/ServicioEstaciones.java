@@ -4,6 +4,7 @@ import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
+import repositorio.RepositorioMemoriaEstacion;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -71,33 +72,40 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			e.printStackTrace();
 		}
 		this.estacionarUnaBicileta(id, estacion.getId());
+		try {
+			Historico historico = new Historico(bici.getId());
+			bici.setIdHistorico(repositorioHistorico.add(historico));
+		} catch (RepositorioException e) {
+			e.printStackTrace();
+		}
 		return id;
+	}
+
+	@Override
+	public void estacionarUnaBicileta(String idBici) {
+		try {
+			String idEstacion = RepositorioMemoriaEstacion.getEstacionLibre(repositorioEstacion);
+			Bicicleta bici = repositorioBicicletas.getById(idBici);
+			Estacionamiento estacion = repositorioEstacion.getById(idEstacion);
+			estacion.estacionarBici(bici);
+			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
+			historico.añadirEntrada(new EntradaHistorico(idBici, idEstacion));
+			repositorioHistorico.update(historico);
+		} catch (RepositorioException | EntidadNoEncontrada e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
 	public void estacionarUnaBicileta(String idBici, String idEstacion) {
 		try {
-			if (idEstacion.isEmpty()) {
-				for (Estacionamiento e : repositorioEstacion.getAll()) {
-					if (e.getNumPuestos() > 0) {
-						Bicicleta bici = repositorioBicicletas.getById(idBici);
-						bici.estacionar(e);
-						e.getBicicletas().add(bici);
-						Historico his = new Historico(idBici);
-						his.añadirEntrada(new EntradaHistorico(idBici, e.getId()));
-						repositorioHistorico.add(his);
-						break;
-					}
-				}
-			} else {
-				Bicicleta bici = repositorioBicicletas.getById(idBici);
-				Estacionamiento e = repositorioEstacion.getById(idEstacion);
-				bici.estacionar(e);
-				e.getBicicletas().add(bici);
-				Historico his = new Historico(idBici);
-				his.añadirEntrada(new EntradaHistorico(idBici, e.getId()));
-				repositorioHistorico.add(his);
-			}
+			Bicicleta bici = repositorioBicicletas.getById(idBici);
+			Estacionamiento estacion = repositorioEstacion.getById(idEstacion);
+			estacion.estacionarBici(bici);
+			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
+			historico.añadirEntrada(new EntradaHistorico(idBici, idEstacion));
+			repositorioHistorico.update(historico);
 		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -107,12 +115,13 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	@Override
 	public void retirarUnaBicleta(String idBici) {
 		try {
-			Estacionamiento e = repositorioEstacion
-					.getById(repositorioHistorico.getById(idBici).getEntradaHistorico().getIdEstacion());
-			e.sacarBici(idBici);
-			repositorioEstacion.update(e);
-			EntradaHistorico h = repositorioHistorico.getById(idBici).getEntradaHistorico();
-			h.setFechaRetiro(LocalDateTime.now());
+			Bicicleta bici = repositorioBicicletas.getById(idBici);
+			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
+			Estacionamiento estacion = repositorioEstacion.getById(historico.getUltimaEstacion());
+			estacion.sacarBici(idBici);
+			repositorioEstacion.update(estacion);
+			historico.salidaUltimaEstacion();
+			repositorioHistorico.update(historico);
 		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,12 +132,11 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	public void darDeBajaUnaBici(String idBici, String motivo) {
 		try {
 			Bicicleta bici = repositorioBicicletas.getById(idBici);
+			this.retirarUnaBicleta(idBici);
 			bici.cambioEstadoBici("no disponible");
 			bici.setFechaBaja(LocalDateTime.now());
-			Estacionamiento e = repositorioEstacion
-					.getById(repositorioHistorico.getById(idBici).getEntradaHistorico().getIdEstacion());
-			e.sacarBici(idBici);
-
+			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
+			repositorioHistorico.delete(historico);
 		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -146,6 +154,13 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	public List<Estacionamiento> recuperarEstacionSitiosTuristicos() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String encontrarEstacionLibre() throws RepositorioException {
+		String idEstacion = RepositorioMemoriaEstacion.getEstacionLibre(repositorioEstacion);
+		return idEstacion;
+
 	}
 
 }
