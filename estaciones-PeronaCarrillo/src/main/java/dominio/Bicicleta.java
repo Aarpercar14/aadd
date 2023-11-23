@@ -1,7 +1,6 @@
 package dominio;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,14 +9,10 @@ import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-
-import org.eclipse.persistence.jaxb.compiler.facets.FacetVisitor;
-
 import repositorio.FactoriaRepositorios;
 import repositorio.Identificable;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
-import repositorio.RepositorioMongoDBEstaciones;
 
 @Entity
 @Table(name="revista")

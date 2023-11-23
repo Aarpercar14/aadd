@@ -5,7 +5,6 @@ import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
-import repositorio.RepositorioMongoDBHistorico;
 
 public interface IServicioEstaciones {
 	

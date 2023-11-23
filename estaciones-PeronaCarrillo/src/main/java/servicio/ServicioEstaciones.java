@@ -4,8 +4,6 @@ import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
-import repositorio.RepositorioJPABicicletas;
-import repositorio.RepositorioMongoDBHistorico;
 
 import java.time.LocalDateTime;
 import java.util.List;

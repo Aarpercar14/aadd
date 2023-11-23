@@ -1,7 +1,6 @@
 package dominio;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 import repositorio.Identificable;
 
