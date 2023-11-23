@@ -13,4 +13,10 @@ public class RepositorioSitiosTuristicosJSON extends RepositorioJSON<SitioTurist
 		return SitioTuristico.class;
 	}
 
+	@Override
+	public Object getCollection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

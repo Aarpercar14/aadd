@@ -3,12 +3,20 @@ package servicio;
 import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
-import repositorio.RepositorioException;
+import repositorio.RepositorioException; 
 import repositorio.RepositorioMemoriaEstacion;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import org.bson.Document;
+import org.bson.conversions.Bson;
+
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
@@ -146,8 +154,8 @@ public class ServicioEstaciones implements IServicioEstaciones {
 
 	@Override
 	public List<Bicicleta> recuperarBiciEstacionadaPosicion(double x, double y) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Bicicleta> bicis=new ArrayList<>();
+		
 	}
 
 	@Override

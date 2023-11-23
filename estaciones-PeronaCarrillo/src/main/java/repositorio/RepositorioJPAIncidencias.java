@@ -14,5 +14,11 @@ public class RepositorioJPAIncidencias extends RepositorioJPA<Incidencia>{
 		return Incidencia.class.getName().substring(Incidencia.class.getName().lastIndexOf(".") + 1);
 	}
 
+	@Override
+	public Object getCollection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

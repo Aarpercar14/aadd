@@ -23,4 +23,6 @@ public interface Repositorio <T, K> {
 		return getAll().stream().filter(obj -> spec.isSatisfiedBy(obj))
 				.collect(Collectors.toList());
 	}
+
+	Object getCollection();
 }

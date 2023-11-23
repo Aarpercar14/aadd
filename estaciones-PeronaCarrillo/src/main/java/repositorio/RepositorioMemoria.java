@@ -54,4 +54,10 @@ public class RepositorioMemoria<T extends Identificable> implements RepositorioS
 	public List<String> getIds() throws RepositorioException {
 		return new ArrayList<>(this.entidades.keySet());
 	}
+
+	@Override
+	public Object getCollection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

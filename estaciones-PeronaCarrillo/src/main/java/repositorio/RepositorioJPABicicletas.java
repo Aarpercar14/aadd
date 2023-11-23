@@ -38,6 +38,12 @@ public class RepositorioJPABicicletas extends RepositorioJPA<Bicicleta>{
 			throw new RepositorioException("Error buscando bicicletas por palabra clave", ru);
 		}
 	}
+
+	@Override
+	public Object getCollection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

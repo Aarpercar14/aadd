@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
+
 import repositorio.FactoriaRepositorios;
 import repositorio.Identificable;
 import repositorio.Repositorio;
@@ -13,7 +15,7 @@ public class Estacionamiento implements Identificable{
 	private String nombre;
 	private int numPuestos;
 	private String postal;
-	private double cordX,cordY;
+	private double[] cord;
 	private LocalDateTime fechaAlta;
 	private String id;
 	
@@ -24,10 +26,11 @@ public class Estacionamiento implements Identificable{
 	private List<ResumenSitioTuristico> sitiosTuristicos;
 	
 	public Estacionamiento(String nombre, int numPuesto, String postal, double x, double y) {
+		this.id=UUID.randomUUID().toString();
 		this.nombre=nombre;
 		this.numPuestos=numPuesto;
-		this.cordX=x;
-		this.cordY=y;
+		this.cord[0]=x;
+		this.cord[1]=y;
 		this.fechaAlta=LocalDateTime.now();
 		this.sitiosTuristicos = new LinkedList<>();
 		this.bicicletas=new ArrayList<>();
@@ -84,19 +87,19 @@ public class Estacionamiento implements Identificable{
 	}
 
 	public double getCordX() {
-		return cordX;
+		return cord[0];
 	}
 
 	public void setCordX(double cordX) {
-		this.cordX = cordX;
+		this.cord[0] = cordX;
 	}
 
 	public double getCordY() {
-		return cordY;
+		return cord[1];
 	}
 
 	public void setCordY(double cordY) {
-		this.cordY = cordY;
+		this.cord[1] = cordY;
 	}
 
 	public LocalDateTime getFechaAlta() {
