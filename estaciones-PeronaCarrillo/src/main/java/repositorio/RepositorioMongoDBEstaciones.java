@@ -79,12 +79,13 @@ public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionami
 		return resultado.getInsertedId().asObjectId().getValue().toString();
 	}
 
-	public List<Estacionamiento> getEstacionesByDistancia(double x, double y) {
+	public static List<Estacionamiento> getEstacionesByDistancia(Repositorio<Estacionamiento,String> repos,double x, double y) {
 		ArrayList<Estacionamiento> estaciones = new ArrayList<Estacionamiento>();
 		double[] coordenada = { x, y };
 		Document consulta= new Document("cord",new Document("$near",new Document("$geometry",coordenada)));
 		Bson query = Filters.all("cord", consulta);
-		FindIterable<Estacionamiento> resultado = getCollection().find(query);
+		FindIterable<Estacionamiento> resultado;
+		resultado = ((MongoCollection<Estacionamiento>) repos.getCollection()).find(query);
 		MongoCursor<Estacionamiento> it = resultado.iterator();
 		while (it.hasNext()) {
 			estaciones.add(it.next());

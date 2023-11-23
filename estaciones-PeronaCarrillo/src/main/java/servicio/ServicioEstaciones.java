@@ -1,13 +1,10 @@
 package servicio;
 
-import repositorio.EntidadNoEncontrada;
-import repositorio.FactoriaRepositorios;
-import repositorio.Repositorio;
-import repositorio.RepositorioException; 
-import repositorio.RepositorioMemoriaEstacion;
+import repositorio.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -155,12 +152,29 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	@Override
 	public List<Bicicleta> recuperarBiciEstacionadaPosicion(double x, double y) {
 		ArrayList<Bicicleta> bicis=new ArrayList<>();
-		
+		for(Estacionamiento e:RepositorioMongoDBEstaciones.getEstacionesByDistancia(repositorioEstacion,x,y)) {
+			bicis.addAll(e.getBicicletas());
+		}
+		return bicis;
 	}
 
 	@Override
-	public List<Estacionamiento> recuperarEstacionSitiosTuristicos() {
-		// TODO Auto-generated method stub
+	public List<Estacionamiento> recuperarEstacionSitiosTuristicosDeMayorAMenor() {
+		LinkedList<Estacionamiento> estacion=new LinkedList<Estacionamiento>();
+		try {
+			int count=0;
+			for(Estacionamiento e: repositorioEstacion.getAll()) {
+				if(e.getSitiosTuristicos().size()>count) {
+					estacion.addFirst(e);
+				} else {
+					estacion.addLast(e);
+				}
+			}
+			return estacion;
+		} catch (RepositorioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 

@@ -8,8 +8,8 @@ public class RepositorioMemoriaEstacion extends RepositorioMemoria<Estacionamien
 		super();
 	}
 	
-	public static String getEstacionLibre(Repositorio<Estacionamiento, String> repositorioEstciones) throws RepositorioException {
-		for(Estacionamiento e : repositorioEstciones.getAll()) {
+	public static String getEstacionLibre(Repositorio<Estacionamiento, String> repositorioEstaciones) throws RepositorioException {
+		for(Estacionamiento e : repositorioEstaciones.getAll()) {
 			if(e.haySitioLibre())
 				return e.getId();
 		}
