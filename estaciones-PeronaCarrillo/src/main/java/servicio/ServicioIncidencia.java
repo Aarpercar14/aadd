@@ -77,7 +77,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 	}
 
 	@Override
-	public List<Incidencia> recuperarIncidencia() {
+	public List<Incidencia> recuperarIncidencias() {
 		try {
 			ArrayList<Incidencia> listaIncidencias=new ArrayList<Incidencia>();
 			for(Incidencia i:(ArrayList<Incidencia>)repositorio.getAll()) {

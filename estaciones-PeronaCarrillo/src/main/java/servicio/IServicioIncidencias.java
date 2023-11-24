@@ -11,6 +11,6 @@ public interface IServicioIncidencias {
 	
 	void gestionDeLasIncidencias(String cierre, String operario, String incidencia,String nuevoEstado);
 	
-	List<Incidencia> recuperarIncidencia();
+	List<Incidencia> recuperarIncidencias();
 
 }
