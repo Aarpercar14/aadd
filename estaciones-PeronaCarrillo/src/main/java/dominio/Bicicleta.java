@@ -111,4 +111,16 @@ public class Bicicleta implements Identificable{
 	public void setIdHistorico(String idHistorico) {
 		this.idHistorico = idHistorico;
 	}
+	
+	public String toString() {
+		return "Bicicleta{" +
+	            "id='" + id + '\'' +
+	            ", modelo='" + modelo + '\'' +
+	            ", fechaAlta=" + fechaAlta +
+	            ", fechaBaja=" + fechaBaja +
+	            ", motivoBaja='" + motivoBaja + '\'' +
+	            ", estado='" + estado + '\'' +
+	            ", idHistorico='" + idHistorico + '\'' +
+	            '}';
+	}
 }

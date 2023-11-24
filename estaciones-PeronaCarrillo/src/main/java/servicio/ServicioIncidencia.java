@@ -29,7 +29,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 	}
 
 	@Override
-	public void gestionDeLasIncidencias(String cierre, String operario, String incidencia,String nuevoEstado) {
+	public void gestionDeLasIncidencias(String cierre, String operario, String incidencia, String nuevoEstado) {
 		try {
 			Incidencia i=repositorio.getById(incidencia);
 			
@@ -50,17 +50,18 @@ public class ServicioIncidencia implements IServicioIncidencias{
 					
 					break;
 				case "resuelta":
-					i.setMotivoCierre(cierre);
 					i.setEstado(EstadoIncidencia.RESUELTA);
+					i.setMotivoCierre(cierre);
 					i.setFechaCierre(LocalDateTime.now());
 					//TODO hacer un if bici esta rota o si regresa a estacion
-					int random_int = (int)Math.floor(Math.random() * 10);
-					if(random_int>5) {
+					
+					if(cierre.equals("rota")) {
 						// Caso bici rota, se da de baja la bici
 						Bicicleta biciRota = i.getBicicleta();
 						servEstaciones.darDeBajaUnaBici(biciRota.getId(), "Bicicleta Rota");
-						
-					}else {
+					}
+					
+					if(cierre.equals("reparada")){
 						// Caso bici regresa a estacion
 						String idEstacion = servEstaciones.encontrarEstacionLibre();
 						if(idEstacion == null)
@@ -81,7 +82,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 		try {
 			ArrayList<Incidencia> listaIncidencias=new ArrayList<Incidencia>();
 			for(Incidencia i:(ArrayList<Incidencia>)repositorio.getAll()) {
-				if(!i.getEstado().equals(EstadoIncidencia.RESUELTA)) {
+				if((i.getEstado().equals(EstadoIncidencia.ASIGNADA)) ||(i.getEstado().equals(EstadoIncidencia.PENDIENTE))) {
 					listaIncidencias.add(i);
 				}
 			}

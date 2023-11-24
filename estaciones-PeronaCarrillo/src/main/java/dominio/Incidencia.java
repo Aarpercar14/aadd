@@ -103,5 +103,18 @@ public class Incidencia implements Identificable {
 	public void setOperario(String operario) {
 		this.operario = operario;
 	}
+	
+	public String toString() {
+		return "Incidencia{" +
+	            "id='" + id + '\'' +
+	            ", bicicleta=" + bicicleta.toString() +
+	            ", fechaCreacion=" + fechaCreacion +
+	            ", descripcion='" + descripcion + '\'' +
+	            ", estado=" + estado +
+	            ", fechaCierre=" + fechaCierre +
+	            ", motivoCierre='" + motivoCierre + '\'' +
+	            ", operario='" + operario + '\'' +
+	            '}';
+	}
 
 }

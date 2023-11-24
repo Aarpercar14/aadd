@@ -129,4 +129,12 @@ public class Estacionamiento implements Identificable{
 	public boolean haySitioLibre() {
 		return (this.numPuestos > 0);
 	}
+	
+	public Bicicleta getBicicleta(String idBici) {
+		for(Bicicleta b : bicicletas) {
+			if(b.getId().equals(idBici))
+				return b;
+		}
+		return null;			
+	}
 }
