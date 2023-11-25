@@ -4,6 +4,7 @@ import org.bson.BsonType;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.codecs.pojo.annotations.BsonRepresentation;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 
 public class ResumenSitioTuristico {
 	@BsonProperty(value="nombre")
@@ -14,9 +15,10 @@ public class ResumenSitioTuristico {
 	private DistanciaCoordenadas distancia;
 	@BsonProperty(value="url")
 	private String URL;
-	@BsonId
-	@BsonRepresentation(BsonType.OBJECT_ID)
+	@BsonProperty(value="id")
 	private String id;
+	
+	public ResumenSitioTuristico() {}
 	
 	public ResumenSitioTuristico(String nombre, String descripcion, DistanciaCoordenadas distancia, String URL) {
 		this.nombre=nombre;

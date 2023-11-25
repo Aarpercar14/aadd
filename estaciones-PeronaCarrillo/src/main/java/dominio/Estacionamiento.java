@@ -17,6 +17,9 @@ import repositorio.Repositorio;
 import repositorio.RepositorioException;
 
 public class Estacionamiento implements Identificable{
+	@BsonId
+	@BsonRepresentation(BsonType.OBJECT_ID)
+	private String id;
 	@BsonProperty(value="nombre")
 	private String nombre;
 	@BsonProperty(value = "num_puestos")
@@ -27,13 +30,10 @@ public class Estacionamiento implements Identificable{
 	private double[] cord=new double[2];
 	@BsonProperty(value="fecha_alta")
 	private LocalDateTime fechaAlta;
-	@BsonId
-	@BsonRepresentation(BsonType.OBJECT_ID)
-	private String id;
 	@BsonProperty(value="bicicletas")
 	private ArrayList<Bicicleta> bicicletas;
-	@BsonProperty(value="sitioTuristico")
-	private ArrayList<ResumenSitioTuristico> sitiosTuristicos;
+	@BsonProperty(value="sitiosTurisiticos")
+	private List<ResumenSitioTuristico> sitiosTuristicos;
 	
 	public Estacionamiento(String nombre, int numPuesto, String postal, double x, double y) {
 		this.nombre=nombre;
