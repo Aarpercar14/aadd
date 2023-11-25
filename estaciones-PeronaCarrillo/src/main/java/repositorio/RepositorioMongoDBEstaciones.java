@@ -44,7 +44,7 @@ public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionami
 					MongoClientSettings.getDefaultCodecRegistry(),
 					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 			
-			coleccion = database.getCollection("estacionamiento", Estacionamiento.class).withCodecRegistry(defaultCodecRegistry);
+			coleccion = database.getCollection("Estacionamiento", Estacionamiento.class).withCodecRegistry(defaultCodecRegistry);
 			coleccionSinCodificar = database.getCollection("Estacionamiento");
 			coleccion.createIndex(Indexes.geo2dsphere("cord"));
 

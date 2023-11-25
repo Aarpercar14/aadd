@@ -3,11 +3,13 @@ package repositorio;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.bson.BsonValue;
+
 import especificacion.Especificacion;
 
 public interface Repositorio <T, K> {
 
-	K add(T entity) throws RepositorioException;
+	String add(T entity) throws RepositorioException;
 	
 	void update(T entity) throws RepositorioException, EntidadNoEncontrada;
 	

@@ -1,24 +1,27 @@
 package pruebas;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.conversions.Bson;
 
 import com.mongodb.MongoClientSettings;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.InsertOneResult;
 import utils.PropertiesReader;
 
-import dominio.Bicicleta;
 import dominio.Estacionamiento;
-import dominio.Incidencia;
+import dominio.SitioTuristico;
 
 public class preubas {
 
@@ -44,7 +47,19 @@ public class preubas {
 			Estacionamiento editorial = new Estacionamiento("Saint Louis", 10, "30020", 40,-5);
 			
 			InsertOneResult s = coleccion.insertOne(editorial);
-			System.out.println(s);
+			System.out.println(s.getInsertedId().asObjectId().getValue().toString());
+			
+			Bson query=Filters.all("_id", s.getInsertedId());
+			System.out.println(query);
+			
+			FindIterable<Estacionamiento> resultados=coleccion.find(query);
+			System.out.println(resultados);
+			
+			MongoCursor<Estacionamiento> it=resultados.iterator();
+			System.out.println(it.available());
+			
+			if(it.hasNext())  System.out.println(it.next().toString());
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

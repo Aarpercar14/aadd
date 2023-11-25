@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.InsertOneResult;
 
 public abstract class RepositorioMongoDB<T extends Identificable> implements RepositorioString<T> {
@@ -16,10 +20,7 @@ public abstract class RepositorioMongoDB<T extends Identificable> implements Rep
 	@Override
 	public String add(T entity) throws RepositorioException {
 		InsertOneResult resultado= getCollection().insertOne(entity);
-		if(resultado.getInsertedId()==null) {
-			throw new RepositorioException("Error insertado");
-		}
-		return resultado.getInsertedId().asObjectId().getValue().toString();
+		return resultado.toString();
 	}
 
 	@Override
@@ -36,11 +37,16 @@ public abstract class RepositorioMongoDB<T extends Identificable> implements Rep
 
 	@Override
 	public T getById(String id) throws RepositorioException, EntidadNoEncontrada {
-		 List<T> coll =getCollection().find().into(new ArrayList<>());
-		 for(T t:coll) {
-			 if(t.getId()==id) return t;
-		 }
-		 return null;
+		
+		Bson query=Filters.all("id", id);
+		System.out.println(query);
+		FindIterable<T> resultados=getCollection().find(query);
+		System.out.println(resultados);
+		MongoCursor<T> it=resultados.iterator();
+		System.out.println(it.available());
+		if(it.hasNext()) return (it.next());
+			
+		return null;
 	}
 
 	@Override

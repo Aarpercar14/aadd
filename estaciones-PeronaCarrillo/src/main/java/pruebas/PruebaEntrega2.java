@@ -17,12 +17,12 @@ public class PruebaEntrega2 {
 	public static void main(String[] args) {
 		
 		Administrador admin = new Administrador("admin", "jefe", "admin@gmail.com", "password", "612345678", LocalDate.now());
-		
-		
+				
 		// Creacion de las tres estaciones de ejemplo
 		String idEstacion1 = admin.DarDeAltaEstacion("Saint Louis", 10, "30020", 40,-5);
 		String idEstacion2 = admin.DarDeAltaEstacion("Saint John", 10, "30800", 22, -8);
 		String idEstacion3 = admin.DarDeAltaEstacion("Groove Street", 10, "30750", 70, 10);
+		System.out.println(idEstacion1);
 		List<Estacionamiento> estaciones = new ArrayList<Estacionamiento>();
 		try {
 			estaciones.add(admin.servEstaciones.getEstacion(idEstacion1));
@@ -34,9 +34,6 @@ public class PruebaEntrega2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
 		
 		try {
 			// Dar de alta Bicis de Ejemplo

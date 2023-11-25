@@ -15,8 +15,7 @@ import dominio.EntradaHistorico;
 
 public class ServicioEstaciones implements IServicioEstaciones {
 
-	private Repositorio<Estacionamiento, String> repositorioEstacion = FactoriaRepositorios
-			.getRepositorio(Estacionamiento.class);
+	private Repositorio<Estacionamiento, String> repositorioEstacion = FactoriaRepositorios.getRepositorio(Estacionamiento.class);
 	private Repositorio<Bicicleta, String> repositorioBicicletas = FactoriaRepositorios.getRepositorio(Bicicleta.class);
 	private Repositorio<Historico, String> repositorioHistorico = FactoriaRepositorios.getRepositorio(Historico.class);
 
@@ -169,8 +168,8 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			e.printStackTrace();
 		}
 		return null;
+		
 	}
-
 	@Override
 	public String encontrarEstacionLibre() throws RepositorioException {
 		String idEstacion = RepositorioMemoriaEstacion.getEstacionLibre(repositorioEstacion);

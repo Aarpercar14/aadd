@@ -29,11 +29,11 @@ public class Estacionamiento implements Identificable{
 	private LocalDateTime fechaAlta;
 	@BsonId
 	@BsonRepresentation(BsonType.OBJECT_ID)
-	@BsonProperty(value="id")
 	private String id;
 	@BsonProperty(value="bicicletas")
 	private ArrayList<Bicicleta> bicicletas;
-	@BsonProperty(value="sitios_turisticos")
+
+	
 	private List<ResumenSitioTuristico> sitiosTuristicos;
 	
 	public Estacionamiento(String nombre, int numPuesto, String postal, double x, double y) {
@@ -131,7 +131,7 @@ public class Estacionamiento implements Identificable{
 	public void setSitiosTuristicos(List<ResumenSitioTuristico> sitiosTuristicos) {
 		this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
-
+	
 	public ArrayList<Bicicleta> getBicicletas() {
 		return bicicletas;
 	}
