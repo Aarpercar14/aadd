@@ -31,4 +31,6 @@ public interface IServicioEstaciones {
 	
 	public String encontrarEstacionLibre() throws RepositorioException;
 	
+	public Bicicleta obtenerBici(String idBici) throws RepositorioException, EntidadNoEncontrada; 
+	
 }

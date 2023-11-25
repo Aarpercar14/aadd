@@ -8,13 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import org.bson.Document;
-import org.bson.conversions.Bson;
-
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.model.Filters;
-
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import dominio.Historico;
@@ -182,7 +175,11 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	public String encontrarEstacionLibre() throws RepositorioException {
 		String idEstacion = RepositorioMemoriaEstacion.getEstacionLibre(repositorioEstacion);
 		return idEstacion;
-
+	}
+	
+	@Override
+	public Bicicleta obtenerBici(String idBici) throws RepositorioException, EntidadNoEncontrada {
+		return repositorioBicicletas.getById(idBici);
 	}
 
 }
