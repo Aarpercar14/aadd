@@ -1,9 +1,16 @@
 package dominio;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
+
 public class DistanciaCoordenadas {
 
+	@BsonProperty(value="cordX")
 	private double x;
+	
+	@BsonProperty(value="cordY")
 	private double y;
+	
+	public DistanciaCoordenadas() {}
 	
 	public DistanciaCoordenadas(double x, double y) {
 		this.x = x;

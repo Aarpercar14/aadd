@@ -1,12 +1,23 @@
 package dominio;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 
 public class ResumenSitioTuristico {
+	
+	@BsonProperty(value="nombre")
 	private String nombre;
+	
+	@BsonProperty(value="descripcion")
 	private String descripcion;
+	
+	@BsonProperty(value="distancia")
 	private DistanciaCoordenadas distancia;
+	@BsonProperty(value="url")
 	private String URL;
+	@BsonProperty(value="id")
 	private String id;
+	
+	public ResumenSitioTuristico() {}
 	
 	public ResumenSitioTuristico(String nombre, String descripcion, DistanciaCoordenadas distancia, String URL) {
 		this.nombre=nombre;
