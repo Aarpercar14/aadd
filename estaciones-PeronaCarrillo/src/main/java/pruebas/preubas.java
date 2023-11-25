@@ -55,6 +55,7 @@ public class preubas {
 			FindIterable<Estacionamiento> resultados=coleccion.find(query);
 			System.out.println(resultados);
 			
+			System.out.println(resultados.first().toString());
 			MongoCursor<Estacionamiento> it=resultados.iterator();
 			System.out.println(it.available());
 			

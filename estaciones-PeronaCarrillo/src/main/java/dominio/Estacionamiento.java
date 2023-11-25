@@ -32,9 +32,8 @@ public class Estacionamiento implements Identificable{
 	private String id;
 	@BsonProperty(value="bicicletas")
 	private ArrayList<Bicicleta> bicicletas;
-
-	
-	private List<ResumenSitioTuristico> sitiosTuristicos;
+	@BsonProperty(value="sitioTuristico")
+	private ArrayList<ResumenSitioTuristico> sitiosTuristicos;
 	
 	public Estacionamiento(String nombre, int numPuesto, String postal, double x, double y) {
 		this.nombre=nombre;
@@ -43,7 +42,7 @@ public class Estacionamiento implements Identificable{
 		this.cord[0]=x;
 		this.cord[1]=y;
 		this.fechaAlta=LocalDateTime.now();
-		this.sitiosTuristicos = new LinkedList<>();
+		this.sitiosTuristicos = new ArrayList<>();
 		this.bicicletas=new ArrayList<>();
 	}
 	
@@ -124,8 +123,8 @@ public class Estacionamiento implements Identificable{
 		this.fechaAlta = fechaAlta;
 	}
 	
-	public List<ResumenSitioTuristico> getSitiosTuristicos(){
-		return new LinkedList<>(this.sitiosTuristicos);
+	public ArrayList<ResumenSitioTuristico> getSitiosTuristicos(){
+		return new ArrayList<>(this.sitiosTuristicos);
 	}
 	
 	public void setSitiosTuristicos(List<ResumenSitioTuristico> sitiosTuristicos) {

@@ -39,14 +39,12 @@ public abstract class RepositorioMongoDB<T extends Identificable> implements Rep
 	public T getById(String id) throws RepositorioException, EntidadNoEncontrada {
 		
 		Bson query=Filters.all("id", id);
-		System.out.println(query);
 		FindIterable<T> resultados=getCollection().find(query);
-		System.out.println(resultados);
 		MongoCursor<T> it=resultados.iterator();
-		System.out.println(it.available());
-		if(it.hasNext()) return (it.next());
+		return resultados.first();
+		//if(it.hasNext()) return (it.next());
 			
-		return null;
+		//return null;
 	}
 
 	@Override

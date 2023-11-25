@@ -1,7 +1,5 @@
 package repositorio;
 
-import java.util.Arrays;
-
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -14,7 +12,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.InsertOneResult;
 
-import dominio.Estacionamiento;
 import dominio.Historico;
 import utils.PropertiesReader;
 
@@ -58,13 +55,9 @@ public class RepositorioMongoDBHistorico extends RepositorioMongoDB<Historico> {
 
 	@Override
 	public MongoCollection<Historico> getCollection() {
-
 		CodecRegistry defaultCodecRegistry = CodecRegistries.fromRegistries(
 				MongoClientSettings.getDefaultCodecRegistry(),
 				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-
 		return database.getCollection("historico", Historico.class).withCodecRegistry(defaultCodecRegistry);
-
 	}
-
 }

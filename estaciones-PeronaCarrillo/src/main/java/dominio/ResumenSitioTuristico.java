@@ -1,11 +1,21 @@
 package dominio;
 
+import org.bson.BsonType;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.codecs.pojo.annotations.BsonRepresentation;
 
 public class ResumenSitioTuristico {
+	@BsonProperty(value="nombre")
 	private String nombre;
+	@BsonProperty(value="descripcion")
 	private String descripcion;
+	@BsonProperty(value="distancia")
 	private DistanciaCoordenadas distancia;
+	@BsonProperty(value="url")
 	private String URL;
+	@BsonId
+	@BsonRepresentation(BsonType.OBJECT_ID)
 	private String id;
 	
 	public ResumenSitioTuristico(String nombre, String descripcion, DistanciaCoordenadas distancia, String URL) {
