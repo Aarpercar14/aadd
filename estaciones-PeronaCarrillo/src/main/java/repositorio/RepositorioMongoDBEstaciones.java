@@ -1,7 +1,6 @@
 package repositorio;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.bson.Document;
@@ -19,13 +18,10 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Indexes;
-import com.mongodb.client.result.InsertOneResult;
-
-import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import utils.PropertiesReader;
 
-public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionamiento>{
+public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionamiento> {
 
 	protected MongoClient mongoClient;
 	protected MongoDatabase database;
@@ -38,20 +34,19 @@ public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionami
 			properties = new PropertiesReader("mongo.properties");
 
 			String connectionString = properties.getProperty("mongouri");
+			String databaseString = properties.getProperty("mongodatabase");
 
 			MongoClient mongoClient = MongoClients.create(connectionString);
 
-			String mongoDatabase = properties.getProperty("mongodatabase");
-
-			database = mongoClient.getDatabase(mongoDatabase);
+			MongoDatabase database = mongoClient.getDatabase(databaseString);
 
 			CodecRegistry defaultCodecRegistry = CodecRegistries.fromRegistries(
 					MongoClientSettings.getDefaultCodecRegistry(),
 					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-			coleccion.createIndex(Indexes.geo2dsphere("cord"));
-			coleccion = database.getCollection("estacionamiento", Estacionamiento.class)
-					.withCodecRegistry(defaultCodecRegistry);
+			
+			coleccion = database.getCollection("estacionamiento", Estacionamiento.class).withCodecRegistry(defaultCodecRegistry);
 			coleccionSinCodificar = database.getCollection("Estacionamiento");
+			coleccion.createIndex(Indexes.geo2dsphere("cord"));
 
 		} catch (Exception e) {
 
@@ -63,26 +58,13 @@ public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionami
 		return coleccion;
 	}
 
-	@Override
-	public String add(Estacionamiento entity) throws RepositorioException {
-		Document d = new Document();
-		d.append("_id", entity.getId()).append("nombre", entity.getNombre()).append("numPuesto", entity.getNumPuestos())
-				.append("fechaAlta", entity.getFechaAlta()).append("sitioTuristico", entity.getSitiosTuristicos())
-				.append("bicicletas", entity.getBicicletas());
-		double[] cord={entity.getCordX(),entity.getCordY()};
-		d.append("cord", cord);
-		
-		InsertOneResult resultado = coleccionSinCodificar.insertOne(d);
-		if (resultado.getInsertedId() == null) {
-			throw new RepositorioException("Error insertado");
-		}
-		return resultado.getInsertedId().asObjectId().getValue().toString();
-	}
+	
 
-	public static List<Estacionamiento> getEstacionesByDistancia(Repositorio<Estacionamiento,String> repos,double x, double y) {
+	public static List<Estacionamiento> getEstacionesByDistancia(Repositorio<Estacionamiento, String> repos, double x,
+			double y) {
 		ArrayList<Estacionamiento> estaciones = new ArrayList<Estacionamiento>();
 		double[] coordenada = { x, y };
-		Document consulta= new Document("cord",new Document("$near",new Document("$geometry",coordenada)));
+		Document consulta = new Document("cord", new Document("$near", new Document("$geometry", coordenada)));
 		Bson query = Filters.all("cord", consulta);
 		FindIterable<Estacionamiento> resultado;
 		resultado = ((MongoCollection<Estacionamiento>) repos.getCollection()).find(query);

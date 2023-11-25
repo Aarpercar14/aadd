@@ -17,7 +17,6 @@ public class PruebaEntrega2 {
 		IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 		IServicioIncidencias servIncidencias = FactoriaServicios.getServicio(IServicioIncidencias.class);
 		
-		
 		// Creacion de las tres estaciones de ejemplo
 		String idEstacion1 = servEstaciones.crear("Saint Louis", 10, "30020", 40,-5);
 		String idEstacion2 = servEstaciones.crear("Saint John", 10, "30800", 22, -8);

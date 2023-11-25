@@ -3,13 +3,22 @@ package dominio;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+import org.bson.BsonType;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.codecs.pojo.annotations.BsonRepresentation;
+
 import repositorio.Identificable;
 
 public class Historico implements Identificable {
-	
+	@BsonId
+	@BsonRepresentation(BsonType.OBJECT_ID)
 	private String id;
+	@BsonProperty(value="id_bici")
 	private String idBici;
+	@BsonProperty(value = "historico")
 	private HashMap<String, EntradaHistorico> historico;
+	@BsonProperty(value="id_ultima_estacion")
 	private String idUltimaEstacion;
 	
 	public Historico(String idBici) {

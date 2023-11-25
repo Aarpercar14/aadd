@@ -6,29 +6,40 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
+import org.bson.BsonType;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.codecs.pojo.annotations.BsonRepresentation;
+
 import repositorio.FactoriaRepositorios;
 import repositorio.Identificable;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
 
 public class Estacionamiento implements Identificable{
+	@BsonProperty(value="nombre")
 	private String nombre;
+	@BsonProperty(value = "num_puestos")
 	private int numPuestos;
+	@BsonProperty(value="postal")
 	private String postal;
-	private double[] cord;
+	@BsonProperty(value="cord")
+	private double[] cord=new double[2];
+	@BsonProperty(value="fecha_alta")
 	private LocalDateTime fechaAlta;
+	@BsonId
+	@BsonRepresentation(BsonType.OBJECT_ID)
+	@BsonProperty(value="id")
 	private String id;
-	
+	@BsonProperty(value="bicicletas")
 	private ArrayList<Bicicleta> bicicletas;
-	
-	private Repositorio<Bicicleta,String> historico=FactoriaRepositorios.getRepositorio(Bicicleta.class);
-	
+	@BsonProperty(value="sitios_turisticos")
 	private List<ResumenSitioTuristico> sitiosTuristicos;
 	
 	public Estacionamiento(String nombre, int numPuesto, String postal, double x, double y) {
-		this.id=UUID.randomUUID().toString();
 		this.nombre=nombre;
 		this.numPuestos=numPuesto;
+		this.cord= new double[2];
 		this.cord[0]=x;
 		this.cord[1]=y;
 		this.fechaAlta=LocalDateTime.now();
@@ -36,9 +47,12 @@ public class Estacionamiento implements Identificable{
 		this.bicicletas=new ArrayList<>();
 	}
 	
+	public Estacionamiento() {
+		
+	}
+	
 	public void estacionarBici(Bicicleta bici) throws RepositorioException {
 		bicicletas.add(bici);
-		historico.add(bici);
 		numPuestos--;
 	}
 	
@@ -120,10 +134,6 @@ public class Estacionamiento implements Identificable{
 
 	public ArrayList<Bicicleta> getBicicletas() {
 		return bicicletas;
-	}
-
-	public Repositorio<Bicicleta, String> getHistorico() {
-		return historico;
 	}
 	
 	public boolean haySitioLibre() {

@@ -10,6 +10,7 @@ public class FactoriaRepositorios {
 		
 		try {
 			PropertiesReader properties = new PropertiesReader(PROPERTIES);
+			
 			String clase = properties.getProperty(entidad.getName());
 			return (R) Class.forName(clase).getConstructor().newInstance();
 		} catch (Exception e) {
