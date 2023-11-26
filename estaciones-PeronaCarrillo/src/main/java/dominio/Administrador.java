@@ -44,7 +44,7 @@ public class Administrador extends Usuario {
 			throws RepositorioException, EntidadNoEncontrada {
 
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
-		estacion.setSitiosTuristicos(sitios);
+	//	estacion.setSitiosTuristicos(sitios);
 
 	}
 

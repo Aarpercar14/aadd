@@ -34,7 +34,6 @@ public class PruebaEntrega2 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		try {
 			// Dar de alta Bicis de Ejemplo
 			

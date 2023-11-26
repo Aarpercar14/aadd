@@ -4,7 +4,6 @@ import repositorio.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -152,6 +151,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 
 	@Override
 	public List<Estacionamiento> recuperarEstacionSitiosTuristicosDeMayorAMenor() {
+		/*
 		LinkedList<Estacionamiento> estacion=new LinkedList<Estacionamiento>();
 		try {
 			int count=0;
@@ -166,7 +166,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		} catch (RepositorioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		return null;
 		
 	}

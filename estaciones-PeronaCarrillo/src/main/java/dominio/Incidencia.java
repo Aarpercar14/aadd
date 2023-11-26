@@ -4,11 +4,15 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 import repositorio.Identificable;
 
+@Entity
+@Table(name="incidencia")
 public class Incidencia implements Identificable {
 	@Id
 	private String id;
@@ -43,13 +47,12 @@ public class Incidencia implements Identificable {
 
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 
 	@Override
 	public void setId(String id) {
-		// TODO Auto-generated method stub
+		this.id=id;
 	}
 
 	public Bicicleta getBicicleta() {
