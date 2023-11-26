@@ -3,18 +3,14 @@ package dominio;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 import org.bson.BsonType;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.codecs.pojo.annotations.BsonRepresentation;
 
-import repositorio.FactoriaRepositorios;
 import repositorio.Identificable;
-import repositorio.Repositorio;
 import repositorio.RepositorioException;
 
 public class Estacionamiento implements Identificable{
@@ -33,8 +29,8 @@ public class Estacionamiento implements Identificable{
 	private LocalDateTime fechaAlta;
 	@BsonProperty(value="bicicletas")
 	private ArrayList<Bicicleta> bicicletas;
-//	@BsonProperty(value="sitiosTurisiticos")
-//	private ArrayList<ResumenSitioTuristico> sitiosTuristicos;
+	@BsonProperty(value="sitiosTurisiticos")
+	private ArrayList<ResumenSitioTuristico> sitiosTuristicos;
 	
 	public Estacionamiento(String nombre, int numPuesto, String postal, double x, double y) {
 		this.nombre=nombre;
@@ -55,7 +51,6 @@ public class Estacionamiento implements Identificable{
 		if(bicicletas==null) {
 			bicicletas=new ArrayList<Bicicleta>();
 		}
-		System.out.println(bicicletas);
 		bicicletas.add(bici);
 		numPuestos--;
 	}
@@ -127,16 +122,15 @@ public class Estacionamiento implements Identificable{
 	public void setFechaAlta(LocalDateTime fechaAlta) {
 		this.fechaAlta = fechaAlta;
 	}
-	/*
+	
 	public ArrayList<ResumenSitioTuristico> getSitiosTuristicos(){
 		return new ArrayList<>(this.sitiosTuristicos);
 	}
 	
-	
 	public void setSitiosTuristicos(List<ResumenSitioTuristico> sitiosTuristicos) {
 		this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
-	*/
+	
 	public ArrayList<Bicicleta> getBicicletas() {
 		return bicicletas;
 	}

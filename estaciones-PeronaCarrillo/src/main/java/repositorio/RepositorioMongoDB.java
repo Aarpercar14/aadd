@@ -1,16 +1,13 @@
 package repositorio;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.BsonValue;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.InsertOneResult;
 
@@ -41,7 +38,6 @@ public abstract class RepositorioMongoDB<T extends Identificable> implements Rep
 		ObjectId idB= new ObjectId(id);
 		Bson query=Filters.all("_id", idB);
 		FindIterable<T> resultados=getCollection().find(query);
-		MongoCursor<T> it=resultados.iterator();
 		return resultados.first();
 		//if(it.hasNext()) return (it.next());
 			

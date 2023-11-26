@@ -55,22 +55,12 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	public String altaDeUnaBici(String modelo, Estacionamiento estacion) {
 		String id = UUID.randomUUID().toString();
 		try {
-			Historico h=new Historico(id);
-			h.añadirEntrada(new EntradaHistorico(id, estacion.getId()));
-			repositorioHistorico.add(h);
-			Bicicleta bici = new Bicicleta(id, modelo, h.getId());
-			try {
-				repositorioBicicletas.add(bici);
-			} catch (RepositorioException e) {
-				e.printStackTrace();
-			}
+			Historico historico = new Historico(id);
+			Bicicleta bici = new Bicicleta(id, modelo);
+			String idHis=repositorioHistorico.add(historico);
+			bici.setIdHistorico(idHis);
+			repositorioBicicletas.add(bici);
 			this.estacionarUnaBicileta(id, estacion.getId());
-			try {
-				Historico historico = new Historico(bici.getId());
-				bici.setIdHistorico(repositorioHistorico.add(historico));
-			} catch (RepositorioException e) {
-				e.printStackTrace();
-			}
 		} catch (RepositorioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,6 +78,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
 			historico.añadirEntrada(new EntradaHistorico(idBici, idEstacion));
 			repositorioHistorico.update(historico);
+			repositorioEstacion.update(estacion);
 		} catch (RepositorioException | EntidadNoEncontrada e) {
 			e.printStackTrace();
 		}
@@ -102,8 +93,9 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			estacion.estacionarBici(bici);
 			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
 			historico.añadirEntrada(new EntradaHistorico(idBici, idEstacion));
+			repositorioEstacion.update(estacion);
 			repositorioHistorico.update(historico);
-		} catch (RepositorioException | EntidadNoEncontrada e) {
+;		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -25,12 +25,12 @@ public class Bicicleta implements Identificable {
 	@Column(name = "idHistorico")
 	private String idHistorico;
 
-	public Bicicleta(String id, String modelo, String idHistorico) {
+	public Bicicleta(String id, String modelo) {
 		super();
 		this.id = id;
 		this.modelo = modelo;
 		this.fechaAlta = LocalDateTime.now();
-		this.idHistorico = idHistorico;
+		this.idHistorico = "";
 		this.fechaBaja = null;
 		this.motivoBaja = null;
 		this.estado="Disponible";

@@ -41,30 +41,21 @@ public class PruebaEntrega2 {
 			// Dar de alta Bicis de Ejemplo
 			
 			String idBmx = admin.servEstaciones.altaDeUnaBici("BMX", admin.servEstaciones.getEstacion(idEstacion1));
-			System.out.println("Las bicicletas que hay estacionadas en la estacion de Saint Louis tras dar de alta la bmx");
-			System.out.println(admin.servEstaciones.getEstacion(idEstacion1).getBicicletas().toString());
-			
+			System.out.println("Se ha introduciodo la bicicleta BMX en la estacion 1 de Saint Louis");
 			String idMontaña = admin.servEstaciones.altaDeUnaBici("MONTAÑA", admin.servEstaciones.getEstacion(idEstacion1));
-			System.out.println("Las bicicletas que hay estacionadas en la estacion de Saint Louis tras dar de alta la bici de Montaña");
-			System.out.println(admin.servEstaciones.getEstacion(idEstacion1).getBicicletas().toString());
-			
+			System.out.println("Se ha introduciodo la bicicleta MONTAÑA en la estacion 1 de Saint Louis");
 			String idCarretera = admin.servEstaciones.altaDeUnaBici("CARRETERA", admin.servEstaciones.getEstacion(idEstacion2));
-			System.out.println("Las bicicletas que hay estacionadas en la estacion de Saint John tras dar de alta la bici de carretera");
-			System.out.println(admin.servEstaciones.getEstacion(idEstacion2).getBicicletas().toString());
-			
+			System.out.println("Se ha introduciodo la bicicleta CARRETERA en la estacion 2 de Saint Louis");
 			String idTandem = admin.servEstaciones.altaDeUnaBici("TANDEM", admin.servEstaciones.getEstacion(idEstacion2));
-			System.out.println("Las bicicletas que hay estacionadas en la estacion de Saint John tras dar de alta el tandem");
-			System.out.println(admin.servEstaciones.getEstacion(idEstacion2).getBicicletas().toString());
+			System.out.println("Se ha introduciodo la bicicleta TANDEM en la estacion 2 de Saint Louis");
 			
 			// Retiro varias biciletas y las muevo de estacion
 			// Bmx sale de estacion 1 y llega a estacion 2
 			admin.servEstaciones.retirarUnaBicleta(idBmx);
 			System.out.println("La bmx ya no esta estacionada en la estacion de Saint Louis");
-			System.out.println(admin.servEstaciones.getEstacion(idEstacion1).getBicicletas().toString());
 			
 			admin.servEstaciones.estacionarUnaBicileta(idBmx, idEstacion2);
 			System.out.println("Ahora la bmx esta estacionada en la estacion de Saint John");
-			System.out.println(admin.servEstaciones.getEstacion(idEstacion2).getBicicletas().toString());
 			
 			// Bici de Carretera sale de la estacion 2 y llega a estacion 1
 			admin.servEstaciones.retirarUnaBicleta(idCarretera);

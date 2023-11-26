@@ -16,55 +16,44 @@ import servicio.IServicioEstaciones;
 import servicio.IServicioIncidencias;
 import servicio.IServicioSitiosTuristicos;
 
-
 public class Administrador extends Usuario {
 
 	public IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 	public IServicioSitiosTuristicos servSitios = FactoriaServicios.getServicio(IServicioSitiosTuristicos.class);
-	public IServicioIncidencias servIncidencias=FactoriaServicios.getServicio(IServicioIncidencias.class);
-	
-	public Repositorio<EntradaHistorico,String> repositorioHistorico;
+	public IServicioIncidencias servIncidencias = FactoriaServicios.getServicio(IServicioIncidencias.class);
+
+	public Repositorio<EntradaHistorico, String> repositorioHistorico;
 
 	public Administrador(String nombre, String apellidos, String email, String password, String telefono,
 			LocalDate fechaNacimiento) {
-
 		super(nombre, apellidos, email, password, telefono, fechaNacimiento);
-
 	}
 
 	public String DarDeAltaEstacion(String nom, int num, String post, double x, double y) {
-
 		String id = servEstaciones.crear(nom, num, post, x, y);
-
 		return id;
-
 	}
 
 	public void EstablecerSitioTuristico(String id, List<ResumenSitioTuristico> sitios)
 			throws RepositorioException, EntidadNoEncontrada {
-
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
-		//estacion.setSitiosTuristicos(sitios);
-
+		// estacion.setSitiosTuristicos(sitios);
 	}
 
-	public List<ResumenSitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada, SAXException, ParserConfigurationException, SitioTuristicoException {
-
+	public List<ResumenSitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada,
+			SAXException, ParserConfigurationException, SitioTuristicoException {
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
 		List<ResumenSitioTuristico> sitios = new LinkedList<>(
 				servSitios.getSitiosInteres(estacion.getCordX(), estacion.getCordY()));
 		return sitios;
-
 	}
 
 	public Estacionamiento getEstacionamiento(String id) throws RepositorioException, EntidadNoEncontrada {
-
 		return servEstaciones.getEstacion(id);
-
 	}
-	
+
 	public String guardarSitioTuristicoJson(ResumenSitioTuristico resumen) {
 		return servSitios.crear(resumen.getURL());
 	}
-	
+
 }

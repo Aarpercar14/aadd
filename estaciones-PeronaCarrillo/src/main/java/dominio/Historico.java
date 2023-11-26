@@ -71,4 +71,11 @@ public class Historico implements Identificable {
 	public String getUltimaEstacion() {
 		return this.idUltimaEstacion;
 	}
+
+	@Override
+	public String toString() {
+		return "Historico [id=" + id + ", idBici=" + idBici + ", historico=" + historico + ", idUltimaEstacion="
+				+ idUltimaEstacion + "]";
+	}
+	
 }
