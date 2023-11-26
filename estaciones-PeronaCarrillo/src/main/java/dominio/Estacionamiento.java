@@ -2,6 +2,7 @@ package dominio;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -43,7 +44,7 @@ public class Estacionamiento implements Identificable{
 		this.cord[1]=y;
 		this.fechaAlta=LocalDateTime.now();
 	//	this.sitiosTuristicos = new ArrayList<>();
-		this.bicicletas=new ArrayList<>();
+		this.bicicletas=new ArrayList<Bicicleta>();
 	}
 	
 	public Estacionamiento() {
@@ -147,4 +148,12 @@ public class Estacionamiento implements Identificable{
 		}
 		return null;			
 	}
+
+	@Override
+	public String toString() {
+		return "Estacionamiento [id=" + id + ", nombre=" + nombre + ", numPuestos=" + numPuestos + ", postal=" + postal
+				+ ", cord=" + Arrays.toString(cord) + ", fechaAlta=" + fechaAlta + ", bicicletas=" + bicicletas + "]";
+	}
+	
+	
 }

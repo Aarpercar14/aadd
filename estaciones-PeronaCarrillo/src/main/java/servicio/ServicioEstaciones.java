@@ -97,7 +97,9 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	public void estacionarUnaBicileta(String idBici, String idEstacion) {
 		try {
 			Bicicleta bici = repositorioBicicletas.getById(idBici);
+			System.out.println(bici);
 			Estacionamiento estacion = repositorioEstacion.getById(idEstacion);
+			System.out.println(estacion.toString());
 			estacion.estacionarBici(bici);
 			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
 			historico.añadirEntrada(new EntradaHistorico(idBici, idEstacion));

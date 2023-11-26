@@ -22,7 +22,6 @@ public class PruebaEntrega2 {
 		String idEstacion1 = admin.DarDeAltaEstacion("Saint Louis", 10, "30020", 40,-5);
 		String idEstacion2 = admin.DarDeAltaEstacion("Saint John", 10, "30800", 22, -8);
 		String idEstacion3 = admin.DarDeAltaEstacion("Groove Street", 10, "30750", 70, 10);
-		System.out.println(idEstacion1);
 		List<Estacionamiento> estaciones = new ArrayList<Estacionamiento>();
 		try {
 			estaciones.add(admin.servEstaciones.getEstacion(idEstacion1));

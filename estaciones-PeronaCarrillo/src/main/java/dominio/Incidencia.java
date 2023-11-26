@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
@@ -16,7 +17,7 @@ import repositorio.Identificable;
 public class Incidencia implements Identificable {
 	@Id
 	private String id;
-	@Column(name = "idBicicleta")
+	@JoinColumn(name = "bicicleta")
 	private Bicicleta bicicleta;
 	@Column(name = "fechaCreacion", columnDefinition = "DATE")
 	private LocalDateTime fechaCreacion;
@@ -43,6 +44,9 @@ public class Incidencia implements Identificable {
 		this.operario = "";
 		this.descripcion = descripcion;
 		this.estado = EstadoIncidencia.PENDIENTE;
+	}
+	public Incidencia() {
+		
 	}
 
 	@Override

@@ -42,18 +42,6 @@ public class RepositorioMongoDBHistorico extends RepositorioMongoDB<Historico> {
 	}
 
 	@Override
-	public String add(Historico entity) throws RepositorioException {
-		Document d = new Document();
-		d.append("_id", entity.getId()).append("idBici", entity.getIdBici()).append("historico", entity.getHistorico())
-				.append("idUltimaEstacion", entity.getUltimaEstacion());
-		InsertOneResult resultado = coleccionSinCodificar.insertOne(d);
-		if (resultado.getInsertedId() == null) {
-			throw new RepositorioException("Error insertado");
-		}
-		return resultado.getInsertedId().asObjectId().getValue().toString();
-	}
-
-	@Override
 	public MongoCollection<Historico> getCollection() {
 		CodecRegistry defaultCodecRegistry = CodecRegistries.fromRegistries(
 				MongoClientSettings.getDefaultCodecRegistry(),

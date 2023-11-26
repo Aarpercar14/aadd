@@ -12,30 +12,23 @@ import javax.persistence.Table;
 import repositorio.Identificable;
 
 @Entity
-@Table(name="revista")
-@NamedQueries({
-	@NamedQuery(name="Bicicleta.getByModelo",query="SELECT r FROM Bicicleta r WHERE r.modelo LIKE :keyword")
-	
-})
-public class Bicicleta implements Identificable{
+@Table(name = "bicicleta")
+public class Bicicleta implements Identificable {
 	@Id
 	private String id;
-	@Column(name="modelo")
+	@Column(name = "modelo")
 	private String modelo;
-	@Column(name="fechaAlta",columnDefinition = "DATE")
+	@Column(name = "fechaAlta", columnDefinition = "DATE")
 	private LocalDateTime fechaAlta;
-	@Column(name="fechaBaja",columnDefinition="DATE")
+	@Column(name = "fechaBaja", columnDefinition = "DATE")
 	private LocalDateTime fechaBaja;
 	@Lob
-	@Column(name="motivoBaja")
+	@Column(name = "motivoBaja")
 	private String motivoBaja;
-	@Column(name="estado")
+	@Column(name = "estado")
 	private String estado;
-	@Column(name="idHistorico")
+	@Column(name = "idHistorico")
 	private String idHistorico;
-	
-	
-	
 
 	public Bicicleta(String id, String modelo, String idHistorico) {
 		super();
@@ -45,9 +38,14 @@ public class Bicicleta implements Identificable{
 		this.idHistorico = idHistorico;
 		this.fechaBaja = null;
 		this.motivoBaja = null;
-		
+		this.estado="Disponible";
+
 	}
-		
+
+	public Bicicleta() {
+
+	}
+
 	public void cambioEstadoBici(String estado) {
 		this.setEstado(estado);
 	}
@@ -59,7 +57,7 @@ public class Bicicleta implements Identificable{
 
 	@Override
 	public void setId(String id) {
-		this.id=id;
+		this.id = id;
 	}
 
 	public String getModelo() {
@@ -77,7 +75,6 @@ public class Bicicleta implements Identificable{
 	public String getMotivoBaja() {
 		return motivoBaja;
 	}
-
 
 	public String getEstado() {
 		return estado;
@@ -103,7 +100,6 @@ public class Bicicleta implements Identificable{
 		this.motivoBaja = motivoBaja;
 	}
 
-
 	public String getIdHistorico() {
 		return idHistorico;
 	}
@@ -111,16 +107,10 @@ public class Bicicleta implements Identificable{
 	public void setIdHistorico(String idHistorico) {
 		this.idHistorico = idHistorico;
 	}
-	
+
 	public String toString() {
-		return "Bicicleta{" +
-	            "id='" + id + '\'' +
-	            ", modelo='" + modelo + '\'' +
-	            ", fechaAlta=" + fechaAlta +
-	            ", fechaBaja=" + fechaBaja +
-	            ", motivoBaja='" + motivoBaja + '\'' +
-	            ", estado='" + estado + '\'' +
-	            ", idHistorico='" + idHistorico + '\'' +
-	            '}';
+		return "Bicicleta{" + "id='" + id + '\'' + ", modelo='" + modelo + '\'' + ", fechaAlta=" + fechaAlta
+				+ ", fechaBaja=" + fechaBaja + ", motivoBaja='" + motivoBaja + '\'' + ", estado='" + estado + '\''
+				+ ", idHistorico='" + idHistorico + '\'' + '}';
 	}
 }
