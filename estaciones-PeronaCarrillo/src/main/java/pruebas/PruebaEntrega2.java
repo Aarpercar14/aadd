@@ -4,11 +4,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import dominio.Administrador;
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import dominio.Incidencia;
-
+import dominio.SitioTuristicoException;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 

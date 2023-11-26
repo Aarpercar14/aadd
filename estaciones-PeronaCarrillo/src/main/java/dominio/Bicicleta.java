@@ -1,16 +1,11 @@
 package dominio;
-
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import repositorio.Identificable;
-
 @Entity
 @Table(name = "bicicleta")
 public class Bicicleta implements Identificable {
@@ -39,11 +34,9 @@ public class Bicicleta implements Identificable {
 		this.fechaBaja = null;
 		this.motivoBaja = null;
 		this.estado="Disponible";
-
 	}
 
 	public Bicicleta() {
-
 	}
 
 	public void cambioEstadoBici(String estado) {

@@ -1,6 +1,7 @@
 package dominio;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bson.BsonType;
@@ -27,7 +28,14 @@ public class Historico implements Identificable {
 		this.idUltimaEstacion="";
 	}
 	
+	public Historico() {
+		
+	}
+	
 	public void añadirEntrada(EntradaHistorico entrada) {
+		if(historico==null) {
+			historico= new HashMap<String, EntradaHistorico>();
+		}
 		this.historico.put(entrada.getIdEstacion(), entrada);
 		this.idUltimaEstacion=entrada.getIdEstacion();
 	}
