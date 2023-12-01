@@ -22,7 +22,7 @@ public class Administrador extends Usuario {
 	public IServicioSitiosTuristicos servSitios = FactoriaServicios.getServicio(IServicioSitiosTuristicos.class);
 	public IServicioIncidencias servIncidencias = FactoriaServicios.getServicio(IServicioIncidencias.class);
 
-	public Repositorio<EntradaHistorico, String> repositorioHistorico;
+	public Repositorio<Historico, String> repositorioHistorico;
 
 	public Administrador(String nombre, String apellidos, String email, String password, String telefono,
 			LocalDate fechaNacimiento) {

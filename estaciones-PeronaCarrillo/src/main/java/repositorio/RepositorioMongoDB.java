@@ -38,6 +38,7 @@ public abstract class RepositorioMongoDB<T extends Identificable> implements Rep
 		ObjectId idB= new ObjectId(id);
 		Bson query=Filters.all("_id", idB);
 		FindIterable<T> resultados=getCollection().find(query);
+		System.out.println(resultados.first());
 		return resultados.first();
 		//if(it.hasNext()) return (it.next());
 			

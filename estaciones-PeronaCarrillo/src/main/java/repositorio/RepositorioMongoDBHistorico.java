@@ -4,14 +4,16 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.conversions.Bson;
 
 import com.mongodb.MongoClientSettings;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.result.InsertOneResult;
-
+import com.mongodb.client.model.Filters;
 import dominio.Historico;
 import utils.PropertiesReader;
 
@@ -48,4 +50,33 @@ public class RepositorioMongoDBHistorico extends RepositorioMongoDB<Historico> {
 				CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 		return database.getCollection("historico", Historico.class).withCodecRegistry(defaultCodecRegistry);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static Historico getHistoricoNoRetirado(Repositorio<Historico, String> repos, String id) {
+		Bson filter=Filters.and(Filters.eq("_id",id),Filters.eq("fecha_retiro",null));
+		FindIterable<Historico> query=((MongoCollection<Historico>) repos.getCollection()).find(filter);
+		MongoCursor<Historico> it = query.iterator();
+		while (it.hasNext()) {
+			return it.next();
+		}
+		return null;
+	}
+	
+	public static void añadirEntrada(Repositorio<Historico, String> repos, Historico hid) {
+		try {
+			repos.update(hid);
+		} catch (RepositorioException | EntidadNoEncontrada e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public static void borrarEntrada(Repositorio<Historico, String> repos, Historico hid) {
+		try {
+			repos.delete(hid);
+		} catch (RepositorioException | EntidadNoEncontrada e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

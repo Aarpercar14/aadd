@@ -34,7 +34,6 @@ public class PruebaEntrega2 {
 			for(Estacionamiento e : estaciones)
 				System.out.println(e.toString());
 		} catch (RepositorioException | EntidadNoEncontrada e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {

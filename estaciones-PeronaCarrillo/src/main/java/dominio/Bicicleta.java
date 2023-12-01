@@ -22,15 +22,12 @@ public class Bicicleta implements Identificable {
 	private String motivoBaja;
 	@Column(name = "estado")
 	private String estado;
-	@Column(name = "idHistorico")
-	private String idHistorico;
 
 	public Bicicleta(String id, String modelo) {
 		super();
 		this.id = id;
 		this.modelo = modelo;
 		this.fechaAlta = LocalDateTime.now();
-		this.idHistorico = "";
 		this.fechaBaja = null;
 		this.motivoBaja = null;
 		this.estado="Disponible";
@@ -93,17 +90,9 @@ public class Bicicleta implements Identificable {
 		this.motivoBaja = motivoBaja;
 	}
 
-	public String getIdHistorico() {
-		return idHistorico;
-	}
-
-	public void setIdHistorico(String idHistorico) {
-		this.idHistorico = idHistorico;
-	}
-
 	public String toString() {
 		return "Bicicleta{" + "id='" + id + '\'' + ", modelo='" + modelo + '\'' + ", fechaAlta=" + fechaAlta
 				+ ", fechaBaja=" + fechaBaja + ", motivoBaja='" + motivoBaja + '\'' + ", estado='" + estado + '\''
-				+ ", idHistorico='" + idHistorico + '\'' + '}';
+				+ '\'' + '}';
 	}
 }

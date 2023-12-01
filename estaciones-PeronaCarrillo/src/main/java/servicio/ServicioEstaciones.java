@@ -4,13 +4,13 @@ import repositorio.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import dominio.Historico;
-import dominio.EntradaHistorico;
 
 public class ServicioEstaciones implements IServicioEstaciones {
 
@@ -55,10 +55,10 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	public String altaDeUnaBici(String modelo, Estacionamiento estacion) {
 		String id = UUID.randomUUID().toString();
 		try {
-			Historico historico = new Historico(id);
+			
 			Bicicleta bici = new Bicicleta(id, modelo);
-			String idHis=repositorioHistorico.add(historico);
-			bici.setIdHistorico(idHis);
+			Historico historico = new Historico(bici.getId(),estacion.getId());
+			repositorioHistorico.add(historico);
 			repositorioBicicletas.add(bici);
 			this.estacionarUnaBicileta(id, estacion.getId());
 		} catch (RepositorioException e) {
@@ -75,8 +75,8 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			Bicicleta bici = repositorioBicicletas.getById(idBici);
 			Estacionamiento estacion = repositorioEstacion.getById(idEstacion);
 			estacion.estacionarBici(bici);
-			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
-			historico.añadirEntrada(new EntradaHistorico(idBici, idEstacion));
+			Historico historico = RepositorioMongoDBHistorico.getHistoricoNoRetirado(repositorioHistorico, idBici);
+			RepositorioMongoDBHistorico.añadirEntrada(repositorioHistorico,new Historico(idBici, idEstacion));
 			repositorioHistorico.update(historico);
 			repositorioEstacion.update(estacion);
 		} catch (RepositorioException | EntidadNoEncontrada e) {
@@ -91,10 +91,8 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			Bicicleta bici = repositorioBicicletas.getById(idBici);
 			Estacionamiento estacion = repositorioEstacion.getById(idEstacion);
 			estacion.estacionarBici(bici);
-			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
-			historico.añadirEntrada(new EntradaHistorico(idBici, idEstacion));
+			repositorioHistorico.add(new Historico(idBici, idEstacion));
 			repositorioEstacion.update(estacion);
-			repositorioHistorico.update(historico);
 ;		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,13 +102,12 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	@Override
 	public void retirarUnaBicleta(String idBici) {
 		try {
-			Bicicleta bici = repositorioBicicletas.getById(idBici);
-			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
-			Estacionamiento estacion = repositorioEstacion.getById(historico.getUltimaEstacion());
+			Historico his=repositorioHistorico.getById("656a2bf572664c72dac3a310");
+			System.out.println(his);
+			Estacionamiento estacion = repositorioEstacion.getById(his.getIdEstacion());
 			estacion.sacarBici(idBici);
 			repositorioEstacion.update(estacion);
-			historico.salidaUltimaEstacion();
-			repositorioHistorico.update(historico);
+			repositorioHistorico.update(his);
 		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -124,7 +121,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			this.retirarUnaBicleta(idBici);
 			bici.cambioEstadoBici("no disponible");
 			bici.setFechaBaja(LocalDateTime.now());
-			Historico historico = repositorioHistorico.getById(bici.getIdHistorico());
+			Historico historico = RepositorioMongoDBHistorico.getHistoricoNoRetirado(repositorioHistorico, idBici);
 			repositorioHistorico.delete(historico);
 		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
@@ -144,7 +141,6 @@ public class ServicioEstaciones implements IServicioEstaciones {
 
 	@Override
 	public List<Estacionamiento> recuperarEstacionSitiosTuristicosDeMayorAMenor() {
-		/*
 		LinkedList<Estacionamiento> estacion=new LinkedList<Estacionamiento>();
 		try {
 			int count=0;
@@ -159,7 +155,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		} catch (RepositorioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		return null;
 		
 	}

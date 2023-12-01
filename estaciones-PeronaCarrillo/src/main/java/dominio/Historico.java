@@ -1,81 +1,73 @@
 package dominio;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.bson.BsonType;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.codecs.pojo.annotations.BsonRepresentation;
-
 import repositorio.Identificable;
 
-public class Historico implements Identificable {
+public class Historico implements Identificable{
+	@BsonProperty(value="fecha_estacionamiento")
+	private LocalDateTime fechaEstacionamiento;
+	@BsonProperty(value="fecha_retiro")
+	private LocalDateTime fechaRetiro;
+	@BsonProperty(value="id_bici")
+	private String idBici;
 	@BsonId
 	@BsonRepresentation(BsonType.OBJECT_ID)
 	private String id;
-	@BsonProperty(value="id_bici")
-	private String idBici;
-	@BsonProperty(value = "historico")
-	private HashMap<String, EntradaHistorico> historico;
-	@BsonProperty(value="id_ultima_estacion")
-	private String idUltimaEstacion;
+	@BsonProperty(value="id_estacion")
+	private String idEstacion;
 	
-	public Historico(String idBici) {
+	public Historico(String idBici, String idEstacion) {
+		this.fechaEstacionamiento = LocalDateTime.now();
+		this.fechaRetiro = null;
 		this.idBici = idBici;
-		this.historico = new HashMap<String, EntradaHistorico>();
-		this.idUltimaEstacion="";
+		this.idEstacion = idEstacion;
 	}
 	
 	public Historico() {
 		
 	}
 	
-	public void añadirEntrada(EntradaHistorico entrada) {
-		if(historico==null) {
-			historico= new HashMap<String, EntradaHistorico>();
-		}
-		this.historico.put(entrada.getIdEstacion(), entrada);
-		this.idUltimaEstacion=entrada.getIdEstacion();
-	}
 	
-	public void eliminarEntrada(String idEstacion) {
-		this.historico.remove(idEstacion);
+
+	public LocalDateTime getFechaEstacionamiento() {
+		return fechaEstacionamiento;
 	}
-	
-	public HashMap<String, EntradaHistorico> getHistorico(){
-		return new HashMap<>(this.historico);
+
+	public LocalDateTime getFechaRetiro() {
+		return fechaRetiro;
 	}
-	
+
+	public void setFechaRetiro(LocalDateTime fechaRetiro) {
+		this.fechaRetiro = fechaRetiro;
+	}
+
+	public String getIdBici() {
+		return idBici;
+	}
+
+	public String getIdEstacion() {
+		return idEstacion;
+	}
+
 	@Override
 	public String getId() {
-		return this.id;
+		return id;
 	}
-	
+
 	@Override
 	public void setId(String id) {
-		this.id = id;
-	}
-	
-	public void salidaUltimaEstacion() {
-		EntradaHistorico entrada = historico.get(idUltimaEstacion);
-		entrada.setFechaRetiro(LocalDateTime.now());
-		historico.replace(idUltimaEstacion, entrada);
-	}
-	
-	public String getIdBici() {
-		return this.idBici;
-	}
-	
-	public String getUltimaEstacion() {
-		return this.idUltimaEstacion;
+		this.id=id;
+		
 	}
 
 	@Override
 	public String toString() {
-		return "Historico [id=" + id + ", idBici=" + idBici + ", historico=" + historico + ", idUltimaEstacion="
-				+ idUltimaEstacion + "]";
+		return "Historico [fechaEstacionamiento=" + fechaEstacionamiento + ", fechaRetiro=" + fechaRetiro + ", idBici="
+				+ idBici + ", id=" + id + ", idEstacion=" + idEstacion + "]";
 	}
-	
+
 }
