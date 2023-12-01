@@ -72,5 +72,11 @@ public class ResumenSitioTuristico {
 	public String toString() {
 		return "ResumenSitioTuristico [id = "+ id +", nombre= " + nombre +" descripcion= " + descripcion + ", distancia = " + distancia.toString() + ", URL= " + URL +" ]";	
 	}
+
+	public void setDistancia(DistanciaCoordenadas distancia) {
+		this.distancia = distancia;
+	}
+	
+	
 	
 }

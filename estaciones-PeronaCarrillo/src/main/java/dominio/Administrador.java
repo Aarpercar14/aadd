@@ -37,7 +37,7 @@ public class Administrador extends Usuario {
 	public void EstablecerSitioTuristico(String id, List<ResumenSitioTuristico> sitios)
 			throws RepositorioException, EntidadNoEncontrada {
 		Estacionamiento estacion = servEstaciones.getEstacion(id);
-		// estacion.setSitiosTuristicos(sitios);
+		estacion.setSitiosTuristicos(sitios);
 	}
 
 	public List<ResumenSitioTuristico> getSitiosTuristicos(String id) throws RepositorioException, EntidadNoEncontrada,

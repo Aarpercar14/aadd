@@ -39,7 +39,7 @@ public class Estacionamiento implements Identificable{
 		this.cord[0]=x;
 		this.cord[1]=y;
 		this.fechaAlta=LocalDateTime.now();
-//		this.sitiosTuristicos = new ArrayList<>();
+		this.sitiosTuristicos = new ArrayList<>();
 		this.bicicletas=new ArrayList<Bicicleta>();
 	}
 	
@@ -124,11 +124,13 @@ public class Estacionamiento implements Identificable{
 	}
 	
 	public ArrayList<ResumenSitioTuristico> getSitiosTuristicos(){
-		return new ArrayList<>(this.sitiosTuristicos);
+		return sitiosTuristicos;
+		//return new ArrayList<>(this.sitiosTuristicos);
 	}
 	
 	public void setSitiosTuristicos(List<ResumenSitioTuristico> sitiosTuristicos) {
-		this.sitiosTuristicos.addAll(sitiosTuristicos);
+		this.sitiosTuristicos = (ArrayList<ResumenSitioTuristico>) sitiosTuristicos;
+		//this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
 	
 	public ArrayList<Bicicleta> getBicicletas() {
