@@ -31,8 +31,6 @@ public class Historico implements Identificable{
 		
 	}
 	
-	
-
 	public LocalDateTime getFechaEstacionamiento() {
 		return fechaEstacionamiento;
 	}
@@ -62,6 +60,18 @@ public class Historico implements Identificable{
 	public void setId(String id) {
 		this.id=id;
 		
+	}
+
+	public void setFechaEstacionamiento(LocalDateTime fechaEstacionamiento) {
+		this.fechaEstacionamiento = fechaEstacionamiento;
+	}
+
+	public void setIdBici(String idBici) {
+		this.idBici = idBici;
+	}
+
+	public void setIdEstacion(String idEstacion) {
+		this.idEstacion = idEstacion;
 	}
 
 	@Override

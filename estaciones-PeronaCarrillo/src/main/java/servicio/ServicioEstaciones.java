@@ -102,8 +102,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	@Override
 	public void retirarUnaBicleta(String idBici) {
 		try {
-			Historico his=repositorioHistorico.getById("656a2bf572664c72dac3a310");
-			System.out.println(his);
+			Historico his=RepositorioMongoDBHistorico.getHistoricoNoRetirado(repositorioHistorico, idBici);
 			Estacionamiento estacion = repositorioEstacion.getById(his.getIdEstacion());
 			estacion.sacarBici(idBici);
 			repositorioEstacion.update(estacion);
@@ -127,7 +126,6 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override

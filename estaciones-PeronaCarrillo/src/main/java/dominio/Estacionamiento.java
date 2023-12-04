@@ -23,8 +23,10 @@ public class Estacionamiento implements Identificable{
 	private int numPuestos;
 	@BsonProperty(value="postal")
 	private String postal;
-	@BsonProperty(value="cord")
-	private double[] cord=new double[2];
+	@BsonProperty(value="cordY")
+	private double cordY;
+	@BsonProperty(value="cordX")
+	private double cordX;
 	@BsonProperty(value="fecha_alta")
 	private LocalDateTime fechaAlta;
 	@BsonProperty(value="bicicletas")
@@ -35,9 +37,8 @@ public class Estacionamiento implements Identificable{
 	public Estacionamiento(String nombre, int numPuesto, String postal, double x, double y) {
 		this.nombre=nombre;
 		this.numPuestos=numPuesto;
-		this.cord= new double[2];
-		this.cord[0]=x;
-		this.cord[1]=y;
+		this.cordX=x;
+		this.cordY=y;
 		this.fechaAlta=LocalDateTime.now();
 		this.sitiosTuristicos = new ArrayList<>();
 		this.bicicletas=new ArrayList<Bicicleta>();
@@ -99,22 +100,6 @@ public class Estacionamiento implements Identificable{
 		this.postal = postal;
 	}
 
-	public double getCordX() {
-		return cord[0];
-	}
-
-	public void setCordX(double cordX) {
-		this.cord[0] = cordX;
-	}
-
-	public double getCordY() {
-		return cord[1];
-	}
-
-	public void setCordY(double cordY) {
-		this.cord[1] = cordY;
-	}
-
 	public LocalDateTime getFechaAlta() {
 		return fechaAlta;
 	}
@@ -124,13 +109,12 @@ public class Estacionamiento implements Identificable{
 	}
 	
 	public ArrayList<ResumenSitioTuristico> getSitiosTuristicos(){
-		return sitiosTuristicos;
-		//return new ArrayList<>(this.sitiosTuristicos);
+		return new ArrayList<>(this.sitiosTuristicos);
 	}
 	
 	public void setSitiosTuristicos(List<ResumenSitioTuristico> sitiosTuristicos) {
 		this.sitiosTuristicos = (ArrayList<ResumenSitioTuristico>) sitiosTuristicos;
-		//this.sitiosTuristicos.addAll(sitiosTuristicos);
+		this.sitiosTuristicos.addAll(sitiosTuristicos);
 	}
 	
 	public ArrayList<Bicicleta> getBicicletas() {
@@ -149,11 +133,38 @@ public class Estacionamiento implements Identificable{
 		return null;			
 	}
 
+	public double getCordX() {
+		return cordX;
+	}
+
+	public void setCordX(double cord) {
+		this.cordX = cord;
+	}
+	
+	public double getCordY() {
+		return cordY;
+	}
+
+	public void setCordY(double cord) {
+		this.cordY = cord;
+	}
+
+	public void setBicicletas(ArrayList<Bicicleta> bicicletas) {
+		this.bicicletas = bicicletas;
+	}
+
+	public void setSitiosTuristicos(ArrayList<ResumenSitioTuristico> sitiosTuristicos) {
+		this.sitiosTuristicos = sitiosTuristicos;
+	}
+
 	@Override
 	public String toString() {
 		return "Estacionamiento [id=" + id + ", nombre=" + nombre + ", numPuestos=" + numPuestos + ", postal=" + postal
-				+ ", cord=" + Arrays.toString(cord) + ", fechaAlta=" + fechaAlta + ", bicicletas=" + bicicletas + "]";
+				+ ", cordY=" + cordY + ", cordX=" + cordX + ", fechaAlta=" + fechaAlta + ", bicicletas=" + bicicletas
+				+ ", sitiosTuristicos=" + sitiosTuristicos + "]";
 	}
+
+	
 	
 	
 }

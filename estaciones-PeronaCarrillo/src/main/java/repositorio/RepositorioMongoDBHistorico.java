@@ -53,13 +53,9 @@ public class RepositorioMongoDBHistorico extends RepositorioMongoDB<Historico> {
 	
 	@SuppressWarnings("unchecked")
 	public static Historico getHistoricoNoRetirado(Repositorio<Historico, String> repos, String id) {
-		Bson filter=Filters.and(Filters.eq("_id",id),Filters.eq("fecha_retiro",null));
+		Bson filter=Filters.and(Filters.eq("id_bici",id),Filters.eq("fecha_retiro",null));
 		FindIterable<Historico> query=((MongoCollection<Historico>) repos.getCollection()).find(filter);
-		MongoCursor<Historico> it = query.iterator();
-		while (it.hasNext()) {
-			return it.next();
-		}
-		return null;
+		return query.first();
 	}
 	
 	public static void añadirEntrada(Repositorio<Historico, String> repos, Historico hid) {

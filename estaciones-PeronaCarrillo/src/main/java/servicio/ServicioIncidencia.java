@@ -8,11 +8,12 @@ import dominio.Bicicleta;
 import dominio.EstadoIncidencia;
 import dominio.Incidencia;
 import repositorio.EntidadNoEncontrada;
+import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
 import repositorio.RepositorioException;
 
 public class ServicioIncidencia implements IServicioIncidencias{
-	private Repositorio<Incidencia,String> repositorio;
+	private Repositorio<Incidencia,String> repositorio=FactoriaRepositorios.getRepositorio(Incidencia.class);
 	private IServicioEstaciones servEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 
 	@Override
@@ -81,7 +82,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 	public List<Incidencia> recuperarIncidencias() {
 		try {
 			ArrayList<Incidencia> listaIncidencias=new ArrayList<Incidencia>();
-			for(Incidencia i:(ArrayList<Incidencia>)repositorio.getAll()) {
+			for(Incidencia i:repositorio.getAll()) {
 				if((i.getEstado().equals(EstadoIncidencia.ASIGNADA)) ||(i.getEstado().equals(EstadoIncidencia.PENDIENTE))) {
 					listaIncidencias.add(i);
 				}
