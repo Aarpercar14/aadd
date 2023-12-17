@@ -1,8 +1,6 @@
 package pruebas;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -21,7 +19,6 @@ import com.mongodb.client.result.InsertOneResult;
 import utils.PropertiesReader;
 
 import dominio.Estacionamiento;
-import dominio.SitioTuristico;
 
 public class preubas {
 

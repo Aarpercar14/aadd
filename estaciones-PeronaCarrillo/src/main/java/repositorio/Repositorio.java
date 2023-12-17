@@ -3,8 +3,6 @@ package repositorio;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.bson.BsonValue;
-
 import especificacion.Especificacion;
 
 public interface Repositorio <T, K> {
