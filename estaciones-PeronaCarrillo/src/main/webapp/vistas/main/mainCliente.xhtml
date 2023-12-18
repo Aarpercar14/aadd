@@ -8,7 +8,22 @@
 </h:head>
 <h:body>
 	<div>
-		<h:form>
+		<h:form>			
+			<h:commandButton value="Dar de alta bicicleta"
+				actionListener="#{MainClienteWeb.crearBicicleta()}">
+			</h:commandButton>
+			
+			<h:commandButton value="Buscar Bicicletas"
+				actionListener="#{MainClienteWeb.buscarBicicleta()}">
+			</h:commandButton>
+			
+			<h:commandButton value="Reportar Incidencia"
+				actionListener="#{MainClienteWeb.crearIncidencia()}">
+			</h:commandButton>
+			
+			<h:commandButton value="Cambiar rol"
+				actionListener="#{InicioSesionWeb.cerrarSesion()}">
+			</h:commandButton>
 		</h:form>
 	</div>
 </h:body>
