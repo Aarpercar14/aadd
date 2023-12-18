@@ -9,6 +9,17 @@
 <h:body>
 	<div>
 		<h:form>
+			<h:outputText value="Identificador Bicicletad"></h:outputText>
+			<h:inputText id="idBici" value="#{CrearIncidenciaWeb.idBici}" />
+			
+			<h:outputText value="Descripcion Incidencia"></h:outputText>
+			<h:inputText id="descripcionIncidencia" value="#{CrearIncidenciaWeb.descripcionIncidencia}" />
+
+
+
+			<h:commandButton value="Alta"
+				actionListener="#{CrearIncidenciaWeb.altaIncidencia()}">
+			</h:commandButton>
 			<h:commandButton value="Volver"
 				actionListener="#{MainClienteWeb.load()}">
 			</h:commandButton>
