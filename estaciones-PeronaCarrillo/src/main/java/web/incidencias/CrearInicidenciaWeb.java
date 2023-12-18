@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import dominio.Bicicleta;
 import dominio.Incidencia;
@@ -15,6 +17,8 @@ import servicio.FactoriaServicios;
 import servicio.IServicioEstaciones;
 import servicio.IServicioIncidencias;
 
+@Named
+@ViewScoped
 public class CrearInicidenciaWeb implements Serializable{
 	
 	private String idBici;

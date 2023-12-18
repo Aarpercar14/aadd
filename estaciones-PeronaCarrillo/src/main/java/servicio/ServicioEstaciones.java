@@ -11,6 +11,7 @@ import java.util.UUID;
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import dominio.Historico;
+import dominio.dto.BicicletaDTO;
 
 public class ServicioEstaciones implements IServicioEstaciones {
 
@@ -167,5 +168,19 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	public Bicicleta obtenerBici(String idBici) throws RepositorioException, EntidadNoEncontrada {
 		return repositorioBicicletas.getById(idBici);
 	}
+
+	
+	public List<BicicletaDTO> obtenerBicisDTO(List<Bicicleta> bicis) throws RepositorioException, EntidadNoEncontrada {
+		List<BicicletaDTO> bicisDto = new LinkedList<>();
+		for(Bicicleta bici : bicis)
+			bicisDto.add(transformBiciToDto(bici));
+		return bicisDto;
+	}
+	
+	private BicicletaDTO transformBiciToDto(Bicicleta bici) {
+		return new BicicletaDTO(bici.getId(), bici.getModelo(), bici.getFechaAlta());				
+	}
+	
+	
 
 }
