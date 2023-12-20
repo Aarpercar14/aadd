@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Alta nueva estacion</title>
+</h:head>
+<h:body>
+	<div>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value=NOMBRE"></h:outputText>
+				<h:inputText id="nombre" value="#{altaEstacionesWeb.nombre}" />
+				<h:outputText value="NUMERO DE PUESTOS"></h:outputText>
+				<h:inputText id="numPuestos" value="#{altaEstacionesWeb.numPuestos}" />
+				<h:outputText value="POSTAL"></h:outputText>
+				<h:inputText id="postal" value="#{altaEstacionesWeb.postal}" />
+				<h:outputText value="cordX"></h:outputText>
+				<h:inputText value="#{altaEstacionesWeb.cordX}">
+					<f:convertDateTime type="int" />
+				</h:inputText>
+				<h:outputText value="cordY"></h:outputText>
+				<h:inputText value="#{altaEstacionesWeb.cordY}">
+					<f:convertDateTime type="int" />
+				</h:inputText>
+
+			</h:panelGrid>
+
+			<h:commandButton value="Alta"
+				actionListener="#{AltaEstacionesWeb.altaEstacion()}">
+			</h:commandButton>
+			<h:messages id="errors" infoStyle="color:blue"
+				warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
+		</h:form>
+	</div>
+</h:body>
+</html>
