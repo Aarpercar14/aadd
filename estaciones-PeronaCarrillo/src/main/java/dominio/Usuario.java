@@ -49,5 +49,22 @@ public class Usuario {
 
 	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
-	}	
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+	
 }

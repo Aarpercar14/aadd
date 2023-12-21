@@ -94,7 +94,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			estacion.estacionarBici(bici);
 			repositorioHistorico.add(new Historico(idBici, idEstacion));
 			repositorioEstacion.update(estacion);
-;		} catch (RepositorioException | EntidadNoEncontrada e) {
+		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -156,8 +156,8 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			e.printStackTrace();
 		}
 		return null;
-		
 	}
+	
 	@Override
 	public String encontrarEstacionLibre() throws RepositorioException {
 		String idEstacion = RepositorioMemoriaEstacion.getEstacionLibre(repositorioEstacion);
@@ -169,7 +169,6 @@ public class ServicioEstaciones implements IServicioEstaciones {
 		return repositorioBicicletas.getById(idBici);
 	}
 
-	
 	public List<BicicletaDTO> obtenerBicisDTO(List<Bicicleta> bicis) throws RepositorioException, EntidadNoEncontrada {
 		List<BicicletaDTO> bicisDto = new LinkedList<>();
 		for(Bicicleta bici : bicis)
