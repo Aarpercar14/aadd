@@ -19,7 +19,7 @@ import servicio.IServicioEstaciones;
 public class EstacionDetailWeb implements Serializable{  
     private String idEstacion;   
     private IServicioEstaciones servicioEstaciones;  
-    private EstacionesDTO revista; 
+    private EstacionesDTO estacion; 
     @Inject
     protected FacesContext facesContext;
         
@@ -28,7 +28,7 @@ public class EstacionDetailWeb implements Serializable{
     }
     public void load() {
         try {
-            revista = servicioEstaciones.getById(idEstacion);
+            estacion = servicioEstaciones.getById(idEstacion);
         } catch (RepositorioException e) {
             facesContext.addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "", e.getMessage()));
@@ -47,10 +47,10 @@ public class EstacionDetailWeb implements Serializable{
 		this.servicioEstaciones = servicioEstaciones;
 	}
 	public EstacionesDTO getRevista() {
-		return revista;
+		return estacion;
 	}
 	public void setRevista(EstacionesDTO revista) {
-		this.revista = revista;
+		this.estacion = revista;
 	}
 	public FacesContext getFacesContext() {
 		return facesContext;
