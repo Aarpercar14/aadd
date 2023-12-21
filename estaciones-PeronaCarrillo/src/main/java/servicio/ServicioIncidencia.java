@@ -2,11 +2,13 @@ package servicio;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import dominio.Bicicleta;
 import dominio.EstadoIncidencia;
 import dominio.Incidencia;
+import dominio.dto.IncidenciaDTO;
 import repositorio.EntidadNoEncontrada;
 import repositorio.FactoriaRepositorios;
 import repositorio.Repositorio;
@@ -94,6 +96,28 @@ public class ServicioIncidencia implements IServicioIncidencias{
 		}
 		
 		return null;
+	}
+	
+	@Override
+	public List<IncidenciaDTO> recuperarIncidenciasDTO() {
+		List<IncidenciaDTO> incidenciasDto = new LinkedList<IncidenciaDTO>();
+		List<Incidencia> incidencias = this.recuperarIncidencias();
+		for(Incidencia i : incidencias)
+			incidenciasDto.add(this.transformToDTO(i));
+		return incidenciasDto;
+	}
+	
+	@Override
+	public IncidenciaDTO getIncidenciaDTO(String id) {
+		List<Incidencia> incidencias = this.recuperarIncidencias();
+		for(Incidencia i : incidencias)
+			if(i.getId().equals(id))
+				return this.transformToDTO(i);
+		return null;
+	}
+	
+	private IncidenciaDTO transformToDTO (Incidencia incidencia) {
+		return new IncidenciaDTO(incidencia.getId(), incidencia.getIdBici(), incidencia.getDescripcion(), incidencia.getOperario());
 	}
 
 }

@@ -111,6 +111,10 @@ public class Incidencia implements Identificable {
 		this.operario = operario;
 	}
 	
+	public String getIdBici() {
+		return bicicleta.getId();
+	}
+	
 	public String toString() {
 		return "Incidencia{" +
 	            "id='" + id + '\'' +

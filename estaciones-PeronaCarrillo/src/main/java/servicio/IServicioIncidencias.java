@@ -4,6 +4,7 @@ import java.util.List;
 
 import dominio.Bicicleta;
 import dominio.Incidencia;
+import dominio.dto.IncidenciaDTO;
 
 public interface IServicioIncidencias {
 	
@@ -12,5 +13,9 @@ public interface IServicioIncidencias {
 	void gestionDeLasIncidencias(String cierre, String operario, String incidencia,String nuevoEstado);
 	
 	List<Incidencia> recuperarIncidencias();
+	
+	public List<IncidenciaDTO> recuperarIncidenciasDTO(); 
+	
+	public IncidenciaDTO getIncidenciaDTO(String id);
 
 }
