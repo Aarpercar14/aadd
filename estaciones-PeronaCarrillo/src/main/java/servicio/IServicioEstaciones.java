@@ -4,6 +4,7 @@ import java.util.List;
 
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
+import dto.EstacionesDTO;
 import repositorio.EntidadNoEncontrada;
 import repositorio.RepositorioException;
 
@@ -31,6 +32,8 @@ public interface IServicioEstaciones {
 	
 	public String encontrarEstacionLibre() throws RepositorioException;
 	
-	public Bicicleta obtenerBici(String idBici) throws RepositorioException, EntidadNoEncontrada; 
+	public Bicicleta obtenerBici(String idBici) throws RepositorioException, EntidadNoEncontrada;
+
+	EstacionesDTO getById(String id) throws RepositorioException; 
 	
 }

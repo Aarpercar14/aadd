@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import dominio.Bicicleta;
 import dominio.Estacionamiento;
 import dominio.Historico;
+import dto.EstacionesDTO;
 
 public class ServicioEstaciones implements IServicioEstaciones {
 
@@ -42,6 +44,10 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			throw new IllegalArgumentException("id: no debe ser nulo ni vacío");
 		return repositorioEstacion.getById(id);
 	}
+	
+	private EstacionesDTO transformToDTO(Estacionamiento estacion) {        
+        return new EstacionesDTO(estacion.getId(),estacion.getNombre(), estacion.getNumPuestos(), estacion.getPostal(),estacion.getCordY(),estacion.getCordX());
+    }
 
 	@Override
 	public void eliminar(String id) throws RepositorioException, EntidadNoEncontrada {
@@ -166,6 +172,20 @@ public class ServicioEstaciones implements IServicioEstaciones {
 	@Override
 	public Bicicleta obtenerBici(String idBici) throws RepositorioException, EntidadNoEncontrada {
 		return repositorioBicicletas.getById(idBici);
+	}
+	@Override
+	public EstacionesDTO getById(String id) throws RepositorioException{
+		try {
+			Estacionamiento estacion = repositorioEstacion.getById(id);
+			return transformToDTO(estacion);
+		} catch (RepositorioException e) {
+			e.printStackTrace();
+			throw new RepositorioException(e.getMessage(), e);
+			
+		} catch (EntidadNoEncontrada e) {
+			e.printStackTrace();
+			throw new RepositorioException(e.getMessage(), e);
+		}
 	}
 
 }

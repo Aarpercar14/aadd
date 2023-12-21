@@ -42,7 +42,8 @@ public class AltaEstacionesWeb implements Serializable {
 	 
 	 public void altaEstacoin() {
 		 try {
-	        String resultado = servicioEstaciones.crear(nombre, numPuestos, postal,cordX,cordY);    
+	        String resultado = servicioEstaciones.crear(nombre, numPuestos, postal,cordX,cordY);
+	        id=resultado;
 	        facesContext.addMessage(null,
 	                new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Estacion "+resultado+" creada correctamente"));
 	    } catch(IllegalArgumentException e) {
