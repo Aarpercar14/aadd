@@ -34,5 +34,19 @@ public class GestionIncidenciaWeb implements Serializable {
 		incidencia = servicioIncidencia.getIncidenciaDTO(id);
 		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Incidencia a gestionar obtenida con exito"));
 	}
+	
+	
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public IncidenciaDTO getIncidencia() {
+		return incidencia;
+	}
 
 }
