@@ -6,6 +6,8 @@
 	<groupId>AADD</groupId>
 	<artifactId>estaciones-PeronaCarrillo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+
 
 	<properties>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -123,6 +125,16 @@
 			<artifactId>jetty-server</artifactId>
 			<version>10.0.18</version>
 		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>13.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>5.12.0</version>
+		</dependency>
 	</dependencies>
 
 
@@ -191,6 +203,7 @@
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
+
 	</dependencyManagement>
 
 	<build>
@@ -199,9 +212,6 @@
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>10.0.18</version>
-				<configuration>
-					<supportedPackagings>jar</supportedPackagings>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
