@@ -5,23 +5,23 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 	<ui:param name="estilo1" value="current" />
-	<h:head>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title>Inicio CityBike</title>
-	</h:head>
-	<h:body>
-		<div>
-			<h:form>
-				<h:commandButton value="Entrar como cliente"
-					actionListener="#{InicioSesionWeb.inicioCliente()}">
-				</h:commandButton>
 
-				<h:commandButton value="Entrar como gestor"
-					actionListener="#{InicioSesionWeb.inicioGestor()}">
-				</h:commandButton>
-			</h:form>
-		</div>
-	</h:body>
+	<ui:define name="title">
+
+</ui:define>
+	<ui:define name="content">
+		<section id="banner">
+			<header>
+				<h2>Bienvenido a cityBike</h2>
+				<p>Porfavor elija su rol</p>
+				<h:button value="Entrar como cliente" outcome="#{request.contextPath}/vistas/main/mainCliente.xhtml" />
+
+				<h:button value="Entrar como gestor" outcome="#{request.contextPath}/vistas/main/mainCliente.xhtml" />
+			</header>
+		</section>
+		<!-- Intro -->
+		<div class="row"></div>
+
+	</ui:define>
 
 </ui:composition>
