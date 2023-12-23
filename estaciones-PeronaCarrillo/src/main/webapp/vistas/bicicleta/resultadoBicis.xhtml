@@ -33,16 +33,16 @@
 		<h:dataTable value="#{ResultadoBicicletasWeb.bicis}" var="bici">
 			<h:column>
 				<f:facet name="header">Id. Bicicleta</f:facet>
-				#{bici.getId()}
+				<h:output value="#{bici.getId()}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Modelo</f:facet>
-				#{bici.getModelo()}
+				<h:outputText value="#{bici.getModelo()}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Fecha del Alta</f:facet>
 				<h:outputText value="#{bici.getFechaAlta()}">
-					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+					<f:convertDateTime pattern="dd/MM/yyyy"/>
 				</h:outputText>
 			</h:column>
 		</h:dataTable>

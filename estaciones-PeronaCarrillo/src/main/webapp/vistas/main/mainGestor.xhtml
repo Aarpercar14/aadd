@@ -9,9 +9,12 @@
 <h:body>
 	<div>
 		<h:form>
-		<h:commandButton value="Cambiar Rol"
+			<h:commandButton value="Buscar Incidencias"
+				actionListener="#{MainGestorWeb.verIncidencias()}">
+			</h:commandButton>
+			<h:commandButton value="Cambiar Rol"
 				actionListener="#{InicioSesionWeb.cerrarSesion()}">
-		</h:commandButton>
+			</h:commandButton>
 		</h:form>
 	</div>
 </h:body>
