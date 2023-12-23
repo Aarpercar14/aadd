@@ -8,7 +8,18 @@
 </h:head>
 <h:body>
 	<div>
-		<h:form>			
+		<h:form>
+			<h:outputText value="Cord X" ></h:outputText>
+			<h:inputText id="x" value="#{BuscarBicicletaWeb.x}"	 />
+			
+			<h:outputText value="Cord Y" ></h:outputText>
+			<h:inputText id="y" value="#{BuscarBicicletaWeb.y}"	/>
+					
+					
+			<h:commandButton value="Buscar"
+				actionListener="#{BuscarBicicletaWeb.buscarBicis()}">
+			</h:commandButton>
+			
 			<h:commandButton value="Volver"
 				actionListener="#{MainClienteWeb.load()}">
 			</h:commandButton>
