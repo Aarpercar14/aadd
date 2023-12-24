@@ -27,13 +27,13 @@ public class CrearInicidenciaWeb implements Serializable{
 	private IServicioIncidencias servicioInicidencias;
 	private IServicioEstaciones servicioEstaciones;
 	
+	@Inject
+	protected FacesContext facesContext;
+	
 	public CrearInicidenciaWeb() {
 		servicioInicidencias = FactoriaServicios.getServicio(IServicioIncidencias.class);
 		servicioEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 	}
-	
-	@Inject
-	protected FacesContext facesContext;
 	
 	public void altaIncidencia() {
 		try {
@@ -58,5 +58,46 @@ public class CrearInicidenciaWeb implements Serializable{
 		}
 		
 	}
+
+	public String getIdBici() {
+		return idBici;
+	}
+
+	public void setIdBici(String idBici) {
+		this.idBici = idBici;
+	}
+
+	public String getDescripcionIncidencia() {
+		return descripcionIncidencia;
+	}
+
+	public void setDescripcionIncidencia(String descripcionIncidencia) {
+		this.descripcionIncidencia = descripcionIncidencia;
+	}
+
+	public IServicioIncidencias getServicioInicidencias() {
+		return servicioInicidencias;
+	}
+
+	public void setServicioInicidencias(IServicioIncidencias servicioInicidencias) {
+		this.servicioInicidencias = servicioInicidencias;
+	}
+
+	public IServicioEstaciones getServicioEstaciones() {
+		return servicioEstaciones;
+	}
+
+	public void setServicioEstaciones(IServicioEstaciones servicioEstaciones) {
+		this.servicioEstaciones = servicioEstaciones;
+	}
+
+	public FacesContext getFacesContext() {
+		return facesContext;
+	}
+
+	public void setFacesContext(FacesContext facesContext) {
+		this.facesContext = facesContext;
+	}
+	
 
 }

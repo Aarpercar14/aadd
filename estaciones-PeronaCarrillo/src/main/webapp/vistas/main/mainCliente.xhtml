@@ -5,30 +5,45 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 	<ui:param name="estilo1" value="current" />
-<h:head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Página principal Cliente</title>
-</h:head>
-<h:body>
-	<div>
-		<h:form>			
-			<h:commandButton value="Dar de alta bicicleta"
-				actionListener="#{MainClienteWeb.crearBicicleta()}">
-			</h:commandButton>
-			
-			<h:commandButton value="Buscar Bicicletas"
-				actionListener="#{MainClienteWeb.buscarBicicleta()}">
-			</h:commandButton>
-			
-			<h:commandButton value="Reportar Incidencia"
-				actionListener="#{MainClienteWeb.crearIncidencia()}">
-			</h:commandButton>
-			
-			<h:commandButton value="Cambiar rol"
-				actionListener="#{InicioSesionWeb.cerrarSesion()}">
-			</h:commandButton>
-		</h:form>
-	</div>
-</h:body>
+	<ui:define name="content">
+		<section id="banner">
+			<header>
+				<h2>Pagina principal de cliente</h2>
+			</header>
+		</section>
+		<section id="main">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="row">
+							<div class="col-4 col-6-medium col-12-small">
+								<section class="box">
+									<h:button value="Dar de alta bicicleta"
+										outcome="#{request.contextPath}/vistas/bicicleta/altaBicicleta.xhtml" />
+								</section>
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section class="box">
+									<h:button value="Buscar una bicicleta"
+										outcome="#{request.contextPath}/vistas/bicicleta/buscadorBicis.xhtml" />
+								</section>
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section class="box">
+									<h:button value="Reportar incidencia"
+										outcome="#{request.contextPath}/vistas/incidencia/altaIncidencia.xhtml" />
+								</section>
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section class="box">
+									<h:button value="Cambiar de rol"
+										outcome="#{request.contextPath}/index.xhtml" />
+								</section>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</ui:define>
 </ui:composition>

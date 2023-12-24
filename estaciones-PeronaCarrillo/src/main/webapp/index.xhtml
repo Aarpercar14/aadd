@@ -8,17 +8,40 @@
 
 	<ui:define name="title">
 
-</ui:define>
+	</ui:define>
 	<ui:define name="content">
 		<section id="banner">
 			<header>
 				<h2>Bienvenido a cityBike</h2>
 				<p>Porfavor elija su rol</p>
-				<h:button value="Entrar como cliente" outcome="#{request.contextPath}/vistas/main/mainCliente.xhtml" />
-
-				<h:button value="Entrar como gestor" outcome="#{request.contextPath}/vistas/main/mainCliente.xhtml" />
 			</header>
 		</section>
+		<section id="intro" class="container">
+			<div class="row">
+				<div class="col-4 col-12-medium">
+					<section class="first">
+						<header>
+							<h2>Aqui podra buscar bicicletas, dar de alta alguna
+								bicicleta o reporrtar algun problema que tengas</h2>
+						</header>
+						<h:button value="Entrar como cliente"
+							outcome="#{request.contextPath}/vistas/main/mainCliente.xhtml" />
+					</section>
+				</div>
+				<div class="col-4 col-12-medium">
+					<section class="middle">
+						<header>
+							<h2>Aqui podra buscar las incidencias y comprobarlas</h2>
+						</header>
+						<h:button value="Entrar como gestor"
+							outcome="#{request.contextPath}/vistas/main/mainGestor.xhtml" />
+					</section>
+				</div>
+			</div>
+			<footer>
+			</footer>
+		</section>
+
 		<!-- Intro -->
 		<div class="row"></div>
 

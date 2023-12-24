@@ -1,49 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+<ui:composition template="/WEB-INF/template/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title>Incidencias Abiertas</title>
-</h:head>
-<h:body>
-	<f:metadata>
-		<f:viewAction action="#{ResultadoBicicletaWeb.load()}" />
-	</f:metadata>
 
-	<div>
-		<h:messages id="errors" infoStyle="color:blue"
-			warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
+	<ui:param name="estilo1" value="current" />
+	<ui:define name="content">
+		<section id="banner">
+			<header>
+				<h2>Incidencias abiertas</h2>
+			</header>
+		</section>
+		<h:body>
+			<f:metadata>
+				<f:viewAction action="#{ResultadoBicicletaWeb.load()}" />
+			</f:metadata>
 
-		<h:form>
-			<h:dataTable value="#{BuscadorIncidenciasWeb.incidencias}" var="incidencia">
-				<h:column>
-					<f:facet name="header">Id. Incidencia</f:facet>
+			<div>
+				<h:messages id="errors" infoStyle="color:blue"
+					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
+
+				<h:form>
+					<h:dataTable value="#{BuscadorIncidenciasWeb.incidencias}"
+						var="incidencia">
+						<h:column>
+							<f:facet name="header">Id. Incidencia</f:facet>
 					#{incidencia.getId()}
 				</h:column>
-				<h:column>
-					<f:facet name="header">Id. Bicicleta</f:facet>
+						<h:column>
+							<f:facet name="header">Id. Bicicleta</f:facet>
 					#{incidencia.getIdBici()}
 				</h:column>
-				<h:column>
-					<f:facet name="header">Descripcion</f:facet>
+						<h:column>
+							<f:facet name="header">Descripcion</f:facet>
 					#{incidencia.getDescripcion()}
 				</h:column>
-				<h:column>
-					<f:facet name="header">Operario</f:facet>
+						<h:column>
+							<f:facet name="header">Operario</f:facet>
 				#{incidencia.getOperario()}
 				</h:column>
-				<h:column>
-					<h:commandButton value="Gestionar"
-						actionListener="#{BuscadorIncidenciasWeb.gestionar(incidencia.getId())}">
-					</h:commandButton>
-				</h:column>
-			</h:dataTable>
+						<h:column>
+							<h:commandButton value="Gestionar"
+								actionListener="#{BuscadorIncidenciasWeb.gestionar(incidencia.getId())}">
+							</h:commandButton>
+						</h:column>
+					</h:dataTable>
 
-			<h:commandButton value="Volver"
-				actionListener="#{MainGestorWeb.load()}">
-			</h:commandButton>
-		</h:form>
-	</div>
-</h:body>
-</html>
+					<h:button value="Volver"
+							outcome="#{request.contextPath}/vistas/main/mainGestor.xhtml" />
+				</h:form>
+			</div>
+		</h:body>
+	</ui:define>
+</ui:composition>
