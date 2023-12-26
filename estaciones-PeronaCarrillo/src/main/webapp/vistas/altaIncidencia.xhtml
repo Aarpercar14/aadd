@@ -14,20 +14,21 @@
 		<h:body>
 			<div>
 				<h:form>
-					<h:outputText value="Identificador Bicicletad"></h:outputText>
-					<h:inputText id="idBici" value="#{CrearIncidenciaWeb.idBici}" />
+					<h:outputText value="Identificador Bicicleta"></h:outputText>
+					<h:inputText id="idBici" value="#{crearIncidenciaWeb.idBici}" />
 
 					<h:outputText value="Descripcion Incidencia"></h:outputText>
 					<h:inputText id="descripcionIncidencia"
-						value="#{CrearIncidenciaWeb.descripcionIncidencia}" />
+						value="#{crearIncidenciaWeb.descripcionIncidencia}" />
 
 
 
 					<h:commandButton value="Alta"
-						actionListener="#{CrearIncidenciaWeb.altaIncidencia()}">
+						actionListener="#{crearIncidenciaWeb.altaIncidencia()}">
 					</h:commandButton>
-					<h:button value="Volver"
-						outcome="#{request.contextPath}/vistas/main/mainCliente.xhtml" />
+					<h:commandButton value="Volver"
+						actionListener="#{crearIncidenciaWeb.volver()}">
+					</h:commandButton>
 				</h:form>
 			</div>
 		</h:body>

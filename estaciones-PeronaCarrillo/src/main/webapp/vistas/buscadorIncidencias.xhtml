@@ -15,7 +15,7 @@
 	<ui:define name="metadata">
 
 		<f:metadata>
-			<f:viewAction action="#{BuscadorIncidenciasWeb.load()}" />
+			<f:viewAction action="#{buscadorIncidenciasWeb.load()}" />
 		</f:metadata>
 	</ui:define>
 	<ui:define name="content">
@@ -27,7 +27,7 @@
 					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
 
 				<h:form>
-					<h:dataTable value="#{BuscadorIncidenciasWeb.incidencias}"
+					<h:dataTable value="#{buscadorIncidenciasWeb.incidencias}"
 						var="incidencia">
 						<h:column>
 							<f:facet name="header">Id. Incidencia</f:facet>
@@ -47,13 +47,13 @@
 				</h:column>
 						<h:column>
 							<h:commandButton value="Gestionar"
-								actionListener="#{BuscadorIncidenciasWeb.gestionar(incidencia.getId())}">
+								actionListener="#{buscadorIncidenciasWeb.gestionar(incidencia.getId())}">
 							</h:commandButton>
 						</h:column>
 					</h:dataTable>
 
 					<h:button value="Volver"
-						outcome="#{request.contextPath}/vistas/main/mainGestor.xhtml" />
+						outcome="#{buscadorIncidenciasWeb.volver()}" />
 				</h:form>
 			</div>
 		</h:body>

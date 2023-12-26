@@ -15,20 +15,23 @@
 			<div>
 				<h:form>
 					<h:outputText value="Cord X"></h:outputText>
-					<h:inputText id="x" value="#{BuscarBicicletaWeb.x}" />
+					<h:inputText id="x" value="#{buscarBicicletaWeb.x}" />
 
 					<h:outputText value="Cord Y"></h:outputText>
-					<h:inputText id="y" value="#{BuscarBicicletaWeb.y}" />
+					<h:inputText id="y" value="#{buscarBicicletaWeb.y}" />
 
 
 					<h:commandButton value="Buscar"
-						actionListener="#{BuscarBicicletaWeb.buscarBicis()}">
+						actionListener="#{buscarBicicletaWeb.buscarBicis()}">
 					</h:commandButton>
 
 					<h:commandButton value="Volver"
-						outcome="#{request.contextPath}/main/mainGestor.xhtml">
+						actionListener="#{buscarBicicletaWeb.volver()}">
 					</h:commandButton>
 				</h:form>
+				
+				<h:messages id="errors" infoStyle="color:blue"
+                    warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
 			</div>
 		</h:body>
 	</ui:define>
