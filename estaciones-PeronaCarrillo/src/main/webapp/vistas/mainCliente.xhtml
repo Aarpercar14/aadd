@@ -8,7 +8,7 @@
 	<ui:define name="content">
 		<section id="banner">
 			<header>
-				<h2>Pagina principal de un Gestor</h2>
+				<h2>Pagina principal de cliente</h2>
 			</header>
 		</section>
 		<section id="main">
@@ -17,13 +17,25 @@
 					<div class="col-12">
 						<div class="row">
 							<div class="col-4 col-6-medium col-12-small">
-								<section class="box text-center">
-									<h:button value="Buscar Incidencias"
-										outcome="#{request.contextPath}/vistas/incidencia/buscadorIncidencias.xhtml" />
+								<section class="box">
+									<h:button value="Dar de alta bicicleta"
+										outcome="#{request.contextPath}/vistas/altaBicicleta.xhtml" />
 								</section>
 							</div>
 							<div class="col-4 col-6-medium col-12-small">
-								<section class="box text-center">
+								<section class="box">
+									<h:button value="Buscar una bicicleta"
+										outcome="#{request.contextPath}/vistas/buscadorBicis.xhtml" />
+								</section>
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section class="box">
+									<h:button value="Reportar incidencia"
+										outcome="#{request.contextPath}/vistas/altaIncidencia.xhtml" />
+								</section>
+							</div>
+							<div class="col-4 col-6-medium col-12-small">
+								<section class="box">
 									<h:button value="Cambiar de rol"
 										outcome="#{request.contextPath}/index.xhtml" />
 								</section>

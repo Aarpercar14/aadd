@@ -27,6 +27,15 @@ public class BuscarBicicletaWeb implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void volver() {
+		try {
+			facesContext.getExternalContext().redirect("mainCliente.xhtml");
+		} catch (IOException e) {
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "No se ha podido navegar"));
+			e.printStackTrace();
+		}
+	}
 
 	public double getX() {
 		return x;

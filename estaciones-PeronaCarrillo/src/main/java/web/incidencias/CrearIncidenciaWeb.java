@@ -19,7 +19,7 @@ import servicio.IServicioIncidencias;
 
 @Named
 @ViewScoped
-public class CrearInicidenciaWeb implements Serializable{
+public class CrearIncidenciaWeb implements Serializable{
 	
 	private String idBici;
 	private String descripcionIncidencia;
@@ -30,7 +30,7 @@ public class CrearInicidenciaWeb implements Serializable{
 	@Inject
 	protected FacesContext facesContext;
 	
-	public CrearInicidenciaWeb() {
+	public CrearIncidenciaWeb() {
 		servicioInicidencias = FactoriaServicios.getServicio(IServicioIncidencias.class);
 		servicioEstaciones = FactoriaServicios.getServicio(IServicioEstaciones.class);
 	}
@@ -57,6 +57,15 @@ public class CrearInicidenciaWeb implements Serializable{
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void volver() {
+		try {
+			facesContext.getExternalContext().redirect("mainCliente.xhtml");
+		} catch (IOException e) {
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "No se ha podido navegar"));
+			e.printStackTrace();
+		}
 	}
 
 	public String getIdBici() {
