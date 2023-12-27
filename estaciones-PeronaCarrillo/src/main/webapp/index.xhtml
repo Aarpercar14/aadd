@@ -12,8 +12,8 @@
 	<ui:define name="content">
 		<section id="banner">
 			<header>
-				<h2>Bienvenido a cityBike</h2>
-				<p>Porfavor elija su rol</p>
+				<h2>#{text['bienvenido']}</h2>
+				<p>#{text['rol']}</p>
 			</header>
 		</section>
 		<section id="intro" class="container">
@@ -21,19 +21,18 @@
 				<div class="col-4 col-12-medium">
 					<section class="first">
 						<header>
-							<h2>Aqui podra buscar bicicletas, dar de alta alguna
-								bicicleta o reportar algun problema que tengas</h2>
+							<h2>#{text['clienteMsg']}</h2>
 						</header>
-						<h:button value="Entrar como cliente"
+						<h:button value="#{text['entrarCliente']}"
 							outcome="#{request.contextPath}/vistas/mainCliente.xhtml" />
 					</section>
 				</div>
 				<div class="col-4 col-12-medium">
 					<section class="middle">
 						<header>
-							<h2>Aqui podra buscar las incidencias y comprobarlas</h2>
+							<h2>#{text['gestorMsg']}</h2>
 						</header>
-						<h:button value="Entrar como gestor"
+						<h:button value="#{text['entrarGestor']}"
 							outcome="#{request.contextPath}/vistas/mainGestor.xhtml" />
 					</section>
 				</div>

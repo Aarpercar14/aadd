@@ -8,25 +8,25 @@
 	<ui:define name="content">
 		<section id="banner">
 			<header>
-				<h2>Introduzca los datos de las incidencias</h2>
+				<h2>#{text['reportaIncidenciaMsg']}</h2>
 			</header>
 		</section>
 		<h:body>
 			<div>
 				<h:form>
-					<h:outputText value="Identificador Bicicleta"></h:outputText>
+					<h:outputText value="#{text['biciId']}"></h:outputText>
 					<h:inputText id="idBici" value="#{crearIncidenciaWeb.idBici}" />
 
-					<h:outputText value="Descripcion Incidencia"></h:outputText>
+					<h:outputText value="#{text['biciDescripcion']}"></h:outputText>
 					<h:inputText id="descripcionIncidencia"
 						value="#{crearIncidenciaWeb.descripcionIncidencia}" />
 
 
 
-					<h:commandButton value="Alta"
+					<h:commandButton value="#{text['alta']}"
 						actionListener="#{crearIncidenciaWeb.altaIncidencia()}">
 					</h:commandButton>
-					<h:commandButton value="Volver"
+					<h:commandButton value="#{text['volver']}"
 						actionListener="#{crearIncidenciaWeb.volver()}">
 					</h:commandButton>
 				</h:form>

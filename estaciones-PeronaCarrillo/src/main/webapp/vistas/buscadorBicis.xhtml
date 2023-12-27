@@ -8,7 +8,7 @@
 	<ui:define name="content">
 		<section id="banner">
 			<header>
-				<h2>Buscar bicicleta</h2>
+				<h2>#{text['buscaBicicletaMsg']}</h2>
 			</header>
 		</section>
 		<h:body>
@@ -21,11 +21,11 @@
 					<h:inputText id="y" value="#{buscarBicicletaWeb.y}" />
 
 
-					<h:commandButton value="Buscar"
+					<h:commandButton value="#{text['buscar']}"
 						actionListener="#{buscarBicicletaWeb.buscarBicis()}">
 					</h:commandButton>
 
-					<h:commandButton value="Volver"
+					<h:commandButton value="#{text['volver']}"
 						actionListener="#{buscarBicicletaWeb.volver()}">
 					</h:commandButton>
 				</h:form>

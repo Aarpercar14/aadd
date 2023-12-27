@@ -31,20 +31,20 @@
 						var="incidencia">
 						<h:column>
 							<f:facet name="header">Id. Incidencia</f:facet>
-					#{incidencia.getId()}
-				</h:column>
+							<h:outputText value="#{incidencia.getId()}" />
+						</h:column>
 						<h:column>
 							<f:facet name="header">Id. Bicicleta</f:facet>
-					#{incidencia.getIdBici()}
-				</h:column>
+							<h:outputText value="#{incidencia.getIdBici()}" />
+						</h:column>
 						<h:column>
 							<f:facet name="header">Descripcion</f:facet>
-					#{incidencia.getDescripcion()}
-				</h:column>
+							<h:outputText value="#{incidencia.getDescripcion()}" />
+						</h:column>
 						<h:column>
 							<f:facet name="header">Operario</f:facet>
-				#{incidencia.getOperario()}
-				</h:column>
+							<h:outputText value="#{incidencia.getOperario()}" />
+						</h:column>
 						<h:column>
 							<h:commandButton value="Gestionar"
 								actionListener="#{buscadorIncidenciasWeb.gestionar(incidencia.getId())}">
