@@ -1,66 +1,44 @@
 package pruebas;
 
-import java.io.IOException;
-
-import org.bson.codecs.configuration.CodecRegistries;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
-import org.bson.conversions.Bson;
-
-import com.mongodb.MongoClientSettings;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.result.InsertOneResult;
-import utils.PropertiesReader;
-
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import dominio.Administrador;
 import dominio.Estacionamiento;
+import repositorio.EntidadNoEncontrada;
+import repositorio.RepositorioException;
 
 public class preubas {
 
-	public static void main(String[] args) {
-		PropertiesReader properties;
+public static void main(String[] args) {
+		
+		Administrador admin = new Administrador("admin", "jefe", "admin@gmail.com", "password", "612345678", LocalDate.now());
+				
+		// Creacion de las tres estaciones de ejemplo
+		
+		String idEstacion1 = admin.DarDeAltaEstacion("Saint Louis", 10, "30020", 40,-5);
+		String idEstacion2 = admin.DarDeAltaEstacion("Saint John", 10, "30800", 22, -8);
+		String idEstacion3 = admin.DarDeAltaEstacion("Groove Street", 10, "30750", 70, 10);
+
 		try {
-			properties = new PropertiesReader("mongo.properties");
-
-			String connectionString = properties.getProperty("mongouri");
-			String databaseString = properties.getProperty("mongodatabase");
-
-			MongoClient mongoClient = MongoClients.create(connectionString);
-
-			MongoDatabase database = mongoClient.getDatabase(databaseString);
-
-			CodecRegistry defaultCodecRegistry = CodecRegistries.fromRegistries(
-					MongoClientSettings.getDefaultCodecRegistry(),
-					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-
-			MongoCollection<Estacionamiento> coleccion = database.getCollection("Estacionamiento", Estacionamiento.class)
-					.withCodecRegistry(defaultCodecRegistry);
 			
-			Estacionamiento editorial = new Estacionamiento("Saint Louis", 10, "30020", 40,-5);
+			String idBmx = admin.servEstaciones.altaDeUnaBici("BMX", admin.servEstaciones.getEstacion(idEstacion1));
+			String idMontaña = admin.servEstaciones.altaDeUnaBici("MONTAÑA", admin.servEstaciones.getEstacion(idEstacion1));
+			String idCarretera = admin.servEstaciones.altaDeUnaBici("CARRETERA", admin.servEstaciones.getEstacion(idEstacion2));
+			String idTandem = admin.servEstaciones.altaDeUnaBici("TANDEM", admin.servEstaciones.getEstacion(idEstacion2));
 			
-			InsertOneResult s = coleccion.insertOne(editorial);
-			System.out.println(s.getInsertedId().asObjectId().getValue().toString());
+			System.out.println("Estacion Sanit Louis"+admin.getEstacionamiento(idEstacion1).getBicicletas());
+			System.out.println("Estacion Sanit John"+admin.getEstacionamiento(idEstacion2).getBicicletas());
+			System.out.println("Estacion Groove Street"+admin.getEstacionamiento(idEstacion3).getBicicletas());
+			admin.servEstaciones.retirarUnaBicleta(idCarretera);
+			System.out.println("La bici de carretera ya no esta estacionada en la estacion de Saint John");
+			System.out.println(admin.servEstaciones.getEstacion(idEstacion2).getBicicletas().toString());
 			
-			Bson query=Filters.all("_id", s.getInsertedId());
-			System.out.println(s.getInsertedId().getClass()
-					);
 			
-			FindIterable<Estacionamiento> resultados=coleccion.find(query);
-			System.out.println(resultados);
-			
-			System.out.println(resultados.first().toString());
-			MongoCursor<Estacionamiento> it=resultados.iterator();
-			System.out.println(it.available());
-			
-			if(it.hasNext())  System.out.println(it.next().toString());
-			
-		} catch (IOException e) {
+		} catch (RepositorioException | EntidadNoEncontrada e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 }

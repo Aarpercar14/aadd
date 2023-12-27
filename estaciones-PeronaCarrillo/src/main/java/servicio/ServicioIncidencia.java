@@ -35,7 +35,6 @@ public class ServicioIncidencia implements IServicioIncidencias{
 	public void gestionDeLasIncidencias(String cierre, String operario, String incidencia, String nuevoEstado) {
 		try {
 			Incidencia i=repositorio.getById(incidencia);
-			
 			switch(nuevoEstado){
 				case "cancelada":
 					i.setEstado(EstadoIncidencia.CANCELADA);
@@ -49,6 +48,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 					i.setOperario(operario);
 					
 					Bicicleta biciAsignada = i.getBicicleta();
+					System.out.println(biciAsignada.getId());
 					servEstaciones.retirarUnaBicleta(biciAsignada.getId());
 					
 					break;

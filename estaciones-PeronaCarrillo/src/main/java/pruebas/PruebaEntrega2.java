@@ -80,7 +80,7 @@ public class PruebaEntrega2 {
 			System.out.println(admin.servEstaciones.getEstacion(idEstacion1).getBicicletas().toString());
 			
 			
-			// Simulacion de una incidencia
+			// Simulacion de una incidenciabmx
 			Bicicleta tandem = admin.servEstaciones.getEstacion(idEstacion1).getBicicleta(idTandem);
 			Bicicleta bmx = admin.servEstaciones.getEstacion(idEstacion2).getBicicleta(idBmx);
 			Incidencia incidencia1, inicidencia2;
@@ -91,6 +91,8 @@ public class PruebaEntrega2 {
 				List<Incidencia> incidenciasAbiertas = admin.servIncidencias.recuperarIncidencias();
 				for(Incidencia i : incidenciasAbiertas)
 					System.out.println(i.toString());
+				
+				//Hay un problema a la hora de actualizar el historico y por eso no saca bien la bici de la estacion cuando llama a gestion de las incidencias
 				
 				admin.servIncidencias.gestionDeLasIncidencias("", "Pedro Benitez", incidencia1.getId(), "asignada");
 				//TODO combrobar que la bici ya no se encuentra en la estacion
