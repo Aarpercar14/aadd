@@ -42,6 +42,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 					i.setMotivoCierre(cierre);
 					Bicicleta bici=i.getBicicleta();
 					bici.cambioEstadoBici("disponible");
+					
 					break;
 				case "asignada":
 					i.setEstado(EstadoIncidencia.ASIGNADA);

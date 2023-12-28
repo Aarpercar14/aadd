@@ -42,15 +42,6 @@ public class BuscadorIncidenciasWeb implements Serializable{
 		}
 	}
 	
-	public void volver() {
-		try {
-			facesContext.getExternalContext().redirect("mainGestor.xhtml");
-		} catch (IOException e) {
-			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "No se ha podido navegar"));
-			e.printStackTrace();
-		}
-	}
-	
 	public List<IncidenciaDTO> getIncidencias() {
 		return incidencias;
 	}
