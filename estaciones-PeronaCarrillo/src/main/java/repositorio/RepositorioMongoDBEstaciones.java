@@ -48,7 +48,7 @@ public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionami
 			coleccionSinCodificar = database.getCollection("Estacionamiento");
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
