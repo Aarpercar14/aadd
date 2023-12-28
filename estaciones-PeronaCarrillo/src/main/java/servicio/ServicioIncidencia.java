@@ -109,10 +109,14 @@ public class ServicioIncidencia implements IServicioIncidencias{
 	
 	@Override
 	public IncidenciaDTO getIncidenciaDTO(String id) {
-		List<Incidencia> incidencias = this.recuperarIncidencias();
-		for(Incidencia i : incidencias)
-			if(i.getId().equals(id))
-				return this.transformToDTO(i);
+		try {
+			return transformToDTO(repositorio.getById(id));
+		} catch (RepositorioException e) {
+			e.printStackTrace();
+		} catch (EntidadNoEncontrada e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
