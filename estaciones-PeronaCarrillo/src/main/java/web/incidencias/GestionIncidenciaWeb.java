@@ -1,5 +1,6 @@
 package web.incidencias;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
@@ -8,45 +9,43 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import dominio.dto.IncidenciaDTO;
-import servicio.FactoriaServicios;
-import servicio.IServicioIncidencias;
-
 @Named
 @ViewScoped
 public class GestionIncidenciaWeb implements Serializable {
 	
-	private String id;
-	
-	private IServicioIncidencias servicioIncidencia;
-	
-	private IncidenciaDTO incidencia;
-	
-	public GestionIncidenciaWeb() {
-		servicioIncidencia = FactoriaServicios.getServicio(IServicioIncidencias.class);
-	}
+	private String idIncidencia;
+		
+	public GestionIncidenciaWeb() {}
 	
 	@Inject
 	protected FacesContext facesContext;
 	
+	public void gestionaIncidencia() {
+		try {
+			facesContext.getExternalContext().redirect("gestionIncidencia.xhtml? id="+ idIncidencia);
+		} catch (IOException e) {
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", e.getMessage()));
+			e.printStackTrace();
+		}
+	}
 	
-	public void load() {
-		incidencia = servicioIncidencia.getIncidenciaDTO(id);
-		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Incidencia a gestionar obtenida con exito"));
+	public void volver() {
+		try {
+			facesContext.getExternalContext().redirect("mainGestor.xhtml");
+		} catch (IOException e) {
+			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", e.getMessage()));
+			e.printStackTrace();
+		}
 	}
 	
 	
 	
-	public String getId() {
-		return id;
+	public String getIdIncidenacia() {
+		return idIncidencia;
 	}
 	
-	public void setId(String id) {
-		this.id = id;
-	}
-	
-	public IncidenciaDTO getIncidencia() {
-		return incidencia;
+	public void setIdIcidencia(String id) {
+		this.idIncidencia = id;
 	}
 
 }

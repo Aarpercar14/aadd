@@ -20,6 +20,7 @@ public class BuscadorIncidenciasWeb implements Serializable{
 	
 	private IServicioIncidencias servicioIncidencias;
 	private List<IncidenciaDTO> incidencias;
+	private String selectedIncidenciaId;
 	
 	public BuscadorIncidenciasWeb() {
 		servicioIncidencias = FactoriaServicios.getServicio(IServicioIncidencias.class);
@@ -33,9 +34,9 @@ public class BuscadorIncidenciasWeb implements Serializable{
 		facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Incidencias abiertas encontradas con exito"));
 	}
 	
-	public void gestionarIncidencia(String id) {
+	public void gestionarIncidencia() {
 		try {
-			facesContext.getExternalContext().redirect("gestionIncidencia.xhtml? id="+id);
+			facesContext.getExternalContext().redirect("gestionIncidencia.xhtml? id="+selectedIncidenciaId);
 		} catch (IOException e) {
 			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "No se ha podido navegar"));
 			e.printStackTrace();

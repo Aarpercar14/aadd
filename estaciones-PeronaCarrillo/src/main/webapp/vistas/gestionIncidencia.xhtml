@@ -7,8 +7,8 @@
 
 	<ui:define name="metadata">
 		<f:metadata>
-			<f:viewParam name="id" value="#{gestionIncidenciaWeb.id}" />
-			<f:viewAction action="#{gestionIncidenciaWeb.load()}" />
+			<f:viewParam name="id" value="#{gestionaIncidenciaWebResultado.id}" />
+			<f:viewAction action="#{gestionaIncidenciaWebResultado.load()}" />
 		</f:metadata>
 	</ui:define>
 
@@ -25,19 +25,19 @@
 					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
 				<p>
 					<strong>#{text['incidenciaId']}</strong>
-					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getId()}"/>
+					<h:outputText value="#{gestionaIncidenciaWebResultado.incidencia.getId()}"/>
 				</p>
 				<p>
 					<strong>#{text['biciId']}</strong>
-					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getIdBici()}"/>
+					<h:outputText value="#{gestionaIncidenciaWebResultado.incidencia.getIdBici()}" />
 				</p>
 				<p>
 					<strong>#{text['descripcion']}</strong>
-					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getDescripcion()}"/>
+					<h:outputText value="#{gestionaIncidenciaWebResultado.incidencia.getDescripcion()}" />
 				</p>
 				<p>
 					<strong>#{text['operario']}</strong>
-					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getOperario()}"/>
+					<h:outputText value="#{gestionaIncidenciaWebResultado.incidencia.getOperario()}" />
 				</p>
 			</div>
 		</h:body>

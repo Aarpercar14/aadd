@@ -48,11 +48,6 @@
 							<f:facet name="header">#{text['operario']}</f:facet>
 							<h:outputText value="#{incidencia.getOperario()}" />
 						</p:column>
-						<p:column>
-							<p:commandButton value="#{text['gestionar']}"
-								actionListener="#{buscadorIncidenciasWeb.gestionarIncidencia(incidencia.getId())}">
-							</p:commandButton>
-						</p:column>
 					</p:dataTable>
 
 					<h:button value="#{text['volver']}"

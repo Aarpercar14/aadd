@@ -9,29 +9,25 @@
 	<ui:define name="content">
 		<section id="banner">
 			<header>
-				<h2>#{text['buscaBicicletaMsg']}</h2>
+				<h2>#{text['gestionIncidenciaMsg']}</h2>
 			</header>
 		</section>
 		<h:body>
 			<div>
 				<h:form>
-					<h:outputText value="Cord Y"></h:outputText>
-					<h:inputText id="y" target="#{buscarBicicletaWeb.y}" />
-
-					<h:outputText value="Cord X"></h:outputText>
-					<h:inputText id="x" value="#{buscarBicicletaWeb.x}" />
-
-					<h:commandButton value="#{text['buscar']}"
-						actionListener="#{buscarBicicletaWeb.buscarBicis()}">
-					</h:commandButton>
+					<h:outputText value="#{text['incidenciaId']}"></h:outputText>
+					<h:inputText  id="idIncidencia" target="#{gestionIncidenciaWeb.idIncidencia}" />
+					<p:commandButton value="#{text['gestionar']}"
+						actionListener="#{gestionIncidenciaWeb.gestionaIncidencia()}">
+					</p:commandButton>
 
 					<h:commandButton value="#{text['volver']}"
-						actionListener="#{buscarBicicletaWeb.volver()}">
+						actionListener="#{gestionIncidenciaWeb.volver()}">
 					</h:commandButton>
 				</h:form>
-
+				
 				<h:messages id="errors" infoStyle="color:blue"
-					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
+                    warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
 			</div>
 		</h:body>
 	</ui:define>
