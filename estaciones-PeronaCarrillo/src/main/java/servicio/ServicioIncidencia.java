@@ -46,9 +46,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 				case "asignada":
 					i.setEstado(EstadoIncidencia.ASIGNADA);
 					i.setOperario(operario);
-					
 					Bicicleta biciAsignada = i.getBicicleta();
-					System.out.println(biciAsignada.getId());
 					servEstaciones.retirarUnaBicleta(biciAsignada.getId());
 					
 					break;
@@ -56,6 +54,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 					i.setEstado(EstadoIncidencia.RESUELTA);
 					i.setMotivoCierre(cierre);
 					i.setFechaCierre(LocalDateTime.now());
+					repositorio.update(i);
 					//TODO hacer un if bici esta rota o si regresa a estacion
 					
 					if(cierre.equals("rota")) {
