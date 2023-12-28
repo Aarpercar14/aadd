@@ -20,11 +20,8 @@ import servicio.IServicioEstaciones;
 public class ResultadoBicicletaWeb implements Serializable{
 	
 	private double x;
-	
 	private double y;
-	
 	private IServicioEstaciones servicioEstaciones;
-	
 	private List<BicicletaDTO> bicis;
 	
 	@Inject
@@ -36,6 +33,7 @@ public class ResultadoBicicletaWeb implements Serializable{
 	
 	public void load() {
 		try {
+			System.out.println(x);
 			bicis = servicioEstaciones.obtenerBicisDTO(servicioEstaciones.recuperarBiciEstacionadaPosicion(x, y));
 			facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "Bicis encontradas con exito"));
 		} catch (RepositorioException e) {
