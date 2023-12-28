@@ -13,6 +13,8 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
+
 import dominio.Historico;
 import utils.PropertiesReader;
 
@@ -53,7 +55,7 @@ public class RepositorioMongoDBHistorico extends RepositorioMongoDB<Historico> {
 	@SuppressWarnings("unchecked")
 	public static Historico getHistoricoNoRetirado(Repositorio<Historico, String> repos, String id) {
 		Bson filter=Filters.and(Filters.eq("id_bici",id),Filters.eq("fecha_retiro",null));
-		FindIterable<Historico> query=((MongoCollection<Historico>) repos.getCollection()).find(filter);
+		FindIterable<Historico> query=((MongoCollection<Historico>) repos.getCollection()).find(filter).sort(Sorts.descending("fecha_estacionamiento"));
 		return query.first();
 	}
 	

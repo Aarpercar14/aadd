@@ -54,6 +54,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 					i.setEstado(EstadoIncidencia.RESUELTA);
 					i.setMotivoCierre(cierre);
 					i.setFechaCierre(LocalDateTime.now());
+					repositorio.update(i);
 					//TODO hacer un if bici esta rota o si regresa a estacion
 					
 					if(cierre.equals("rota")) {
