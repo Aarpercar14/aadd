@@ -29,17 +29,21 @@
 						value="#{buscadorIncidenciasWeb.incidencias}" rows="50"
 						id="tabla_header" paginator="true"
 						paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-						<p:column headerText="incidenciaId">
+						<p:column headerText="#{text['incidenciaId']}">
 							<h:outputText value="#{incidencia.getId()}" />
 						</p:column>
-						<p:column headerText="biciId">
+						<p:column headerText="#{text['biciId']}">
 							<h:outputText value="#{incidencia.getIdBici()}" />
 						</p:column>
-						<p:column headerText="descripcion">
+						<p:column headerText="#{text['descripcion']}">
 							<h:outputText value="#{incidencia.getDescripcion()}" />
 						</p:column>
-						<p:column headerText="incidenciaId">
-							<h:outputText value="#{incidencia.getId()}" />
+						<p:column headerText="#{text['operario']}">
+							<h:outputText value="#{incidencia.getOperario()}" />
+						</p:column>
+						<p:column>
+							<h:commandButton value="#{text['gestionar']}"
+								actionListener="#{buscadorIncidenciasWeb.gestionarIncidencia(incidencia.getId())}"/>
 						</p:column>
 
 					</p:dataTable>
