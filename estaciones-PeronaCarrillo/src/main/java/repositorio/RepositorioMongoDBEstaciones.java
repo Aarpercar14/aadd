@@ -78,11 +78,7 @@ public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionami
 	public static Estacionamiento getEstacionesByPosicion(Repositorio<Estacionamiento, String> repos, double x,
 			double y) {
 		Bson query = Filters.and(Filters.eq("cordX", x),Filters.eq("cordY", y));
-		System.out.println(x);
-		System.out.println(y);
 		FindIterable<Estacionamiento> resultado = ((MongoCollection<Estacionamiento>) repos.getCollection()).find(query);
-		System.out.println(resultado.first());
-		
 		return resultado.first();
 	}
 

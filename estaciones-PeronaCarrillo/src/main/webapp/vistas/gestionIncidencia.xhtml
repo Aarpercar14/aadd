@@ -25,19 +25,19 @@
 					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
 				<p>
 					<strong>#{text['incidenciaId']}</strong>
-					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getId()}/>
+					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getId()}"/>
 				</p>
 				<p>
 					<strong>#{text['biciId']}</strong>
-					#{gestionIncidenciaWeb.incidencia.getIdBici()}
+					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getIdBici()}"/>
 				</p>
 				<p>
 					<strong>#{text['descripcion']}</strong>
-					#{gestionIncidenciaWeb.incidencia.getDescripcion()}
+					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getDescripcion()}"/>
 				</p>
 				<p>
 					<strong>#{text['operario']}</strong>
-					#{gestionIncidenciaWeb.incidencia.getOperario()}
+					<h:outputText value="#{gestionIncidenciaWeb.incidencia.getOperario()}"/>
 				</p>
 			</div>
 		</h:body>
