@@ -6,7 +6,7 @@
 
 	<section id="banner">
 		<header>
-			<h2>Incidencias abiertas</h2>
+			<h2>#{text['buscaIncidenciaMsg']}</h2>
 		</header>
 	</section>
 
@@ -30,29 +30,29 @@
 					<h:dataTable value="#{buscadorIncidenciasWeb.incidencias}"
 						var="incidencia">
 						<h:column>
-							<f:facet name="header">Id. Incidencia</f:facet>
+							<f:facet name="header">#{text['incidenciaId']}</f:facet>
 							<h:outputText value="#{incidencia.getId()}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Id. Bicicleta</f:facet>
+							<f:facet name="header">#{text['biciId']}</f:facet>
 							<h:outputText value="#{incidencia.getIdBici()}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Descripcion</f:facet>
+							<f:facet name="header">#{text['descripcion']}</f:facet>
 							<h:outputText value="#{incidencia.getDescripcion()}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Operario</f:facet>
+							<f:facet name="header">#{text['operario']}</f:facet>
 							<h:outputText value="#{incidencia.getOperario()}" />
 						</h:column>
 						<h:column>
-							<h:commandButton value="Gestionar"
+							<h:commandButton value="#{text['gestionar']}"
 								actionListener="#{buscadorIncidenciasWeb.gestionar(incidencia.getId())}">
 							</h:commandButton>
 						</h:column>
 					</h:dataTable>
 
-					<h:button value="Volver"
+					<h:button value="#{text['volver']}"
 						outcome="#{buscadorIncidenciasWeb.volver()}" />
 				</h:form>
 			</div>

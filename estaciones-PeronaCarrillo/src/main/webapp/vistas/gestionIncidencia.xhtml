@@ -15,7 +15,7 @@
 	<ui:define name="content">
 		<section id="banner">
 			<header>
-				<h2>Gestion de Incidencia</h2>
+				<h2>#{text['gestionIncidenciaMsg']}</h2>
 			</header>
 		</section>
 		<h:body>
@@ -23,19 +23,19 @@
 				<h:messages id="errors" infoStyle="color:blue"
 					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
 				<p>
-					<strong>Id. Incidencia:</strong>
+					<strong>#{text['incidenciaId']}</strong>
 					#{gestionIncidenciaWeb.incidencia.getId()}
 				</p>
 				<p>
-					<strong>Id. Bicicleta:</strong>
+					<strong>#{text['biciId']}</strong>
 					#{gestionIncidenciaWeb.incidencia.getIdBici()}
 				</p>
 				<p>
-					<strong>Descripcion:</strong>
+					<strong>#{text['descripcion']}</strong>
 					#{gestionIncidenciaWeb.incidencia.getDescripcion()}
 				</p>
 				<p>
-					<strong>Operario:</strong>
+					<strong>#{text['operario']}</strong>
 					#{gestionIncidenciaWeb.incidencia.getOperario()}
 				</p>
 			</div>

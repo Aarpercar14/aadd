@@ -22,7 +22,7 @@
 
 		<section id="banner">
 			<header>
-				<h2>Buscador de bicicletas</h2>
+				<h2>#{text['buscaBicicletaMsg']}</h2>
 			</header>
 		</section>
 		<h:body>
@@ -34,15 +34,15 @@
 
 				<h:dataTable value="#{resultadoBicicletasWeb.bicis}" var="bici">
 					<h:column>
-						<f:facet name="header">Id. Bicicleta</f:facet>
+						<f:facet name="header">#{text['biciId']}</f:facet>
 						<h:output value="#{bici.getId()}" />
 					</h:column>
 					<h:column>
-						<f:facet name="header">Modelo</f:facet>
+						<f:facet name="header">#{text['modelo']}</f:facet>
 						<h:outputText value="#{bici.getModelo()}" />
 					</h:column>
 					<h:column>
-						<f:facet name="header">Fecha del Alta</f:facet>
+						<f:facet name="header">#{text['fechaAlta']}</f:facet>
 						<h:outputText value="#{bici.getFechaAlta()}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
