@@ -121,7 +121,7 @@ public class ServicioEstaciones implements IServicioEstaciones {
 			bici.cambioEstadoBici("no disponible");
 			bici.setFechaBaja(LocalDateTime.now());
 			Historico historico = RepositorioMongoDBHistorico.getHistoricoNoRetirado(repositorioHistorico, idBici);
-			repositorioHistorico.delete(historico);
+			repositorioHistorico.update(historico);
 		} catch (RepositorioException | EntidadNoEncontrada e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

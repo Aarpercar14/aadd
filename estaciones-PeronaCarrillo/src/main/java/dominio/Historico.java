@@ -59,7 +59,6 @@ public class Historico implements Identificable{
 	@Override
 	public void setId(String id) {
 		this.id=id;
-		
 	}
 
 	public void setFechaEstacionamiento(LocalDateTime fechaEstacionamiento) {

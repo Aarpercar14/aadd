@@ -57,9 +57,6 @@ public class Estacionamiento implements Identificable{
 	
 	public void sacarBici(String idBici) {
 		for(Bicicleta b:bicicletas) {
-			System.out.println("Ha entrado");
-			System.out.println(b.getId());
-			System.out.println(idBici);
 			if(b.getId().equals(idBici)) {
 				System.out.println("Entrada");
 				bicicletas.remove(b);

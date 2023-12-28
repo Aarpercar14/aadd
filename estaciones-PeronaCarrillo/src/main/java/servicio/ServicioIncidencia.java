@@ -46,9 +46,7 @@ public class ServicioIncidencia implements IServicioIncidencias{
 				case "asignada":
 					i.setEstado(EstadoIncidencia.ASIGNADA);
 					i.setOperario(operario);
-					
 					Bicicleta biciAsignada = i.getBicicleta();
-					System.out.println(biciAsignada.getId());
 					servEstaciones.retirarUnaBicleta(biciAsignada.getId());
 					
 					break;

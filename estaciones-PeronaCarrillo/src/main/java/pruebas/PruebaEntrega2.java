@@ -65,7 +65,7 @@ public class PruebaEntrega2 {
 			admin.servEstaciones.retirarUnaBicleta(idMontaña);
 			System.out.println("La bici de montaña ya no esta estacionada en la estacion de Saint Louis");
 			System.out.println(admin.servEstaciones.getEstacion(idEstacion1).getBicicletas().toString());
-			
+			 
 			admin.servEstaciones.estacionarUnaBicileta(idMontaña, idEstacion3);
 			System.out.println("Ahora la bici de carretera esta estacionada en la estacion de Groove Street");
 			System.out.println(admin.servEstaciones.getEstacion(idEstacion3).getBicicletas().toString());
