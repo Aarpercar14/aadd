@@ -5,12 +5,6 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-	<section id="banner">
-		<header>
-			<h2>#{text['buscaIncidenciaMsg']}</h2>
-		</header>
-	</section>
-
 	<ui:param name="estilo1" value="current" />
 
 	<ui:define name="metadata">
@@ -21,12 +15,15 @@
 	</ui:define>
 	<ui:define name="content">
 
+		<section id="banner">
+			<header>
+				<h2>#{text['buscaIncidenciaMsg']}</h2>
+			</header>
+		</section>
+
 		<h:body>
 
 			<div>
-				<h:messages id="errors" infoStyle="color:blue"
-					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
-
 				<h:form>
 					<h:dataTable value="#{buscadorIncidenciasWeb.incidencias}"
 						var="incidencia">
@@ -53,8 +50,8 @@
 						</h:column>
 					</h:dataTable>
 
-					<h:button value="#{text['volver']}"
-						outcome="#{buscadorIncidenciasWeb.volver()}" />
+					<h:commandButton value="#{text['volver']}"
+						actionListener="#{buscadorIncidenciasWeb.volver()}" />
 				</h:form>
 			</div>
 		</h:body>
