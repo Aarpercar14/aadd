@@ -5,6 +5,12 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
+	<section id="banner">
+		<header>
+			<h2>#{text['buscaIncidenciaMsg']}</h2>
+		</header>
+	</section>
+
 	<ui:param name="estilo1" value="current" />
 
 	<ui:define name="metadata">
@@ -15,34 +21,40 @@
 	</ui:define>
 	<ui:define name="content">
 
-		<section id="banner">
-			<header>
-				<h2>#{text['buscaIncidenciaMsg']}</h2>
-			</header>
-		</section>
-
 		<h:body>
 
 			<div>
+				<h:messages id="errors" infoStyle="color:blue"
+					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
+
 				<h:form>
-					<p:dataTable var="Incidencias" style="prueba"
+					<p:dataTable var="incidencia" style="prueba"
 						value="#{buscadorIncidenciasWeb.incidencias}" rows="50"
 						id="tabla_header" paginator="true"
-						paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
-						<p:column headerText="incidenciaId">
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+						<p:column>
+							<f:facet name="header">#{text['incidenciaId']}</f:facet>
 							<h:outputText value="#{incidencia.getId()}" />
 						</p:column>
-						<p:column headerText="biciId">
+						<p:column>
+							<f:facet name="header">#{text['biciId']}</f:facet>
 							<h:outputText value="#{incidencia.getIdBici()}" />
 						</p:column>
-						<p:column headerText="descripcion">
+						<p:column>
+							<f:facet name="header">#{text['descripcion']}</f:facet>
 							<h:outputText value="#{incidencia.getDescripcion()}" />
 						</p:column>
-						<p:column headerText="incidenciaId">
-							<h:outputText value="#{incidencia.getId()}" />
+						<p:column>
+							<f:facet name="header">#{text['operario']}</f:facet>
+							<h:outputText value="#{incidencia.getOperario()}" />
 						</p:column>
-
+						<p:column>
+							<p:commandButton value="#{text['gestionar']}"
+								actionListener="#{buscadorIncidenciasWeb.gestionarIncidencia(incidencia.getId())}">
+							</p:commandButton>
+						</p:column>
 					</p:dataTable>
+
 					<h:button value="#{text['volver']}"
 						outcome="#{request.contextPath}/vistas/mainGestor.xhtml" />
 				</h:form>
