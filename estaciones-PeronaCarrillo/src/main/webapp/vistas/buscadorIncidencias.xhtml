@@ -28,33 +28,27 @@
 					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
 
 				<h:form>
-					<h:dataTable value="#{buscadorIncidenciasWeb.incidencias}"
-						var="incidencia">
-						<h:column>
-							<f:facet name="header">#{text['incidenciaId']}</f:facet>
-							<h:outputText value="#{incidencia.getId()}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{text['biciId']}</f:facet>
-							<h:outputText value="#{incidencia.getIdBici()}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{text['descripcion']}</f:facet>
-							<h:outputText value="#{incidencia.getDescripcion()}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">#{text['operario']}</f:facet>
-							<h:outputText value="#{incidencia.getOperario()}" />
-						</h:column>
-						<h:column>
-							<h:commandButton value="#{text['gestionar']}"
-								actionListener="#{buscadorIncidenciasWeb.gestionar(incidencia.getId())}">
-							</h:commandButton>
-						</h:column>
-					</h:dataTable>
+					<p:dataTable var="Incidencias" style="prueba"
+						value="#{buscadorIncidenciasWeb.incidencias}" rows="50"
+						id="tabla_header" paginator="true"
+						paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
+						<p:column headerText="incidenciaId">
+							<h:outputText value="#{incidencia.getId()}" />
+						</p:column>
+						<p:column headerText="biciId">
+							<h:outputText value="#{incidencia.getIdBici()}" />
+						</p:column>
+						<p:column headerText="descripcion">
+							<h:outputText value="#{incidencia.getDescripcion()}" />
+						</p:column>
+						<p:column headerText="incidenciaId">
+							<h:outputText value="#{incidencia.getId()}" />
+						</p:column>
+
+					</p:dataTable>
 					<h:button value="#{text['volver']}"
-						outcome="#{buscadorIncidenciasWeb.volver()}" />
+						outcome="#{request.contextPath}/vistas/mainGestor.xhtml" />
 				</h:form>
 			</div>
 		</h:body>

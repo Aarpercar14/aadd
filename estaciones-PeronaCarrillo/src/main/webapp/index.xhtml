@@ -2,7 +2,8 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 
 	<ui:param name="estilo1" value="current" />
 
@@ -23,16 +24,16 @@
 						<header>
 							<h2>#{text['clienteMsg']}</h2>
 						</header>
-						<h:button value="#{text['entrarCliente']}"
+						<p:button value="#{text['entrarCliente']}"
 							outcome="#{request.contextPath}/vistas/mainCliente.xhtml" />
 					</section>
 				</div>
 				<div class="col-4 col-12-medium">
-					<section class="middle">
+					<section class="last">
 						<header>
 							<h2>#{text['gestorMsg']}</h2>
 						</header>
-						<h:button value="#{text['entrarGestor']}"
+						<p:button value="#{text['entrarGestor']}"
 							outcome="#{request.contextPath}/vistas/mainGestor.xhtml" />
 					</section>
 				</div>

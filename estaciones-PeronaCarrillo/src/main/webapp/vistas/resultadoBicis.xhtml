@@ -49,6 +49,20 @@
 						</h:outputText>
 					</h:column>
 				</h:dataTable>
+				<p:dataTable var="Incidencias" style="prueba"
+						value="#{buscadorIncidenciasWeb.incidencias}" rows="50"
+						id="tabla_header" paginator="true"
+						paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+						<p:column headerText="incidenciaId">
+							<h:outputText value="#{incidencia.getId()}" />
+						</p:column>
+						<p:column headerText="biciId">
+							<h:outputText value="#{incidencia.getIdBici()}" />
+						</p:column>
+						<p:column headerText="descripcion">
+							<h:outputText value="#{incidencia.getDescripcion()}" />
+						</p:column>
 
 			</div>
 
