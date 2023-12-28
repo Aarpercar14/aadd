@@ -15,12 +15,11 @@
 		<h:body>
 			<div>
 				<h:form>
-					<h:outputText value="Cord X"></h:outputText>
-					<h:inputText id="x" value="#{buscarBicicletaWeb.x}" />
-
 					<h:outputText value="Cord Y"></h:outputText>
 					<h:inputText id="y" value="#{buscarBicicletaWeb.y}" />
 
+					<h:outputText value="Cord X"></h:outputText>
+					<h:inputText id="x" value="#{buscarBicicletaWeb.x}" />
 
 					<h:commandButton value="#{text['buscar']}"
 						actionListener="#{buscarBicicletaWeb.buscarBicis()}">
@@ -30,9 +29,9 @@
 						actionListener="#{buscarBicicletaWeb.volver()}">
 					</h:commandButton>
 				</h:form>
-				
+
 				<h:messages id="errors" infoStyle="color:blue"
-                    warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
+					warnStyle="color:orange" errorStyle="color:red" showDetail="true" />
 			</div>
 		</h:body>
 	</ui:define>

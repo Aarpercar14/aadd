@@ -13,6 +13,10 @@ import javax.inject.Named;
 @ViewScoped
 public class BuscarBicicletaWeb implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double x;
 	private double y;
 	
