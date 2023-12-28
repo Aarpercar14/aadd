@@ -46,7 +46,6 @@ public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionami
 			
 			coleccion = database.getCollection("Estacionamiento", Estacionamiento.class).withCodecRegistry(defaultCodecRegistry);
 			coleccionSinCodificar = database.getCollection("Estacionamiento");
-			coleccion.createIndex(Indexes.geo2dsphere("cord"));
 
 		} catch (Exception e) {
 
@@ -73,6 +72,18 @@ public class RepositorioMongoDBEstaciones extends RepositorioMongoDB<Estacionami
 			estaciones.add(it.next());
 		}
 		return estaciones;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static Estacionamiento getEstacionesByPosicion(Repositorio<Estacionamiento, String> repos, double x,
+			double y) {
+		Bson query = Filters.and(Filters.eq("cordX", x),Filters.eq("cordY", y));
+		System.out.println(x);
+		System.out.println(y);
+		FindIterable<Estacionamiento> resultado = ((MongoCollection<Estacionamiento>) repos.getCollection()).find(query);
+		System.out.println(resultado.first());
+		
+		return resultado.first();
 	}
 
 }

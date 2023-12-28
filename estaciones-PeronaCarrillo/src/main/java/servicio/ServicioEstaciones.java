@@ -132,11 +132,8 @@ public class ServicioEstaciones implements IServicioEstaciones {
 
 	@Override
 	public List<Bicicleta> recuperarBiciEstacionadaPosicion(double x, double y) {
-		ArrayList<Bicicleta> bicis=new ArrayList<>();
-		for(Estacionamiento e:RepositorioMongoDBEstaciones.getEstacionesByDistancia(repositorioEstacion,x,y)) {
-			bicis.addAll(e.getBicicletas());
-		}
-		return bicis;
+		System.out.println(x);
+		return new ArrayList<Bicicleta>(RepositorioMongoDBEstaciones.getEstacionesByPosicion(repositorioEstacion,x,y).getBicicletas());
 	}
 
 	@Override
